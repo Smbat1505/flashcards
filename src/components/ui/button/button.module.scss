@@ -1,0 +1,32 @@
+.button {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: inherit;
+  font-family: inherit;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-info-500);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.primary {
+  background-color: var(--color-danger-500);
+}
+
+.secondary {
+  background-color: var(--color-success-500);
+}
+
+.fullWidth {
+  width: 100%;
+  background-color: var(--color-danger-500);
+}
+
+.asLink {
+  background-color: var(--color-warning-100);
+}
