@@ -11,7 +11,7 @@ export const CheckboxDemo = (props: PropsType) => (
   <form>
     <Checkbox.Root className={s.CheckboxRoot} defaultChecked={props.defaultChecked}>
       <Checkbox.Indicator className={s.CheckboxIndicator}>
-        <CheckIcon />
+        <CheckIcon className={s.CheckboxIcon}/>
       </Checkbox.Indicator>
     </Checkbox.Root>
   </form>

@@ -4,16 +4,23 @@ button {
 }
 
 .CheckboxRoot {
-  background-color: white;
-  width: 25px;
-  height: 25px;
-  border-radius: 4px;
+  background-color: var(--color-dark-900);
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px black;
+  border: solid 2px var(--color-light-100) ;
 }
 
 .CheckboxIndicator {
-  color: black;
+  color: var(--color-dark-900);
+  width: 18px;
+  height: 18px;
+}
+
+.CheckboxIcon {
+  width: 18px;
+  height: 18px;
 }
