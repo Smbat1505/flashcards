@@ -3,14 +3,48 @@ button {
   all: unset;
 }
 
+
+.Container {
+  display: flex;
+  align-items: center;
+}
+
 .CheckboxRoot {
   width: 14px;
   height: 14px;
-  border-radius: 3px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: solid 2px var(--color-light-100);
+}
+
+.CheckboxRoot:hover {
+  //background-color: var(--color-dark-500);
+}
+
+.Ellipse {
+  width: 36px;
+  height: 36px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.Ellipse:hover {
+  background-color: var(--color-dark-500);
+}
+
+.Ellipse:focus-within {
+  background-color: var(--color-dark-100);
+}
+
+
+
+.CheckboxRoot:focus {
+
 }
 
 .Selected {
@@ -18,17 +52,25 @@ button {
 }
 
 .Unselected {
-  background-color: var(--color-dark-900);
+  border: solid 2px var(--color-light-900);
 }
 
 
 .CheckboxIndicator {
   color: var(--color-dark-900);
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
 }
 
 .CheckboxIcon {
-  width: 25px;
+  width: 24px;
   height: auto;
+}
+
+
+.Label {
+  color: var(--color-light-100);
+  padding-left: 11px;
+  font-size: 14px;
+  line-height: 24px;
 }
