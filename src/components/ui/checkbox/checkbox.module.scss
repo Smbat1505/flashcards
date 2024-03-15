@@ -3,7 +3,6 @@ button {
   all: unset;
 }
 
-
 .Container {
   display: flex;
   align-items: center;
@@ -13,15 +12,13 @@ button {
   width: 14px;
   height: 14px;
   border-radius: 2px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: solid 2px var(--color-light-100);
 }
 
-.CheckboxRoot:hover {
-  //background-color: var(--color-dark-500);
-}
+
 
 .Ellipse {
   width: 36px;
@@ -31,20 +28,21 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  cursor: pointer;
+  box-sizing: border-box;
+
 }
 
 .Ellipse:hover {
   background-color: var(--color-dark-500);
 }
 
-.Ellipse:focus-within {
+.Ellipse:active {
   background-color: var(--color-dark-100);
 }
 
-
-
-.CheckboxRoot:focus {
-
+.Ellipse:focus-within {
+  background-color: var(--color-dark-100);
 }
 
 .Selected {
@@ -53,6 +51,9 @@ button {
 
 .Unselected {
   border: solid 2px var(--color-light-900);
+}
+.Disabled {
+  border: solid 2px var(--color-dark-100);
 }
 
 
@@ -70,7 +71,27 @@ button {
 
 .Label {
   color: var(--color-light-100);
-  padding-left: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LabelText {
+  padding-left: 3px;
   font-size: 14px;
   line-height: 24px;
+}
+
+.TextDisabled {
+  color: var(--color-dark-100);
+  cursor: auto;
+}
+
+.DisabledWrapper {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

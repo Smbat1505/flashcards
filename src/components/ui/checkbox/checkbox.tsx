@@ -11,26 +11,41 @@ type PropsType = {
   disabled?: boolean
 }
 
-export const CheckboxDemo = ({ children, defaultChecked = false }: PropsType) => {
+export const CheckboxDemo = ({ children, defaultChecked = false, disabled }: PropsType) => {
   const [checked, setChecked] = useState<boolean>(defaultChecked)
 
   return (
     <form>
       <div className={s.Container}>
-        <div className={s.Ellipse}>
-          <Checkbox.Root
-            className={
-              checked ? `${s.CheckboxRoot} ${s.Selected}` : `${s.CheckboxRoot} ${s.Unselected}`
-            }
-            defaultChecked={checked}
-            onClick={() => setChecked(prevState => !prevState)}
-          >
-            <Checkbox.Indicator className={s.CheckboxIndicator}>
-              <CheckIcon className={s.CheckboxIcon} />
-            </Checkbox.Indicator>
-          </Checkbox.Root>
-        </div>
-        <label className={s.Label}>{children}</label>
+        <label className={disabled ? `${s.Label} ${s.TextDisabled}` : `${s.Label} `}>
+          <div className={disabled ? s.DisabledWrapper : s.Ellipse}>
+            <Checkbox.Root
+              checked={disabled ? defaultChecked : checked}
+              // className={
+              //   checked ? `${s.CheckboxRoot} ${s.Selected}` : `${s.CheckboxRoot} ${s.Unselected}`
+              // }
+              //  className={disabled ? `${s.CheckboxRoot} ${s.Disabled}` : `${s.CheckboxRoot}`}
+              className={
+                s.CheckboxRoot +
+                ' ' +
+                (disabled ? s.Disabled : '') +
+                ' ' +
+                (checked ? s.Selected : s.Unselected)
+              }
+              disabled={disabled}
+              onClick={() => setChecked(prevState => !prevState)}
+            >
+              <Checkbox.Indicator className={s.CheckboxIndicator}>
+                <CheckIcon className={s.CheckboxIcon} />
+              </Checkbox.Indicator>
+            </Checkbox.Root>
+          </div>
+          <span className={s.LabelText}>{children}</span>
+        </label>
+
+        {/*<label className={disabled ? `${s.Label} ${s.TextDisabled}` : `${s.Label} `}>*/}
+        {/*  {children}*/}
+        {/*</label>*/}
       </div>
     </form>
   )
