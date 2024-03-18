@@ -9,9 +9,15 @@ type PropsType = {
   children?: ReactNode
   defaultChecked?: boolean
   disabled?: boolean
+  onChange?: ((checked: boolean) => void) | undefined
 }
 
-export const CheckboxDemo = ({ children, defaultChecked = false, disabled }: PropsType) => {
+export const CheckboxDemo = ({
+  children,
+  defaultChecked = false,
+  disabled,
+  onChange,
+}: PropsType) => {
   const [checked, setChecked] = useState<boolean>(defaultChecked)
 
   return (
@@ -31,6 +37,11 @@ export const CheckboxDemo = ({ children, defaultChecked = false, disabled }: Pro
                 (checked ? s.Selected : s.Unselected)
               }
               disabled={disabled}
+              onCheckedChange={() => {
+                if (onChange) {
+                  onChange(!checked)
+                }
+              }}
               onClick={() => setChecked(prevState => !prevState)}
             >
               <Checkbox.Indicator
