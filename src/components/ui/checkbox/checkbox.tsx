@@ -17,35 +17,35 @@ export const CheckboxDemo = ({ children, defaultChecked = false, disabled }: Pro
   return (
     <form>
       <div className={s.Container}>
-        <label className={disabled ? `${s.Label} ${s.TextDisabled}` : `${s.Label} `}>
+        <label className={s.Label + ' ' + (disabled ? s.TextDisabled : '')}>
           <div className={disabled ? s.DisabledWrapper : s.Ellipse}>
             <Checkbox.Root
               checked={disabled ? defaultChecked : checked}
-              // className={
-              //   checked ? `${s.CheckboxRoot} ${s.Selected}` : `${s.CheckboxRoot} ${s.Unselected}`
-              // }
-              //  className={disabled ? `${s.CheckboxRoot} ${s.Disabled}` : `${s.CheckboxRoot}`}
               className={
                 s.CheckboxRoot +
                 ' ' +
                 (disabled ? s.Disabled : '') +
+                ' ' +
+                (disabled && checked ? s.DisabledSelected : '') +
                 ' ' +
                 (checked ? s.Selected : s.Unselected)
               }
               disabled={disabled}
               onClick={() => setChecked(prevState => !prevState)}
             >
-              <Checkbox.Indicator className={s.CheckboxIndicator}>
+              <Checkbox.Indicator
+                className={
+                  s.CheckboxIndicator +
+                  ' ' +
+                  (disabled && checked ? s.CheckboxIndicatorSelectedDisabled : '')
+                }
+              >
                 <CheckIcon className={s.CheckboxIcon} />
               </Checkbox.Indicator>
             </Checkbox.Root>
           </div>
           <span className={s.LabelText}>{children}</span>
         </label>
-
-        {/*<label className={disabled ? `${s.Label} ${s.TextDisabled}` : `${s.Label} `}>*/}
-        {/*  {children}*/}
-        {/*</label>*/}
       </div>
     </form>
   )

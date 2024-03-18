@@ -20,3 +20,15 @@ export const DefaultUnChecked: Story = {
     defaultChecked: false,
   },
 }
+export const DefaultCheckedWithText: Story = {
+  args: {
+    children: 'Check-box',
+    defaultChecked: true,
+  },
+}
+export const DefaultUnCheckedWithText: Story = {
+  args: {
+    children: 'Check-box',
+    defaultChecked: false,
+  },
+}
