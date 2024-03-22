@@ -1,0 +1,21 @@
+/* IMPORTANT */
+
+.arrow {
+  width: 5px;
+  height: 10px;
+  display: inline-flex;
+  margin: 5px;
+
+  &.gray {
+  background-color: var(--color-dark-100); /* defines the background color of the image */
+  mask: url(./arrow_r.svg) no-repeat center / contain;
+}
+
+  &.light {
+    background: url(./arrow_r.svg) no-repeat center / contain;
+  }
+
+  &.left {
+    transform: rotate(180deg);
+  }
+}
