@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Pagination } from '@/components/ui/pagination'
+import { SelectDemo } from "@/components/ui/select";
+
 
 export function App() {
   return (
@@ -23,6 +25,7 @@ export function App() {
         Check-box
       </CheckboxDemo>
       <Pagination />
+      <SelectDemo/>
     </div>
   )
 }

@@ -4,18 +4,59 @@
   width: 5px;
   height: 10px;
   display: inline-flex;
-  margin: 5px;
+  margin: 0 6px;
 
-  &.gray {
+
+  &.disabled {
   background-color: var(--color-dark-100); /* defines the background color of the image */
   mask: url(./arrow_r.svg) no-repeat center / contain;
 }
 
-  &.light {
+  &.active {
     background: url(./arrow_r.svg) no-repeat center / contain;
+    cursor: pointer;
   }
 
   &.left {
     transform: rotate(180deg);
   }
 }
+
+.digit {
+  box-sizing: border-box;
+  margin: 0 6px;
+  padding: 0 8px;
+  height: 24px;
+  width: 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 2px;
+
+  &.active {
+    background-color: var(--color-light-100);
+    color: var(--color-dark-900);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus {
+    border: 2px solid var(--color-info-900);
+  }
+
+
+}
+
+
+.threeDots {
+  display: inline-flex;
+  margin: 0 5px;
+}
+
+.showTxt {
+  margin: 0 6px 0 18px;
+}
+
