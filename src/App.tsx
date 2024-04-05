@@ -6,7 +6,8 @@ import { SelectDemo } from "@/components/ui/select";
 
 export function App() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', justifyContent: 'flex-start', alignContent: 'flex-start', alignItems: 'flex-start'}}>
+     {/*<div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px' }}>*/}
       <Button onClick={() => (window.location.href = 'https://google.com')}>hello</Button>
       <Button as={'a'} href={'https://google.com'}>
         Hi
@@ -26,6 +27,7 @@ export function App() {
       </CheckboxDemo>
       <Pagination />
       <SelectDemo/>
+      <SelectDemo disabled/>
     </div>
   )
 }
