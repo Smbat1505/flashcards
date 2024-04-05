@@ -6,15 +6,15 @@ import { SelectDemo } from "@/components/ui/select";
 
 export function App() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', justifyContent: 'flex-start', alignContent: 'flex-start', alignItems: 'flex-start'}}>
-     {/*<div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px' }}>*/}
+    <div style={{ alignContent: 'flex-start', alignItems: 'flex-start', display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'flex-start', padding: '20px'}}>
+      <SelectDemo disabled/>
       <Button onClick={() => (window.location.href = 'https://google.com')}>hello</Button>
       <Button as={'a'} href={'https://google.com'}>
         Hi
       </Button>
       <CheckboxDemo
         defaultChecked
-        onChange={(a: boolean) => {
+        onChange={(a) => {
           console.log(a)
         }}
       />

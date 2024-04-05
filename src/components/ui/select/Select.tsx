@@ -1,5 +1,5 @@
 // your-select.jsx
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as Select from '@radix-ui/react-select'
@@ -11,38 +11,43 @@ type SelectDemoPropsType = {
   disabled?: boolean
 }
 
+export const SelectDemo = (props: SelectDemoPropsType) =>
+{
 
-export const SelectDemo = (props:SelectDemoPropsType) => (
-  <Select.Root disabled={props.disabled}>
-    <Select.Trigger aria-label={'Food'} className={s.SelectTrigger}>
-      <Select.Value placeholder={'Select…'} />
-      <Select.Icon className={s.SelectIcon}>
-        <ChevronDownIcon />
-      </Select.Icon>
-    </Select.Trigger>
-    <Select.Portal>
-      <Select.Content className={s.SelectContent} position={"popper"}>
-        <Select.ScrollUpButton className={s.SelectScrollButton}>
-          <ChevronUpIcon />
-        </Select.ScrollUpButton>
-        <Select.Viewport className={s.SelectViewport}>
+  const [selectOpen,setSelectOpen ]=useState<boolean>(false)
 
-          {/*<Select.Group>*/}
+ return (
+    <Select.Root disabled={props.disabled} onOpenChange={(open:boolean)=>setSelectOpen(open)}>
+      <Select.Trigger aria-label={'Food'} className={s.SelectTrigger}>
+        <Select.Value placeholder={'Select…'} />
+        <Select.Icon className={s.SelectIcon}>
+          {selectOpen?<ChevronUpIcon />: <ChevronDownIcon />}
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Portal>
+        <Select.Content className={s.SelectContent} position={'popper'}>
+          <Select.ScrollUpButton className={s.SelectScrollButton}>
+            <ChevronUpIcon />
+          </Select.ScrollUpButton>
+          <Select.Viewport className={s.SelectViewport}>
+            {/*<Select.Group>*/}
             <SelectItem value={'apple'}>Apple</SelectItem>
             <SelectItem value={'banana'}>Banana</SelectItem>
             <SelectItem value={'blueberry'}>Blueberry</SelectItem>
             <SelectItem value={'grapes'}>Grapes</SelectItem>
             <SelectItem value={'pineapple'}>Pineapple</SelectItem>
-          {/*</Select.Group>*/}
+            {/*</Select.Group>*/}
+          </Select.Viewport>
+          <Select.ScrollDownButton className={s.SelectScrollButton}>
+            <ChevronDownIcon />
+          </Select.ScrollDownButton>
+        </Select.Content>
+      </Select.Portal>
+    </Select.Root>
+  )
 
-        </Select.Viewport>
-        <Select.ScrollDownButton className={s.SelectScrollButton}>
-          <ChevronDownIcon />
-        </Select.ScrollDownButton>
-      </Select.Content>
-    </Select.Portal>
-  </Select.Root>
-)
+}
+
 
 
 type selectItemPropsType = {
