@@ -1,0 +1,44 @@
+.themeBlock {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50vw;
+
+  overflow: auto;
+
+  width: 50%;
+  height: 100vh;
+  padding: 1rem;
+
+  color: #0e1720;
+
+  background: #fffefe;
+
+  &.dark-mode {
+    color: #fffefe;
+    background: #0e1720;
+  }
+
+  &.light-mode {
+    color: #000;
+    text-shadow: 0 0 2px #fffefe;
+    background: #fffefe;
+  }
+
+  &.left {
+    right: 50%;
+    left: 0;
+    width: 50%;
+    border-right: 1px solid #202020;
+  }
+
+  &.fill {
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &.docs {
+    all: unset;
+  }
+}
