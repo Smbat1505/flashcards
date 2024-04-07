@@ -9,7 +9,7 @@ module.exports = {
       }
     },
     {
-      files: ["src/assets/icons/components/*.tsx"], // применить только к файлам с расширением .tsx
+      files: ["src/assets/icons/components/*.tsx"],
       rules: {
         "no-duplicate-imports": "warn"
       }
