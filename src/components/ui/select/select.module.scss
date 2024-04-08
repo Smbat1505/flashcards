@@ -4,45 +4,80 @@ button {
   all: unset;
 }
 
+.Label {
+  font-size: 14px;
+  color: var(--color-dark-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
+
+}
+
 .SelectTrigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 15px;
+  justify-content: space-between;
+  padding-left: 12px;
+  margin-top: -10px;
   font-size: 16px;
   line-height: 1;
   height: 36px;
-  gap: 5px;
+  //width: 100%;
   border: 1px solid var(--color-dark-300);
-  border-radius: 2px;
+  border-radius: 2px
 }
 
 .SelectTrigger:hover {
   background-color: var(--color-dark-500);
   border-color: var(--color-dark-100)
 }
+
+.SelectTrigger:disabled {
+  background-color: var(--color-dark-900);
+  border-color: var(--color-dark-300);
+}
+
 .SelectTrigger:focus {
   border-color: var(--color-info-700)
 }
 .SelectTrigger[data-placeholder] {
   color: var(--color-light-100);
 }
+.SelectTrigger[data-placeholder]:disabled {
+  color: var(--color-dark-300);
+}
+
 
 .SelectIcon {
   color: var(--color-light-100);
+  padding: 0 12px;
 }
+
+.SelectIconDisabled {
+  color: var(--color-dark-300);
+  padding-right: 12px;
+}
+
+.UpIcon {
+  transform: rotate(180deg);
+  transition: 200ms linear all;
+}
+.DownIcon {
+  transform: rotate(0deg);
+  transition: 200ms linear all;
+}
+
 
 .SelectContent {
   overflow: hidden;
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
   background-color: var(--color-dark-900);
+  width: var(--radix-select-trigger-width);
   }
 
-.SelectViewport {
-//margin-top: 36px;
 
-}
 
 .SelectItem {
   font-size: 16px;
@@ -51,7 +86,7 @@ button {
   display: flex;
   align-items: center;
   height: 36px;
-  padding: 0px 35px 0 25px;
+  padding-left: 12px;
   position: relative;
   user-select: none;
 }
@@ -64,13 +99,6 @@ button {
   background-color: var(--color-accent-900);
   color: var(--color-accent-300);
 }
-//
-//.SelectLabel {
-//  padding: 0 25px;
-//  font-size: 12px;
-//  line-height: 25px;
-//  color: #0f9954;
-//}
 
 
 
@@ -92,3 +120,4 @@ button {
   color: #0f9954;
   cursor: default;
 }
+
