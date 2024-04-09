@@ -158,6 +158,16 @@ export const All: Story = {
             </td>
           </tr>
         </tbody>
+        <tbody>
+          <tr>
+            <td style={{ gap: '32px', marginBottom: '30px' }}>
+              <Typography variant={'error'}>Error</Typography>
+            </td>
+            <td style={{ gap: '32px', marginBottom: '30px' }}>
+              <Typography variant={'error'} {...All.args} />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   ),
@@ -235,5 +245,12 @@ export const Link2: Story = {
   args: {
     ...H1.args,
     variant: 'link2',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    ...H1.args,
+    variant: 'error',
   },
 }

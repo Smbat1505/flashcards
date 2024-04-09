@@ -26,6 +26,7 @@ export const VARIANTS = {
   body1: 'body1',
   body2: 'body2',
   caption: 'caption',
+  error: 'error',
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
