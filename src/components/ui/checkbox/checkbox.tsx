@@ -1,10 +1,10 @@
 import { ReactNode, useState } from 'react'
 
 import * as Checkbox from '@radix-ui/react-checkbox'
+import { CheckedState } from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
 
 import s from './checkbox.module.scss'
-import { CheckedState } from "@radix-ui/react-checkbox";
 
 type PropsType = {
   children?: ReactNode
@@ -38,12 +38,12 @@ export const CheckboxDemo = ({
                 (checked ? s.Selected : s.Unselected)
               }
               disabled={disabled}
-
-              onCheckedChange={(checked:CheckedState)=> {
+              onCheckedChange={(checked: CheckedState) => {
                 setChecked(checked)
-                if (onChange) onChange(checked)
-              }
-              }
+                if (onChange) {
+                  onChange(checked)
+                }
+              }}
             >
               <Checkbox.Indicator
                 className={
