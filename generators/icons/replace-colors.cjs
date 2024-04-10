@@ -9,7 +9,7 @@ async function main() {
   for (const file of files) {
     const filePath = join(dirWithIcons, file);
     const fileContent = await fsp.readFile(filePath, "utf-8");
-    const newFileContent = fileContent.replaceAll("#fff", "currentcolor");
+    const newFileContent = fileContent.replaceAll("#000", "currentcolor");
     await fsp.writeFile(filePath, newFileContent);
   }
 }
