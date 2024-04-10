@@ -3,13 +3,12 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgPlayCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#play-circle_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#play-circle_svg__a)'} fill={'currentcolor'}>
       <path d={'m11.5 14.6 2.81-2.6-2.81-2.6z'} />
       <path
         d={
@@ -19,7 +18,7 @@ const SvgPlayCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) 
     </g>
     <defs>
       <clipPath id={'play-circle_svg__a'}>
-        <path d={'M0 0h24v24H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v24H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>

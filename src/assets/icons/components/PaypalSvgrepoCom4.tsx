@@ -3,9 +3,8 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgPaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={16}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 16'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -14,7 +13,7 @@ const SvgPaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
         d={
           'M1.474.5h21.052c.55 0 .974.431.974.936v13.128c0 .505-.424.936-.974.936H1.474c-.55 0-.974-.431-.974-.936V1.436C.5.93.924.5 1.474.5Z'
         }
-        fill={'currentcolor'}
+        fill={'#fff'}
         stroke={'#F3F3F3'}
       />
       <path
@@ -60,7 +59,7 @@ const SvgPaypalSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
     <defs>
       <clipPath id={'paypal-svgrepo-com-4_svg__a'}>
-        <path d={'M0 0h24v16H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v16H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>

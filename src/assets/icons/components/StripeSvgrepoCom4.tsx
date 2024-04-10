@@ -3,9 +3,8 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={16}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 16'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
@@ -14,7 +13,7 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
         d={
           'M1.913.5h20.174c.79 0 1.413.625 1.413 1.372v12.256c0 .748-.622 1.372-1.413 1.372H1.913C1.123 15.5.5 14.876.5 14.128V1.872C.5 1.125 1.122.5 1.913.5Z'
         }
-        fill={'currentcolor'}
+        fill={'#fff'}
         stroke={'#F3F3F3'}
       />
       <path
@@ -28,7 +27,7 @@ const SvgStripeSvgrepoCom4 = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEle
     </g>
     <defs>
       <clipPath id={'stripe-svgrepo-com-4_svg__a'}>
-        <path d={'M0 0h24v16H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v16H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>
