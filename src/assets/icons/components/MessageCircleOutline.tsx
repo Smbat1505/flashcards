@@ -3,13 +3,12 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgMessageCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#message-circle-outline_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#message-circle-outline_svg__a)'} fill={'currentcolor'}>
       <path
         d={
           'M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2M16 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2M8 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2'
@@ -23,7 +22,7 @@ const SvgMessageCircleOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVG
     </g>
     <defs>
       <clipPath id={'message-circle-outline_svg__a'}>
-        <path d={'M0 0h24v24H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v24H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>

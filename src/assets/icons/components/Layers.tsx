@@ -3,13 +3,12 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgLayers = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#layers_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#layers_svg__a)'} fill={'currentcolor'}>
       <path
         d={
           'm3.24 7.29 8.52 4.63a.51.51 0 0 0 .48 0l8.52-4.63a.44.44 0 0 0-.05-.81L12.19 3a.5.5 0 0 0-.38 0L3.29 6.48a.44.44 0 0 0-.05.81'
@@ -28,7 +27,7 @@ const SvgLayers = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id={'layers_svg__a'}>
-        <path d={'M0 0h24v24H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v24H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>

@@ -3,13 +3,12 @@ import { Ref, forwardRef, memo } from 'react'
 const SvgMic = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={24}
     ref={ref}
-    width={24}
+    viewBox={'0 0 24 24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#mic_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#mic_svg__a)'} fill={'currentcolor'}>
       <path d={'M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4'} />
       <path
         d={
@@ -19,7 +18,7 @@ const SvgMic = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id={'mic_svg__a'}>
-        <path d={'M0 0h24v24H0z'} fill={'currentcolor'} />
+        <path d={'M0 0h24v24H0z'} fill={'#fff'} />
       </clipPath>
     </defs>
   </svg>
