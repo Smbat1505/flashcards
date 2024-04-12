@@ -23,7 +23,7 @@ button {
   font-size: 16px;
   line-height: 1;
   height: 36px;
-
+  box-sizing: border-box;
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
 
@@ -47,7 +47,8 @@ button {
 }
 
 .SelectTrigger:focus {
-  border-color: var(--color-info-700)
+  border-color: var(--color-info-700);
+  border-width: 2px;
 }
 .SelectTrigger[data-placeholder] {
   color: var(--color-light-100);

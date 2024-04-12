@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Pagination } from '@/components/ui/pagination'
-import { SelectDemo } from '@/components/ui/select'
+import { SelectDemo, SelectItem } from '@/components/ui/select'
+import { SelectNew } from '@/components/ui/select/SelectNew'
 
 export type selectOptionsType = {
   label: string
@@ -49,7 +50,7 @@ export function App() {
         padding: '50px',
       }}
     >
-      <SelectDemo onChange={onChangeHandler} options={selectOptions} placeholder={'Select…'} />
+      {/*<SelectDemo onChange={onChangeHandler} options={selectOptions} placeholder={'Select…'} />*/}
       <Button fullWidth onClick={() => (window.location.href = 'https://google.com')}>
         hello
       </Button>
@@ -85,6 +86,27 @@ export function App() {
         options={selectOptions}
         placeholder={'Select…'}
       />
+
+      <SelectNew defaultValue={'2'} onChange={onChangeHandler}>
+        <SelectItem value={'1'}>Item 1</SelectItem>
+        <SelectItem value={'2'}>Item 2</SelectItem>
+        <SelectItem value={'3'}>Item 3</SelectItem>
+      </SelectNew>
+      <SelectNew
+        fullwidth
+        label={'Select fruit'}
+        onChange={onChangeHandler}
+        placeholder={'Select…'}
+      >
+        <SelectItem value={'1'}>Item 1</SelectItem>
+        <SelectItem value={'2'}>Item 2</SelectItem>
+        <SelectItem value={'3'}>Item 3</SelectItem>
+      </SelectNew>
+      <SelectNew disabled label={'Select fruit'} onChange={onChangeHandler} placeholder={'Select…'}>
+        <SelectItem value={'1'}>Item 1</SelectItem>
+        <SelectItem value={'2'}>Item 2</SelectItem>
+        <SelectItem value={'3'}>Item 3</SelectItem>
+      </SelectNew>
     </div>
   )
 }

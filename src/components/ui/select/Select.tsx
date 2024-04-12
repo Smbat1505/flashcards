@@ -10,6 +10,8 @@ import classnames from 'classnames'
 import s from './select.module.scss'
 
 type SelectDemoPropsType = {
+  children?: ReactNode
+  defaultValue?: string
   disabled?: boolean
   fullwidth?: boolean
   label?: string
@@ -68,7 +70,7 @@ type selectItemPropsType = {
   value: string
 }
 
-const SelectItem = React.forwardRef(
+export const SelectItem = React.forwardRef(
   ({ children, className, ...props }: selectItemPropsType, forwardedRef: any) => {
     return (
       <Select.Item className={classnames(s.SelectItem, className)} {...props} ref={forwardedRef}>
