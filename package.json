@@ -25,7 +25,6 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "1.2.25",
     "@it-incubator/eslint-config": "1.0.2",
     "@it-incubator/prettier-config": "0.1.2",
     "@it-incubator/stylelint-config": "1.0.3",
