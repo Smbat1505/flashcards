@@ -86,3 +86,10 @@ export { default as Trash } from './Trash'
 export { default as TrashOutline } from './TrashOutline'
 export { default as TrendingUp } from './TrendingUp'
 export { default as TrendingUpOutline } from './TrendingUpOutline'
+
+// Object export
+
+// components.js
+import * as Icons from '../components'
+
+export default Icons
