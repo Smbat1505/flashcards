@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react'
 
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon } from '@radix-ui/react-icons'
 import { Label } from '@radix-ui/react-label'
 import * as SelectPrimitive from '@radix-ui/react-select'
 
@@ -41,15 +41,9 @@ export const SelectNew = React.forwardRef(
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content className={s.SelectContent} position={'popper'}>
-              <SelectPrimitive.ScrollUpButton className={s.SelectScrollButton}>
-                <ChevronUpIcon />
-              </SelectPrimitive.ScrollUpButton>
               <SelectPrimitive.Viewport className={s.SelectViewport}>
                 {children}
               </SelectPrimitive.Viewport>
-              <SelectPrimitive.ScrollDownButton>
-                <ChevronDownIcon />
-              </SelectPrimitive.ScrollDownButton>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>
         </SelectPrimitive.Root>
@@ -66,11 +60,8 @@ type SelectItemProps = {
 export const SelectItem = React.forwardRef(
   ({ children, ...props }: SelectItemProps, forwardedRef: any) => {
     return (
-      <SelectPrimitive.Item {...props} ref={forwardedRef}>
+      <SelectPrimitive.Item className={s.SelectItem} {...props} ref={forwardedRef}>
         <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-        <SelectPrimitive.ItemIndicator>
-          <CheckIcon />
-        </SelectPrimitive.ItemIndicator>
       </SelectPrimitive.Item>
     )
   }

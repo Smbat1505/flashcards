@@ -87,7 +87,6 @@ button {
   }
 
 
-
 .SelectItem {
   font-size: 16px;
   line-height: 1;
@@ -109,24 +108,4 @@ button {
   color: var(--color-accent-300);
 }
 
-
-
-.SelectItemIndicator {
-  position: absolute;
-  left: 0;
-  width: 25px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.SelectScrollButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 25px;
-  background-color: white;
-  color: #0f9954;
-  cursor: default;
-}
 
