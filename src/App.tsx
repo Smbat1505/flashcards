@@ -1,42 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Pagination } from '@/components/ui/pagination'
-import { SelectDemo, SelectItem } from '@/components/ui/select'
-import { SelectNew } from '@/components/ui/select/SelectNew'
-
-export type selectOptionsType = {
-  label: string
-  value: string
-}
+import { SelectItem, SelectNew } from '@/components/ui/select/select'
 
 const onChangeHandler = (value: string) => {
   console.log(value)
 }
 
 export function App() {
-  const selectOptions: Array<selectOptionsType> = [
-    {
-      label: 'Apple',
-      value: 'apple',
-    },
-    {
-      label: 'Banana',
-      value: 'banana',
-    },
-    {
-      label: 'Blueberry',
-      value: 'blueberry',
-    },
-    {
-      label: 'Grapes',
-      value: 'grapes',
-    },
-    {
-      label: 'Pineapple',
-      value: 'pineapple',
-    },
-  ]
-
   return (
     <div
       style={{
@@ -50,12 +21,24 @@ export function App() {
         padding: '50px',
       }}
     >
-      {/*<SelectDemo onChange={onChangeHandler} options={selectOptions} placeholder={'Select…'} />*/}
-      <Button fullWidth onClick={() => (window.location.href = 'https://google.com')}>
-        hello
+      <Button>Primary Button</Button>
+      <Button
+        as={'a'}
+        fullWidth={false}
+        href={'https://my.beltelecom.by/login'}
+        onClick={() => console.log('clicked')}
+      >
+        Primary Button As a
       </Button>
-      <Button as={'a'} href={'https://google.com'}>
-        Hi
+      <Button onClick={() => console.log('clicked')} showIcon>
+        Primary Button with Icon
+      </Button>
+      <Button variant={'secondary'}>Secondary Button</Button>
+      <Button showIcon variant={'secondary'}>
+        Secondary Button with Icon
+      </Button>
+      <Button fullWidth variant={'secondary'}>
+        Secondary Button with Icon
       </Button>
       <CheckboxDemo
         defaultChecked
@@ -71,21 +54,6 @@ export function App() {
         Check-box
       </CheckboxDemo>
       <Pagination />
-      <SelectDemo
-        fullwidth
-        label={'Select fruit'}
-        onChange={onChangeHandler}
-        options={selectOptions}
-        placeholder={'Select…'}
-      />
-      <SelectDemo
-        disabled
-        fullwidth
-        label={'Select fruit'}
-        onChange={onChangeHandler}
-        options={selectOptions}
-        placeholder={'Select…'}
-      />
 
       <SelectNew defaultValue={'2'} onChange={onChangeHandler}>
         <SelectItem value={'1'}>Item 1</SelectItem>

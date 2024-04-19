@@ -5,7 +5,6 @@ button {
 }
 
 .Label {
-  font-size: 14px;
   color: var(--color-dark-100);
 
   &.disabled {
@@ -20,8 +19,6 @@ button {
   justify-content: space-between;
   padding-left: 12px;
   margin-top: -10px;
-  font-size: 16px;
-  line-height: 1;
   height: 36px;
   box-sizing: border-box;
   border: 1px solid var(--color-dark-300);
@@ -30,11 +27,7 @@ button {
   &.fullwidth {
     width: 100%;
   }
-
-
 }
-
-
 
 .SelectTrigger:hover {
   background-color: var(--color-dark-500);
@@ -88,8 +81,6 @@ button {
 
 
 .SelectItem {
-  font-size: 16px;
-  line-height: 1;
   color: var(--color-light-100);
   display: flex;
   align-items: center;
@@ -107,5 +98,3 @@ button {
   background-color: var(--color-accent-900);
   color: var(--color-accent-300);
 }
-
-

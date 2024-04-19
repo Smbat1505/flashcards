@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react'
 
+import { Typography } from '@/components/ui/typography'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { CheckedState } from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
@@ -56,7 +57,9 @@ export const CheckboxDemo = ({
               </Checkbox.Indicator>
             </Checkbox.Root>
           </div>
-          <span className={s.LabelText}>{children}</span>
+          <Typography className={s.LabelText} variant={'body2'}>
+            {children}
+          </Typography>
         </label>
       </div>
     </form>
