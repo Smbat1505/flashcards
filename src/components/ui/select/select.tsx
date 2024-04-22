@@ -14,8 +14,8 @@ type SelectNewProps = {
   fullwidth?: boolean
   label?: string
   onChange: (value: string) => void
-  placeholder?: string
   options?: Array<{value: string, label: string}>
+  placeholder?: string
 }
 
 export const SelectNew = React.forwardRef(
@@ -44,7 +44,7 @@ export const SelectNew = React.forwardRef(
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content className={s.SelectContent} position={'popper'}>
               <SelectPrimitive.Viewport>
-                {props.options? props.options?.map(o=><SelectItem value={o.value}>{o.label}</SelectItem>): children}
+                {props.options? props.options?.map((o, index)=><SelectItem value={o.value} key={index}>{o.label}</SelectItem>): children}
               </SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>

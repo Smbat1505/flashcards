@@ -17,16 +17,16 @@ export const Default: Story = {
   args: {
     options: [
       {
-        value: "apple",
-        label: "Apple"
+        value: 'apple',
+        label: 'Apple'
       },
       {
-        value: "blueberry",
-        label: "Blueberry"
+        value: 'blueberry',
+        label: 'Blueberry'
       },
       {
-        value: "grapes",
-        label: "Grapes"
+        value: 'grapes',
+        label: 'Grapes'
       },
     ],
     disabled: false,

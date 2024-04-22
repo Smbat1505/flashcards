@@ -7,6 +7,30 @@ const onChangeHandler = (value: string) => {
   console.log(value)
 }
 
+type optionsType = {
+  value: string,
+  label: string
+}
+
+
+const options:Array<optionsType>  =
+
+[
+  {
+    value: 'apple',
+    label: 'Apple'
+  },
+  {
+    value: 'blueberry',
+    label: 'Blueberry'
+  },
+  {
+    value: 'grapes',
+    label: 'Grapes'
+  },
+
+]
+
 export function App() {
   return (
     <div
@@ -53,7 +77,11 @@ export function App() {
       <CheckboxDemo defaultChecked disabled>
         Check-box
       </CheckboxDemo>
+
       <Pagination />
+
+      <SelectNew onChange={onChangeHandler}  placeholder={'Select…'} options={options}>
+      </SelectNew>
 
       <SelectNew defaultValue={'2'} onChange={onChangeHandler}>
         <SelectItem value={'1'}>Item 1</SelectItem>
