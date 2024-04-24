@@ -1,12 +1,13 @@
+import { useState } from 'react'
+
+import { SelectItem, SelectNew } from '@/components/ui/select'
+
 import s from './pagination.module.scss'
 
-import { SelectItem, SelectNew } from "@/components/ui/select";
-
 export const Pagination = () => {
-
-  const currentPage: number = 0;
-  const itemsPerPage: number = 0;
-  const totalPages: number = 44;
+  const [currentPage, setCurentPage] = useState<number>(1)
+  const itemsPerPage: number = 0
+  const totalPages: number = 21
 
   const pagesArray: Array<any> = []
 
@@ -15,10 +16,19 @@ export const Pagination = () => {
       pagesArray.push(i)
     }
   } else {
-    for (let i = 1; i <= 5; i++) {
-      pagesArray.push(i)
+    if (currentPage < 5) {
+      for (let i = 1; i <= 5; i++) {
+        pagesArray.push(i)
+      }
+      pagesArray.push('...', totalPages)
+    } else if (currentPage >= 5 && totalPages - currentPage > 3) {
+      pagesArray.push(1, '...')
+      pagesArray.push(currentPage - 1, currentPage, currentPage + 1)
+      pagesArray.push('...', totalPages)
+    } else if (currentPage >= 5 && totalPages - currentPage <= 3) {
+      pagesArray.push(1, '...')
+      pagesArray.push(totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
     }
-    pagesArray.push('...', totalPages)
   }
   console.log(pagesArray)
   const onChangeHandler = (value: string) => {
@@ -28,15 +38,24 @@ export const Pagination = () => {
   return (
     <div>
       <div style={{ padding: '50px 0px' }}>
+        <div className={`${s.arrow} ${s.disabled} ${s.left}`}></div>
         {pagesArray.map((p, index) => (
-          <div className={s.digit} key={index}>
+          <div
+            className={
+              p === '...' ? s.threeDots : s.digit + ' ' + (p === currentPage ? s.active : '')
+            }
+            key={index}
+            onClick={() => setCurentPage(p)}
+          >
             {p}
           </div>
         ))}
+        <div
+          className={`${s.arrow} ${s.active}`}
+          onClick={() => setCurentPage(prevState => prevState + 1)}
+        ></div>
       </div>
-
-      <div className={`${s.arrow} ${s.disabled} ${s.left}`}></div>
-      
+      <div className={`${s.arrow} ${s.active}`}></div>
 
       <div className={s.digit}>1</div>
       <div className={`${s.digit} ${s.active}`} tabIndex={0}>
@@ -58,7 +77,7 @@ export const Pagination = () => {
       <div className={`${s.arrow} ${s.active}`}></div>
       <span className={s.showTxt}>Показать</span>
       <div className={s.select}>
-        <SelectNew onChange={onChangeHandler} defaultValue={'10'}>
+        <SelectNew defaultValue={'10'} onChange={onChangeHandler}>
           <SelectItem value={'10'}>10</SelectItem>
           <SelectItem value={'20'}>20</SelectItem>
           <SelectItem value={'30'}>30</SelectItem>
@@ -67,8 +86,6 @@ export const Pagination = () => {
         </SelectNew>
       </div>
       <span className={s.showTxt}>на странице</span>
-
-
     </div>
   )
 }

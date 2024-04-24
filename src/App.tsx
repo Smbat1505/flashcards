@@ -8,27 +8,23 @@ const onChangeHandler = (value: string) => {
 }
 
 type optionsType = {
-  value: string,
   label: string
+  value: string
 }
 
-
-const options:Array<optionsType>  =
-
-[
+const options: Array<optionsType> = [
   {
+    label: 'Apple',
     value: 'apple',
-    label: 'Apple'
   },
   {
+    label: 'Blueberry',
     value: 'blueberry',
-    label: 'Blueberry'
   },
   {
+    label: 'Grapes',
     value: 'grapes',
-    label: 'Grapes'
   },
-
 ]
 
 export function App() {
@@ -80,8 +76,7 @@ export function App() {
 
       <Pagination />
 
-      <SelectNew onChange={onChangeHandler}  placeholder={'Select…'} options={options}>
-      </SelectNew>
+      <SelectNew onChange={onChangeHandler} options={options} placeholder={'Select…'}></SelectNew>
 
       <SelectNew defaultValue={'2'} onChange={onChangeHandler}>
         <SelectItem value={'1'}>Item 1</SelectItem>
