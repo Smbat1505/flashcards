@@ -38,7 +38,10 @@ export const Pagination = () => {
   return (
     <div>
       <div style={{ padding: '50px 0px' }}>
-        <div className={`${s.arrow} ${s.disabled} ${s.left}`}></div>
+        <div
+          className={s.arrow + ' ' + (currentPage == 1 ? s.disabled : s.active) + ' ' + s.left}
+          onClick={() => setCurentPage(prevState => prevState - 1)}
+        ></div>
         {pagesArray.map((p, index) => (
           <div
             className={
@@ -51,11 +54,11 @@ export const Pagination = () => {
           </div>
         ))}
         <div
-          className={`${s.arrow} ${s.active}`}
+          className={s.arrow + ' ' + (currentPage == totalPages ? s.disabled : s.active)}
           onClick={() => setCurentPage(prevState => prevState + 1)}
         ></div>
       </div>
-      <div className={`${s.arrow} ${s.active}`}></div>
+      <div className={`${s.arrow} ${s.active} `}></div>
 
       <div className={s.digit}>1</div>
       <div className={`${s.digit} ${s.active}`} tabIndex={0}>
