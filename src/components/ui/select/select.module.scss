@@ -10,7 +10,6 @@ button {
   &.disabled {
     color: var(--color-dark-300);
   }
-
 }
 
 .SelectTrigger {
@@ -18,7 +17,6 @@ button {
   align-items: center;
   justify-content: space-between;
   padding-left: 12px;
-  margin-top: -10px;
   height: 36px;
   box-sizing: border-box;
   border: 1px solid var(--color-dark-300);
@@ -28,6 +26,12 @@ button {
   &.fullwidth {
     width: 100%;
   }
+
+  &.pagination {
+    height: 24px;
+    padding-left: 6px;
+  }
+
 }
 
 .SelectTrigger:hover {
@@ -51,10 +55,14 @@ button {
   color: var(--color-dark-300);
 }
 
-
 .SelectIcon {
   color: var(--color-light-100);
   padding: 0 12px;
+
+  &.pagination {
+    padding: 0 6px;
+  }
+
 }
 
 .SelectIconDisabled {
@@ -86,10 +94,18 @@ button {
   display: flex;
   align-items: center;
   height: 36px;
+  font-size: var(--font-size-s);
   padding-left: 12px;
   padding-right: 12px;
   position: relative;
   user-select: none;
+
+  &.pagination {
+    padding-left: 6px;
+    height: 24px;
+  }
+
+
 }
 .SelectItem[data-disabled] {
   color: var(--color-accent-900);

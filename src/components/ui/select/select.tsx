@@ -14,7 +14,8 @@ type SelectNewProps = {
   fullwidth?: boolean
   label?: string
   onChange: (value: string) => void
-  options?: Array<{value: string, label: string}>
+  options?: Array<{ label: string; value: string }>
+  pagination?: boolean
   placeholder?: string
 }
 
@@ -33,18 +34,36 @@ export const SelectNew = React.forwardRef(
           onValueChange={props.onChange}
         >
           <SelectPrimitive.Trigger
-            className={s.SelectTrigger + ' ' + (props.fullwidth ? s.fullwidth : '')}
+            className={
+              s.SelectTrigger +
+              ' ' +
+              (props.fullwidth ? s.fullwidth : '') +
+              ' ' +
+              (props.pagination ? s.pagination : '')
+            }
             ref={forwardedRef}
           >
             <SelectPrimitive.Value placeholder={props.placeholder} />
-            <SelectPrimitive.Icon className={props.disabled ? s.SelectIconDisabled : s.SelectIcon}>
+            <SelectPrimitive.Icon
+              className={
+                props.disabled
+                  ? s.SelectIconDisabled
+                  : s.SelectIcon + ' ' + (props.pagination ? s.pagination : '')
+              }
+            >
               <ChevronDownIcon className={selectOpen ? s.UpIcon : s.DownIcon} />
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
             <SelectPrimitive.Content className={s.SelectContent} position={'popper'}>
               <SelectPrimitive.Viewport>
-                {props.options? props.options?.map((o, index)=><SelectItem value={o.value} key={index}>{o.label}</SelectItem>): children}
+                {props.options
+                  ? props.options?.map((o, index) => (
+                      <SelectItem key={index} value={o.value}>
+                        {o.label}
+                      </SelectItem>
+                    ))
+                  : children}
               </SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>
@@ -56,15 +75,21 @@ export const SelectNew = React.forwardRef(
 
 type SelectItemProps = {
   children?: ReactNode
+  pagination?: boolean
   value: string
 }
 
 export const SelectItem = React.forwardRef(
   ({ children, ...props }: SelectItemProps, forwardedRef: any) => {
     return (
-      <SelectPrimitive.Item className={s.SelectItem} {...props} ref={forwardedRef}>
+      <SelectPrimitive.Item
+        className={s.SelectItem + ' ' + (props.pagination ? s.pagination : '')}
+        {...props}
+        ref={forwardedRef}
+      >
         <SelectPrimitive.ItemText>
-          <Typography variant={'body1'}>{children}</Typography>
+          {/*<Typography variant={'body2'}>{children}</Typography>*/}
+          {children}
         </SelectPrimitive.ItemText>
       </SelectPrimitive.Item>
     )

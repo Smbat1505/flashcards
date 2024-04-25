@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Pagination } from '@/components/ui/pagination'
 import { SelectItem, SelectNew } from '@/components/ui/select/select'
+import { Typography } from "@/components/ui/typography";
 
 const onChangeHandler = (value: string) => {
   console.log(value)
@@ -73,9 +74,9 @@ export function App() {
       <CheckboxDemo defaultChecked disabled>
         Check-box
       </CheckboxDemo>
-
-      <Pagination />
-
+      <Typography variant={'body2'}>
+        <Pagination />
+      </Typography>
       <SelectNew onChange={onChangeHandler} options={options} placeholder={'Select…'}></SelectNew>
 
       <SelectNew defaultValue={'2'} onChange={onChangeHandler}>
