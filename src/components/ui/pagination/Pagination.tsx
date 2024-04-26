@@ -1,14 +1,21 @@
 import { useState } from 'react'
 
 import { SelectItem, SelectNew } from '@/components/ui/select'
+import { Typography } from '@/components/ui/typography'
 
 import s from './pagination.module.scss'
-import { Typography } from "@/components/ui/typography";
 
-export const Pagination = () => {
-  const [currentPage, setCurentPage] = useState<number>(1)
-  const itemsPerPage: number = 0
-  const totalPages: number = 21
+type PaginationPropsType = {
+  onPageChange: (page: number | string) => void
+  onPerPageChange: (value: string) => void
+  perPageOptions: Array<string>
+  totalPages: number
+}
+
+export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationPropsType) => {
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  // const itemsPerPage: number = 0
+  // const totalPages: number = 21
 
   const pagesArray: Array<any> = []
 
@@ -31,53 +38,59 @@ export const Pagination = () => {
       pagesArray.push(totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
     }
   }
-  console.log(pagesArray)
-  const onChangeHandler = (value: string) => {
-    console.log(value)
+
+  const onPerPageChangeHandler = (value: string) => {
+    props.onPerPageChange(value)
   }
 
   return (
-    <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
-      <div
-        className={s.arrow + ' ' + (currentPage == 1 ? s.disabled : s.active) + ' ' + s.left}
-        onClick={() => setCurentPage(prevState => prevState - 1)}
-      ></div>
-      {pagesArray.map((p, index) => (
+    <Typography variant={'body2'}>
+      <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
         <div
-          className={
-            p === '...' ? s.threeDots : s.digit + ' ' + (p === currentPage ? s.active : '')
-          }
-          key={index}
-          onClick={() => setCurentPage(p)}
-        >
-          {p}
+          className={s.arrow + ' ' + (currentPage == 1 ? s.disabled : s.active) + ' ' + s.left}
+          onClick={() => {
+            if (currentPage !== 1) {
+              setCurrentPage(prevState => prevState - 1)
+            }
+          }}
+        ></div>
+        {pagesArray.map((p, index) => (
+          <div
+            className={
+              p === '...' ? s.threeDots : s.digit + ' ' + (p === currentPage ? s.active : '')
+            }
+            key={index}
+            onClick={() => {
+              if (p !== '...') {
+                setCurrentPage(p)
+                props.onPageChange(p)
+              }
+            }}
+          >
+            {p}
+          </div>
+        ))}
+        <div
+          className={s.arrow + ' ' + (currentPage == totalPages ? s.disabled : s.active)}
+          onClick={() => {
+            if (currentPage + 1 <= totalPages) {
+              setCurrentPage(prevState => prevState + 1)
+              props.onPageChange(currentPage + 1)
+            }
+          }}
+        ></div>
+        <span className={s.showTxt}>Показать</span>
+        <div className={s.select}>
+          <SelectNew defaultValue={'10'} onChange={onPerPageChangeHandler} pagination>
+            {perPageOptions.map((opt, index) => (
+              <SelectItem key={index} pagination value={opt}>
+                {opt}
+              </SelectItem>
+            ))}
+          </SelectNew>
         </div>
-      ))}
-      <div
-        className={s.arrow + ' ' + (currentPage == totalPages ? s.disabled : s.active)}
-        onClick={() => setCurentPage(prevState => prevState + 1)}
-      ></div>
-      <span className={s.showTxt}>Показать</span>
-      <div className={s.select}>
-        <SelectNew defaultValue={'10'} onChange={onChangeHandler} pagination>
-          <SelectItem pagination value={'10'}>
-            10
-          </SelectItem>
-          <SelectItem pagination value={'20'}>
-            20
-          </SelectItem>
-          <SelectItem pagination value={'30'}>
-            30
-          </SelectItem>
-          <SelectItem pagination value={'50'}>
-            50
-          </SelectItem>
-          <SelectItem pagination value={'100'}>
-            100
-          </SelectItem>
-        </SelectNew>
+        <span className={s.showTxt}>на странице</span>
       </div>
-      <span className={s.showTxt}>на странице</span>
-    </div>
+    </Typography>
   )
 }

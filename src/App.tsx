@@ -2,9 +2,8 @@ import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Pagination } from '@/components/ui/pagination'
 import { SelectItem, SelectNew } from '@/components/ui/select/select'
-import { Typography } from "@/components/ui/typography";
 
-const onChangeHandler = (value: string) => {
+const onChangeHandler = (value: number | string) => {
   console.log(value)
 }
 
@@ -74,9 +73,14 @@ export function App() {
       <CheckboxDemo defaultChecked disabled>
         Check-box
       </CheckboxDemo>
-      <Typography variant={'body2'}>
-        <Pagination />
-      </Typography>
+
+      <Pagination
+        onPageChange={onChangeHandler}
+        onPerPageChange={onChangeHandler}
+        perPageOptions={['10', '20', '30', '50', '100']}
+        totalPages={21}
+      />
+
       <SelectNew onChange={onChangeHandler} options={options} placeholder={'Select…'}></SelectNew>
 
       <SelectNew defaultValue={'2'} onChange={onChangeHandler}>

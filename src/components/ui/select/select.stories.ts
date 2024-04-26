@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SelectNew } from "./select";
-
+import { SelectNew } from './select'
 
 const meta = {
   argTypes: {},
@@ -15,52 +14,50 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    disabled: false,
+    onChange: value => console.log(value),
     options: [
       {
+        label: 'Apple',
         value: 'apple',
-        label: 'Apple'
       },
       {
+        label: 'Blueberry',
         value: 'blueberry',
-        label: 'Blueberry'
       },
       {
+        label: 'Grapes',
         value: 'grapes',
-        label: 'Grapes'
       },
     ],
-    disabled: false,
     placeholder: 'Select...',
-    onChange: (value)=> console.log(value)
-  }
+  },
 }
 export const Fullwidth: Story = {
   args: {
+    disabled: false,
+    fullwidth: true,
     options: [
       {
-        value: "apple",
-        label: "Apple"
+        label: 'Apple',
+        value: 'apple',
       },
       {
-        value: "blueberry",
-        label: "Blueberry"
+        label: 'Blueberry',
+        value: 'blueberry',
       },
       {
-        value: "grapes",
-        label: "Grapes"
+        label: 'Grapes',
+        value: 'grapes',
       },
     ],
-    disabled: false,
     placeholder: 'Select...',
-    fullwidth: true
-  }
+  },
 }
-
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    placeholder: 'Select...'
-  }
+    placeholder: 'Select...',
+  },
 }
-

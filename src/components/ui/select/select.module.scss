@@ -30,8 +30,13 @@ button {
   &.pagination {
     height: 24px;
     padding-left: 6px;
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
   }
 
+}
+.SelectTrigger:active {
+  border-color: var(--color-success-300)
 }
 
 .SelectTrigger:hover {
@@ -48,6 +53,7 @@ button {
   border-color: var(--color-info-700);
   border-width: 2px;
 }
+
 .SelectTrigger[data-placeholder] {
   color: var(--color-light-100);
 }
@@ -82,19 +88,29 @@ button {
 
 .SelectContent {
   overflow: hidden;
-  border: 1px solid var(--color-dark-100);
+  border: 1px solid var(--color-dark-300);
   border-radius: 2px;
   background-color: var(--color-dark-900);
   width: var(--radix-select-trigger-width);
+
+  &.pagination {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
   }
 
+
+  }
+
+.SelectContent:active {
+  border-color: var(--color-success-300)
+}
 
 .SelectItem {
   color: var(--color-light-100);
   display: flex;
   align-items: center;
   height: 36px;
-  font-size: var(--font-size-s);
+
   padding-left: 12px;
   padding-right: 12px;
   position: relative;
@@ -103,6 +119,7 @@ button {
   &.pagination {
     padding-left: 6px;
     height: 24px;
+    font-size: var(--font-size-s);
   }
 
 

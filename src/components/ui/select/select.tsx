@@ -55,7 +55,10 @@ export const SelectNew = React.forwardRef(
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
-            <SelectPrimitive.Content className={s.SelectContent} position={'popper'}>
+            <SelectPrimitive.Content
+              className={s.SelectContent + ' ' + (props.pagination ? s.pagination : '')}
+              position={'popper'}
+            >
               <SelectPrimitive.Viewport>
                 {props.options
                   ? props.options?.map((o, index) => (
