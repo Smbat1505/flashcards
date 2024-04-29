@@ -29,7 +29,7 @@ const preview: Preview = {
         headingSelector: 'h1, h2, h3',
       },
     },
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypes: { onClick: { action: 'clicked' } } },
     controls: {
       matchers: {
         color: /(background|color)$/i,
