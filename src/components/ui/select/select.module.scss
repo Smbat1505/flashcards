@@ -34,10 +34,14 @@ button {
     border-color: var(--color-dark-500);
   }
 
+
+  &.pagination[data-state=open] {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
 }
-.SelectTrigger:active {
-  border-color: var(--color-success-300)
-}
+
 
 .SelectTrigger:hover {
   background-color: var(--color-dark-500);
@@ -60,6 +64,9 @@ button {
 .SelectTrigger[data-placeholder]:disabled {
   color: var(--color-dark-300);
 }
+.SelectTrigger[data-state=open] {
+  border-color: var(--color-dark-100);
+}
 
 .SelectIcon {
   color: var(--color-light-100);
@@ -68,6 +75,7 @@ button {
   &.pagination {
     padding: 0 6px;
   }
+
 
 }
 
@@ -98,11 +106,16 @@ button {
     border-color: var(--color-dark-500);
   }
 
+  &.pagination[data-state=open] {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
 
   }
 
-.SelectContent:active {
-  border-color: var(--color-success-300)
+.SelectContent[data-state=open] {
+  border-color: var(--color-dark-100);
 }
 
 .SelectItem {
