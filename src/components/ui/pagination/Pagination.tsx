@@ -5,6 +5,8 @@ import { Typography } from '@/components/ui/typography'
 
 import s from './pagination.module.scss'
 
+import arrow from './arrow_r.svg'
+
 type PaginationPropsType = {
   onPageChange: (page: number | string) => void
   onPerPageChange: (value: string) => void
@@ -45,17 +47,19 @@ export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationP
 
   return (
     <Typography variant={'body2'}>
-      <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
-        <div
+      <div className={s.container}>
+        <button
           className={s.arrow + ' ' + (currentPage == 1 ? s.disabled : s.active) + ' ' + s.left}
           onClick={() => {
             if (currentPage !== 1) {
               setCurrentPage(prevState => prevState - 1)
             }
           }}
-        ></div>
+        >
+          <img className={s.arrowImg} src={arrow} />
+        </button>
         {pagesArray.map((p, index) => (
-          <div
+          <button
             className={
               p === '...' ? s.threeDots : s.digit + ' ' + (p === currentPage ? s.active : '')
             }
@@ -68,7 +72,7 @@ export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationP
             }}
           >
             {p}
-          </div>
+          </button>
         ))}
         <div
           className={s.arrow + ' ' + (currentPage == totalPages ? s.disabled : s.active)}
