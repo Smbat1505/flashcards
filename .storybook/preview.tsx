@@ -3,6 +3,7 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 import '../src/styles/index.scss'
 import withTheme from './withTheme'
+import { themes } from '@storybook/theming'
 
 const preview: Preview = {
   globalTypes: {
@@ -24,12 +25,20 @@ const preview: Preview = {
   },
   decorators: [withTheme],
   parameters: {
+    darkMode: {
+      dark: { ...themes.dark, appBg: '#18191B' },
+      light: { ...themes.normal, appBg: '#fff' },
+      current: 'dark',
+    },
+
     docs: {
       toc: {
         headingSelector: 'h1, h2, h3',
       },
     },
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    // actions: { argTypes: { onClick: { action: 'clicked' } } },
+    actions: { argTypesRegex: '^on.*' },
+    handles: ['mouseover', 'click .btn'],
     controls: {
       matchers: {
         color: /(background|color)$/i,
