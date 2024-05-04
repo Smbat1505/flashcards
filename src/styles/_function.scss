@@ -1,0 +1,21 @@
+/* Function to convert px to rem or em */
+
+/*** EXAMPLE -> padding: px-to-unit(8)   This example shows how to use it without specifying target-unit because it is silent  ***/
+
+/*** EXAMPLE -> padding: px-to-unit(8, 'em')   And this example shows how to use the target-unit indication ***/
+
+@use 'sass:math';
+
+@function px-to-unit($px-value, $target-unit: 'rem') {
+  $base-size: 16; // Default base font size in px
+
+  /* $px-value-num: if(type-of($px-value) == 'number', $px-value, str-to-num($px-value));*/
+
+  @if $target-unit == 'rem' {
+    @return math.div($px-value, $base-size) + rem;
+  } @else if $target-unit == 'em' {
+    @return math.div($px-value, $base-size) + em;
+  } @else {
+    @error "Unsupported target unit. Please use 'rem' or 'em'.";
+  }
+}

@@ -40,13 +40,22 @@
   }
 }
 
-@mixin typography($fontSize, $lineHeight, $fontWeight) {
+@mixin typography($fontSize, $fontWeight, $lineHeight, $color: currentcolor) {
   margin: 0;
+  @if ($lineHeight) {
+    line-height: $lineHeight;
+  }
+  @if ($fontSize) {
+    font-size: $fontSize;
+  }
 
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-  line-height: $lineHeight;
-  color: var(--color-light-100);
+  @if ($fontWeight) {
+    font-weight: $fontWeight;
+  }
+
+  @if ($color) {
+    color: $color;
+  }
 }
 
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0, $wrap: nowrap) {
@@ -107,4 +116,8 @@
   @if $left != 0 {
     left: $left;
   }
+}
+
+@mixin border-with-color($color) {
+  border: 1px solid $color;
 }
