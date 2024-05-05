@@ -1,3 +1,5 @@
+
+
 const fs = require("fs");
 const { join } = require("node:path");
 const fsp = fs.promises;
@@ -15,6 +17,7 @@ async function main() {
     await Promise.all(files.map(async (file) => {
       // Заменяем все пробелы и скобки на дефисы, а затем приводим к нижнему регистру
       const newName = file.replace(/[\s()]/g, "-").toLowerCase();
+
       await fsp.rename(join(dirWithIcons, file), join(dirWithIcons, newName));
     }));
 
