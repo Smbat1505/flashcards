@@ -1,7 +1,15 @@
-import { ForwardRefExoticComponent, MemoExoticComponent, RefAttributes, SVGProps } from 'react'
+import React, {
+  ForwardRefExoticComponent,
+  MemoExoticComponent,
+  RefAttributes,
+  SVGProps,
+  useState,
+} from 'react'
 
-import { SvgWrapper } from '@/assets/icons/wrapper'
+import { SvgWrapper, SvgWrapperProps } from '@/assets/icons/wrapper'
 import { Meta, StoryObj } from '@storybook/react'
+
+import styles from './SvgComp.module.scss'
 
 import {
   ArrowBackOutline,
@@ -187,7 +195,12 @@ const SvgComp: MemoExoticComponent<
   TrendingUpOutline,
 ]
 
-const meta: Meta<typeof SvgWrapper> = {
+const meta: {
+  component: <T extends React.ElementType>(props: SvgWrapperProps<T>) => React.ReactNode
+  parameters: { category: string; content: string }
+  tags: string[]
+  title: string
+} = {
   component: SvgWrapper,
   parameters: {
     category: 'stories',
@@ -196,30 +209,30 @@ const meta: Meta<typeof SvgWrapper> = {
 
   tags: ['autodocs'],
   title: 'Components/SvgComp',
-} satisfies Meta<typeof SvgWrapper>
+} satisfies Meta<typeof AllComponents>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const AllComponents: Story = {
   render: () => {
+    const [hoverIndex, setHoverIndex] = useState<null | number>(null)
+
     return (
-      <>
+      <div className={styles.container}>
         {SvgComp.map((Component, index) => (
-          <SvgWrapper key={index} wrapper={'button'}>
-            <Component
-              style={{
-                border: '0.5px solid',
-                borderRadius: '5px',
-                boxShadow: 'rgb(0 77 152) 0px 0px 5px 2px',
-                margin: '10px',
-                padding: '5px',
-                width: '28px',
-              }}
-            />
-          </SvgWrapper>
+          <div
+            className={`${styles.item} ${
+              hoverIndex === index ? styles.itemHovered : styles.itemNotHovered
+            }`}
+            key={index}
+            onMouseEnter={() => setHoverIndex(index)}
+            onMouseLeave={() => setHoverIndex(null)}
+          >
+            <SvgWrapper SvgComponent={Component} size={'2rem'} wrapper={'button'} />
+          </div>
         ))}
-      </>
+      </div>
     )
   },
 }
