@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 import style from './typography.module.scss'
 
 export const Typography = <T extends React.ElementType = 'p'>(
-  props: TypographyProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>>
+  props: Omit<ComponentPropsWithoutRef<T>, keyof TypographyProps<T>> & TypographyProps<T>
 ): React.ReactNode => {
   const { as, children, className, color, size, variant = VARIANTS.body1, ...rest } = props
   const Component = as || 'p'

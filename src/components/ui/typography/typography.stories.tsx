@@ -2,11 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography, VARIANTS } from '@/components/ui/typography/typography'
 
+import s from './typography-story-styles.module.scss'
+
 const meta: Meta<typeof Typography> = {
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: VARIANTS,
+      options: Object.values(VARIANTS),
     },
   },
   component: Typography,
@@ -22,13 +24,14 @@ const meta: Meta<typeof Typography> = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+
 export const All: Story = {
   args: {
     children: 'Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH',
   },
   decorators: [
     Story => (
-      <div style={{ margin: '3em' }}>
+      <div className={s.decoratorStyles}>
         {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
         <Story />
       </div>
@@ -36,134 +39,134 @@ export const All: Story = {
   ],
 
   render: () => (
-    <div style={{ display: 'grid', justifyContent: 'center', width: '100%' }}>
-      <table style={{ textAlign: 'left', width: '100%' }}>
+    <div className={s.wrapper}>
+      <table className={s.tableStyles}>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h1'}>H1</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h1'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h2'}>H2</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h2'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h3'}>H3</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h3'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h4'}>H4</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'h4'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'body1'}>Body1</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'body1'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'subtitle1'}>Subtitle1</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'subtitle1'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'body2'}>Body2</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'body2'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'subtitle2'}>Subtitle2</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'subtitle2'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'caption'}>Caption</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'caption'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'overline'}>Overline</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'overline'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'link1'}>Link1</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'link1'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'link2'}>Link2</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'link2'} {...All.args} />
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'error'}>Error</Typography>
             </td>
-            <td style={{ gap: '32px', marginBottom: '30px' }}>
+            <td className={s.tableHeaderSpacing}>
               <Typography variant={'error'} {...All.args} />
             </td>
           </tr>
