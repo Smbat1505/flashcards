@@ -1,0 +1,30 @@
+/* SvgComp.module.css */
+.container {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap; /* This line now takes care of both direction and wrapping */
+  justify-content: space-between;
+}
+
+.item {
+  align-items: center; /* Removed quotes for consistency */
+  border: 0.5px solid #000; /* Removed quotes for consistency */
+  border-radius: 5px; /* Removed quotes for consistency */
+  display: flex; /* Removed quotes for consistency */
+  justify-content: center; /* Removed quotes for consistency */
+  margin: 5px; /* Removed quotes for consistency */
+  padding: 5px; /* Removed quotes for consistency */
+  transition: color 0.3s; /* Removed quotes for consistency */
+}
+
+.itemHovered {
+  background-color: rgb(188, 186, 186);
+  color: #10101c;
+  box-shadow: rgb(0 77 152) 0px 0px 5px 2px;
+}
+
+.itemNotHovered {
+  background-color: #585591;
+  box-shadow: none;
+}

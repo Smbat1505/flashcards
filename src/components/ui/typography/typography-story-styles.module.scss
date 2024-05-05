@@ -1,0 +1,18 @@
+.decoratorStyles {
+  margin: px-to-unit(30, 'em');
+}
+
+.tableStyles {
+  text-align: 'left';
+  width: '100%';
+}
+.wrapper {
+  display: 'grid';
+  justify-content: 'center';
+  width: '100%';
+}
+
+.tableHeaderSpacing {
+  gap: px-to-unit(32);
+  margin-bottom: px-to-unit(30);
+}
