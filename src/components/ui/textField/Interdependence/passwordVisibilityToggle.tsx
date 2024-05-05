@@ -1,4 +1,4 @@
-import { ComponentProps, FC, useMemo } from 'react'
+import { ComponentProps, FC, MouseEvent, TouchEvent, useMemo } from 'react'
 
 import { Eye, EyeOff } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
@@ -24,6 +24,6 @@ export const PasswordVisibilityToggle: FC<PasswordVisibilityToggleProps> = props
 interface PasswordVisibilityToggleProps extends ComponentProps<'button'> {
   isTypePassword?: boolean
   isVisible?: boolean
-  onClick?: () => void
+  onClick?: (event?: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>) => void
   size?: number | string
 }

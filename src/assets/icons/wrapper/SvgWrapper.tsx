@@ -4,9 +4,11 @@ import {
   ElementType,
   ForwardRefExoticComponent,
   MemoExoticComponent,
+  MouseEvent,
   ReactNode,
   RefAttributes,
   SVGProps,
+  TouchEvent,
 } from 'react'
 
 /**
@@ -58,7 +60,7 @@ export type SvgWrapperProps<T extends ElementType> = {
     ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>>
   >
   color?: string
-  onClick?: () => void
+  onClick?: (event?: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>) => void
   size?: number | string
   style?: CSSProperties
   svgClassName?: string
