@@ -1,100 +1,60 @@
 @import '@/styles/mixins';
+@import '@/styles/function';
 
 .container {
   position: relative;
   width: 100%;
   color: var(--color-dark-100);
 
-  .SvgWrapper {
-    cursor: pointer;
-    position: absolute;
-    box-sizing: content-box;
-  }
-
-  .svgIcons {
-    cursor: pointer;
-    width: 20px;
-    color: currentcolor;
-  }
-
-  input:disabled ~ .svgIcons {
-    pointer-events: none;
-    color: var(--color-dark-300);
-  }
-
-  input[type='search']:focus ~ .svgIcons {
-    color: var(--color-light-100);
-  }
-
-  input[type='search']:focus-visible ~ .svgIcons {
-    color: currentcolor;
-  }
-
-  input[type='search']::-webkit-search-cancel-button {
-    width: 1.5em;
-    height: 1.5em;
-
-    appearance: none;
-    background-color: transparent;
-    background-image: url('src/assets/icons/svg/close.svg');
-    background-size: cover;
-    filter: invert(0.8);
-    border: none;
-  }
-
   .label {
+    @include typography(
+      var(--font-size-s),
+      var(--font-weight-regular),
+      var(--line-height-m),
+      var(--color-dark-100)
+    );
+
     display: inline-block;
-
-    padding-bottom: 8px;
-
-    font-size: 14px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 24px;
-    color: var(--color-dark-100);
+    padding-bottom: px-to-unit(8);
   }
 
   .inputWrapper {
     @include flex($align: center);
 
     position: relative;
-
     overflow: hidden;
-    display: flex;
-    align-items: center;
-
-    height: 3.6rem;
-
+    height: px-to-unit(36);
     border-radius: 2px;
 
-    input {
+    .input {
+      @include border-with-color(var(--color-dark-300));
+      @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+
       width: 100%;
       height: 100%;
-      padding: 6px 51px;
-
-      font-size: var(--font-size-m);
-      font-weight: var(--font-weight-regular);
-      line-height: var(--line-height-m);
+      padding: px-to-unit(8) px-to-unit(41);
 
       background-color: transparent;
-      border: 1px solid var(--color-dark-300);
       border-radius: 2px;
       outline: none;
 
       &:hover {
+        @include border-with-color(var(--color-dark-100));
+
         color: var(--color-dark-100);
         background: var(--color-dark-700);
-        border: 1px solid var(--color-dark-100);
       }
 
       &:focus {
+        @include border-with-color(var(--color-light-100));
+
         color: var(--color-light-100);
-        border: 1px solid var(--color-light-100);
       }
 
       &:focus-visible,
       &:focus-within {
-        border: 1px solid var(--color-info-700);
+        @include border-with-color(var(--color-info-700));
+
         outline: 1px solid var(--color-info-700);
       }
 
@@ -119,27 +79,78 @@
       }
     }
 
-    .passwordToggle {
-      right: 10px;
+    .SvgWrapper {
+      position: absolute;
+      box-sizing: content-box;
+    }
+
+    .svgIcons {
+      width: px-to-unit(20);
+    }
+
+    .iconRight {
+      right: px-to-unit(10);
       color: var(--color-light-100);
     }
 
+    .iconLeft {
+      left: px-to-unit(12);
+      width: px-to-unit(20);
+    }
+
+    .password {
+      all: unset;
+      cursor: pointer;
+      right: px-to-unit(12);
+    }
+
     .search {
-      margin-left: 7px;
+      all: unset;
+      left: px-to-unit(12);
+    }
+
+    .clear {
+      all: unset;
+      cursor: pointer;
+      width: px-to-unit(16);
+    }
+
+    input:disabled ~ .svgIcons {
+      pointer-events: none;
+      color: var(--color-dark-300);
+    }
+    input:disabled ~ .iconRight {
+      pointer-events: none;
+      color: var(--color-dark-300);
+    }
+
+    input[type='search']:active ~ .search,
+    input[type='search']:focus-visible ~ .SvgWrapper {
+      color: var(--color-light-100);
+    }
+
+    input[type='search']::-webkit-search-cancel-button,
+    input[type='search']::-webkit-search-decoration {
+      display: none;
+      appearance: none;
+      background-color: transparent;
+      outline: none;
+    }
+
+    input[type='password'] {
+      padding: px-to-unit(8) px-to-unit(41);
     }
   }
 
-  input[type='password'] {
-    padding: 6px 41px;
-  }
-
   .errorText {
-    padding: 7px 0;
+    @include typography(
+      var(--font-size-xs),
+      var(--font-weight-regular),
+      var(--line-height-m),
+      var(--color-danger-300)
+    );
 
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 24px;
-    color: var(--color-danger-300);
+    padding: px-to-unit(7) 0;
   }
 
   .disabledText {

@@ -1,31 +1,37 @@
-import { ChangeEvent, ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ComponentType,
+  KeyboardEvent,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 
-import { Eye, EyeOff, Search } from '@/assets/icons/components'
+import { Close, Search } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
+import { Label } from '@/components/ui/label'
+import {
+  PasswordVisibilityToggle,
+  getInputFieldClasses,
+  useGetId,
+} from '@/components/ui/textField/Interdependence'
 import { Typography } from '@/components/ui/typography'
-import clsx from 'clsx'
-
-import styles from './textField.module.scss'
-
-interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
-  handleValueChange?: (value: any) => void
-  isSearchInputNotEmpty?: boolean
-  labelCustomProps?: ComponentProps<'label'>
-  labelText?: string
-  onEnter?: ComponentProps<'input'>['onKeyDown']
-  validationError?: string
-  wrapperProps?: ComponentProps<'div'>
-}
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const {
+    CloseIcon = Close,
+    PasswordVisibilityToggleIcon = PasswordVisibilityToggle,
+    SearchIcon = Search,
     className,
-
     handleValueChange,
-    isSearchInputNotEmpty,
+    id,
     labelCustomProps,
     labelText,
     onChange,
+    onClearClick,
     onEnter,
     onKeyDown,
     placeholder,
@@ -36,82 +42,105 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   } = props
 
   const [isPasswordVisible, togglePasswordVisibility] = useState(false)
+
   const isTypeSearch = type === 'search'
-  const shouldShowPasswordToggle = type === 'password'
+  const isTypePassword = type === 'password'
+
+  const inputId = useGetId(id)
+
+  const showError = !!validationError && validationError.length > 0
+  const isShowClearButton = onClearClick && inputRestProps?.value?.length! > 0
+
   const resolvedInputType = resolveInputType(type, isPasswordVisible)
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    onChange?.(event)
-    handleValueChange?.(event.currentTarget.value)
-  }
+  const handleInputChange = useHandleInputChange(onChange, handleValueChange)
+  const handleKeyDown = useHandleKeyDown(onEnter, onKeyDown)
 
-  const handleTogglePasswordVisibility = () => {
+  /**
+   * Toggles the visibility of the password by updating the state of `isPasswordVisible`.
+   *
+   * @return {void} No return value.
+   */
+  const handleTogglePasswordVisibility = (): void => {
     togglePasswordVisibility(prevState => !prevState)
   }
 
-  const errorClasses = clsx(styles.error)
-  const disabledClass = styles.disabled
-  const inputFieldClasses = {
-    containerClass: clsx(styles.container, wrapperProps?.className),
-    errorClass: errorClasses,
-    errorTextClass: styles.errorText,
-    inputClass: clsx(styles.input, !!validationError && errorClasses, className),
-    inputWrapperClass: clsx(styles.inputWrapper, isTypeSearch && styles.hasIcon),
-    labelClass: clsx(
-      styles.label,
-      inputRestProps.disabled && styles.disabledText,
-      labelCustomProps?.className
-    ),
-    passwordToggle: clsx(styles.passwordToggle, inputRestProps.disabled && disabledClass),
-    svgClass: clsx(styles.search, inputRestProps.disabled && disabledClass),
-    svgWrapperClasses: clsx(
-      styles.SvgWrapper,
-      styles.svgIcons,
-      isTypeSearch && styles.search,
-      shouldShowPasswordToggle && styles.passwordToggle,
-      inputRestProps.disabled && disabledClass
-    ),
-  }
+  const InputFieldClasses = useMemo(
+    () =>
+      getInputFieldClasses({
+        className,
+        inputRestProps,
+        isShowClearButton,
+        isTypePassword,
+        isTypeSearch,
+        labelCustomProps,
+        showError,
+        wrapperProps,
+      }),
+    [
+      className,
+      inputRestProps,
+      isShowClearButton,
+      isTypePassword,
+      isTypeSearch,
+      labelCustomProps,
+      showError,
+      wrapperProps,
+    ]
+  )
 
   return (
-    <div className={inputFieldClasses.containerClass}>
+    <div className={InputFieldClasses.wrapperClass}>
       {labelText && (
-        <Typography as={'label'} className={inputFieldClasses.labelClass} variant={'body2'}>
-          {labelText}
-        </Typography>
+        <Label
+          aria-label={labelText}
+          className={InputFieldClasses.labelClass}
+          htmlFor={inputId}
+          label={labelText}
+        />
       )}
 
-      <div className={inputFieldClasses.inputWrapperClass}>
+      <div className={InputFieldClasses.inputWrapperClass}>
         <input
-          className={inputFieldClasses.inputClass}
+          className={InputFieldClasses.inputClass}
+          id={inputId}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
           ref={ref}
           type={resolvedInputType}
           {...inputRestProps}
         />
-        {isTypeSearch && (
+        {isTypeSearch && SearchIcon && (
           <SvgWrapper
             SvgComponent={Search}
-            onClick={() => alert('Заглушка Поиска')}
-            svgClassName={inputFieldClasses.svgClass}
-            wrapper={'button'}
-            wrapperClassName={inputFieldClasses.svgWrapperClasses}
+            svgClassName={InputFieldClasses.svgIconsClass}
+            wrapperClassName={InputFieldClasses.svgWrapperClasses}
           />
         )}
-        {shouldShowPasswordToggle && (
+        {isShowClearButton && !isTypePassword && CloseIcon && (
           <SvgWrapper
-            onClick={handleTogglePasswordVisibility}
-            svgClassName={inputFieldClasses.passwordToggle}
+            SvgComponent={Close}
+            onClick={onClearClick}
+            size={'0.875rem'}
+            svgClassName={InputFieldClasses.svgClearClass}
             wrapper={'button'}
-            wrapperClassName={inputFieldClasses.svgWrapperClasses}
-          >
-            {isPasswordVisible ? <EyeOff /> : <Eye />}
-          </SvgWrapper>
+            wrapperClassName={
+              isShowClearButton ? InputFieldClasses.svgWrapperClassesForClearSvg : undefined
+            }
+          />
+        )}
+        {isTypePassword && PasswordVisibilityToggleIcon && (
+          <PasswordVisibilityToggle
+            isTypePassword
+            isVisible={isPasswordVisible}
+            onClick={handleTogglePasswordVisibility}
+            size={'1.25rem'}
+          />
         )}
       </div>
-      {validationError && (
-        <Typography className={inputFieldClasses.errorTextClass} variant={'error'}>
+      {!!validationError && (
+        <Typography className={InputFieldClasses.errorTextClass} variant={'error'}>
           {validationError}
         </Typography>
       )}
@@ -119,6 +148,71 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   )
 })
 
-function resolveInputType(inputType: ComponentProps<'input'>['type'], isPasswordVisible: boolean) {
+/**
+ * Resolves the input type based on the given input type and password visibility.
+ *
+ * @param {ComponentProps<'input'>['type']} inputType - The input type.
+ * @param {boolean} isPasswordVisible - Indicates whether the password is visible.
+ * @return {ComponentProps<'input'>['type']} The resolved input type.
+ */
+function resolveInputType(
+  inputType: ComponentProps<'input'>['type'],
+  isPasswordVisible: boolean
+): ComponentProps<'input'>['type'] {
   return inputType === 'password' && isPasswordVisible ? 'text' : inputType
+}
+
+/**
+ * Returns a memoized callback function that handles input change events by calling the provided onChange and handleValueChange functions.
+ *
+ * @param {(event: ChangeEvent<HTMLInputElement>) => void} onChange - Callback function for input change events.
+ * @param {(value: string) => void} handleValueChange - Callback function for handling the input value change.
+ * @return {(event: ChangeEvent<HTMLInputElement>) => void} Memoized callback function for input change events.
+ */
+const useHandleInputChange = (
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+  handleValueChange?: (value: string) => void
+): ((event: ChangeEvent<HTMLInputElement>) => void) => {
+  return useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.currentTarget.value
+
+      onChange?.(event)
+      handleValueChange?.(inputValue)
+    },
+    [onChange, handleValueChange]
+  )
+}
+
+/**
+ * Returns a callback function that handles keydown events on an input element.
+ *
+ * @param {function} onEnter - Optional callback function to be called when the 'Enter' key is pressed.
+ * @param {function} onKeyDown - Optional callback function to be called when any key is pressed.
+ * @return {function} The callback function that handles keydown events.
+ */
+const useHandleKeyDown = (
+  onEnter?: (event: KeyboardEvent<HTMLInputElement>) => void,
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
+): ((e: KeyboardEvent<HTMLInputElement>) => void) => {
+  return (e: KeyboardEvent<HTMLInputElement>) => {
+    if (onEnter && e.key === 'Enter') {
+      onEnter(e)
+    }
+    onKeyDown?.(e)
+  }
+}
+
+export interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
+  CloseIcon?: ComponentType
+  PasswordVisibilityToggleIcon?: ComponentType
+  SearchIcon?: ComponentType
+  handleValueChange?: (value: string) => void
+  labelCustomProps?: ComponentProps<'label'>
+  labelText?: string
+  onClearClick?: () => void
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
+  validationError?: string
+  value?: string
+  wrapperProps?: ComponentProps<'div'>
 }
