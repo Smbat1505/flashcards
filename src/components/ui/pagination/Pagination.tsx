@@ -16,8 +16,6 @@ type PaginationPropsType = {
 
 export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationPropsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  // const itemsPerPage: number = 0
-  // const totalPages: number = 21
 
   const pagesArray: Array<any> = []
 
@@ -49,40 +47,52 @@ export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationP
     <Typography variant={'body2'}>
       <div className={s.container}>
         <button
-          className={s.arrow + ' ' + (currentPage == 1 ? s.disabled : s.active) + ' ' + s.left}
+          className={s.item + ' ' + s.left}
+          disabled={currentPage == 1}
           onClick={() => {
             if (currentPage !== 1) {
               setCurrentPage(prevState => prevState - 1)
             }
           }}
         >
-          <img className={s.arrowImg} src={arrow} />
+          <img className={s.arrowImg + ' ' + (currentPage == 1 ? s.disabled : '')} src={arrow} />
         </button>
-        {pagesArray.map((p, index) => (
-          <button
-            className={
-              p === '...' ? s.threeDots : s.digit + ' ' + (p === currentPage ? s.active : '')
-            }
-            key={index}
-            onClick={() => {
-              if (p !== '...') {
-                setCurrentPage(p)
-                props.onPageChange(p)
-              }
-            }}
-          >
-            {p}
-          </button>
-        ))}
-        <div
-          className={s.arrow + ' ' + (currentPage == totalPages ? s.disabled : s.active)}
+
+        {pagesArray.map((p, index) =>
+          p === '...' ? (
+            <span className={s.threeDots} key={index}>
+              ...
+            </span>
+          ) : (
+            <button
+              className={s.item + ' ' + (p === currentPage ? s.active : '')}
+              key={index}
+              onClick={() => {
+                if (p !== '...') {
+                  setCurrentPage(p)
+                  props.onPageChange(p)
+                }
+              }}
+            >
+              {p}
+            </button>
+          )
+        )}
+        <button
+          className={s.item}
+          disabled={currentPage == totalPages}
           onClick={() => {
             if (currentPage + 1 <= totalPages) {
               setCurrentPage(prevState => prevState + 1)
               props.onPageChange(currentPage + 1)
             }
           }}
-        ></div>
+        >
+          <img
+            className={s.arrowImg + ' ' + (currentPage == totalPages ? s.disabled : ' ')}
+            src={arrow}
+          />
+        </button>
         <span className={s.showTxt}>Показать</span>
         <div className={s.select}>
           <SelectNew defaultValue={'10'} onChange={onPerPageChangeHandler} pagination>
