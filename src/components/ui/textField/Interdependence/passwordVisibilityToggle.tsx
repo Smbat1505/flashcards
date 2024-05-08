@@ -3,6 +3,7 @@ import { ComponentProps, FC, useMemo } from 'react'
 import { Eye, EyeOff } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
 import { getInputFieldClasses } from '@/components/ui/textField/Interdependence/inputFieldClasses'
+import { ButtonEvent } from '@/types'
 
 export const PasswordVisibilityToggle: FC<PasswordVisibilityToggleProps> = props => {
   const { isTypePassword, isVisible, onClick, size, ...rest } = props
@@ -24,6 +25,6 @@ export const PasswordVisibilityToggle: FC<PasswordVisibilityToggleProps> = props
 interface PasswordVisibilityToggleProps extends ComponentProps<'button'> {
   isTypePassword?: boolean
   isVisible?: boolean
-  onClick?: () => void
+  onClick?: (event?: ButtonEvent) => void
   size?: number | string
 }

@@ -1,7 +1,8 @@
-import React, { ComponentProps } from 'react'
+import { ComponentProps, FC, ReactElement } from 'react'
 
 import { Close } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
+import { ButtonEvent } from '@/types'
 
 /**
  * Renders a ClearButton component that wraps a Close icon inside an SvgWrapper component.
@@ -11,10 +12,14 @@ import { SvgWrapper } from '@/assets/icons/wrapper'
  * @param {ComponentProps<'button'>} props.rest - The rest of the props for the ClearButton component.
  * @return {ReactElement} The rendered ClearButton component.
  */
-export const ClearButton: React.FC<ClearButtonProps> = ({ onClick, ...rest }) => {
+
+export const ClearButton: FC<ClearButtonProps> = ({
+  onClick,
+  ...rest
+}: ClearButtonProps): ReactElement => {
   return <SvgWrapper SvgComponent={Close} wrapper={'button'} {...rest} onClick={onClick} />
 }
 
 interface ClearButtonProps extends ComponentProps<'button'> {
-  onClick: () => void
+  onClick: (event?: ButtonEvent) => void
 }
