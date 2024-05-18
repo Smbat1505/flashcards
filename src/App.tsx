@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
+import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
 import { SelectItem, SelectNew } from '@/components/ui/select/select'
 
@@ -41,7 +42,9 @@ export function App() {
         padding: '50px',
       }}
     >
-      <Button>Primary Button</Button>
+      <div style={{ height: '160px' }}>
+        <Button>Primary Button</Button>
+      </div>
       <Button
         as={'a'}
         fullWidth={false}
@@ -103,6 +106,7 @@ export function App() {
         <SelectItem value={'2'}>Item 2</SelectItem>
         <SelectItem value={'3'}>Item 3</SelectItem>
       </SelectNew>
+      <Header />
     </div>
   )
 }
