@@ -1,0 +1,148 @@
+
+/* reset */
+button {
+  all: unset;
+}
+
+.Label {
+  color: var(--color-dark-100);
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
+}
+
+.SelectTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+  height: 36px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  background-color: var(--color-dark-900);
+
+  &.fullwidth {
+    width: 100%;
+  }
+
+  &.pagination {
+    height: 24px;
+    padding-left: 6px;
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
+
+  &.pagination[data-state=open] {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
+}
+
+
+.SelectTrigger:hover {
+  background-color: var(--color-dark-500);
+  border-color: var(--color-dark-100)
+}
+
+.SelectTrigger:disabled {
+  background-color: var(--color-dark-900);
+  border-color: var(--color-dark-300);
+}
+
+.SelectTrigger:focus {
+  border-color: var(--color-info-700);
+  border-width: 2px;
+}
+
+.SelectTrigger[data-placeholder] {
+  color: var(--color-light-100);
+}
+.SelectTrigger[data-placeholder]:disabled {
+  color: var(--color-dark-300);
+}
+.SelectTrigger[data-state=open] {
+  border-color: var(--color-dark-100);
+}
+
+.SelectIcon {
+  color: var(--color-light-100);
+  padding: 0 12px;
+
+  &.pagination {
+    padding: 0 6px;
+  }
+
+
+}
+
+.SelectIconDisabled {
+  color: var(--color-dark-300);
+  padding-right: 12px;
+}
+
+.UpIcon {
+  transform: rotate(180deg);
+  transition: 200ms linear all;
+}
+.DownIcon {
+  transform: rotate(0deg);
+  transition: 200ms linear all;
+}
+
+
+.SelectContent {
+  overflow: hidden;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  background-color: var(--color-dark-900);
+  width: var(--radix-select-trigger-width);
+
+  &.pagination {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
+  &.pagination[data-state=open] {
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-500);
+  }
+
+
+  }
+
+.SelectContent[data-state=open] {
+  border-color: var(--color-dark-100);
+}
+
+.SelectItem {
+  color: var(--color-light-100);
+  display: flex;
+  align-items: center;
+  height: 36px;
+
+  padding-left: 12px;
+  padding-right: 12px;
+  position: relative;
+  user-select: none;
+
+  &.pagination {
+    padding-left: 6px;
+    height: 24px;
+    font-size: var(--font-size-s);
+  }
+
+
+}
+.SelectItem[data-disabled] {
+  color: var(--color-accent-900);
+  pointer-events: none;
+}
+.SelectItem[data-highlighted] {
+  outline: none;
+  background-color: var(--color-accent-900);
+  color: var(--color-accent-300);
+}
