@@ -1,15 +1,27 @@
-import { CSSProperties, ComponentPropsWithoutRef, FC, ReactNode, useState } from 'react'
+import { CSSProperties, ComponentPropsWithoutRef, ReactNode, useState } from 'react'
 
 import { MoreVerticalOutline } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
-import { menu } from '@/components/ui/dropDown/animations'
+import { menu } from '@/components/ui/toolbar/animations'
 import * as ToolbarMenuRadix from '@radix-ui/react-dropdown-menu'
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import s from 'src/components/ui/dropDown/Toolbar.module.scss'
+import s from '@/components/ui/toolbar/toolbar.module.scss'
 
-export const ToolbarMenu: FC<ToolbarMenuProps> = (props): ReactNode => {
+/**
+ * Renders a toolbar menu component.
+ *
+ * @param {ToolbarMenuProps} props - The properties for the toolbar menu.
+ * @param {string} [props.align='end'] - The alignment of the menu.
+ * @param {ReactNode} props.children - The children components to render inside the menu.
+ * @param {string} [props.className] - The additional CSS class for the menu.
+ * @param {CSSProperties} [props.style] - The additional inline styles for the menu.
+ * @param {ReactNode} [props.trigger] - The trigger component to open the menu.
+ * @param {...rest} props - Additional properties for the menu.
+ * @returns {ReactNode} The rendered toolbar menu component.
+ */
+export const ToolbarMenu = (props: ToolbarMenuProps): ReactNode => {
   const { align = 'end', children, className, style, trigger, ...rest } = props
   const Classes = {
     arrow: s.arrow,
@@ -23,16 +35,11 @@ export const ToolbarMenu: FC<ToolbarMenuProps> = (props): ReactNode => {
 
   return (
     <ToolbarMenuRadix.Root onOpenChange={setOpen} open={open} {...rest}>
-      <ToolbarMenuRadix.Trigger>
+      <ToolbarMenuRadix.Trigger className={Classes.button}>
         <AnimatePresence>
           {trigger ?? (
             <motion.button>
-              <SvgWrapper
-                SvgComponent={MoreVerticalOutline}
-                color={'currentcolor'}
-                size={20}
-                wrapper={'button'}
-              />
+              <SvgWrapper SvgComponent={MoreVerticalOutline} size={20} wrapper={'button'} />
             </motion.button>
           )}
         </AnimatePresence>
@@ -56,9 +63,7 @@ export const ToolbarMenu: FC<ToolbarMenuProps> = (props): ReactNode => {
                 initial={'closed'}
                 variants={menu}
               >
-                <ToolbarMenuRadix.Arrow asChild className={Classes.arrowBox}>
-                  <div className={Classes.arrow} />
-                </ToolbarMenuRadix.Arrow>
+                <ToolbarMenuRadix.Arrow className={Classes.arrow} />
                 <div className={Classes.itemsBox}>{children}</div>
               </motion.div>
             </ToolbarMenuRadix.Content>
