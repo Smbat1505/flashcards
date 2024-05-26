@@ -19,7 +19,7 @@
   }
 
   .inputWrapper {
-    @include flex($align: center);
+    @include display-flex($align: center);
 
     position: relative;
     overflow: hidden;
@@ -36,6 +36,7 @@
 
       background-color: transparent;
       border-radius: 2px;
+      box-sizing: border-box;
       outline: none;
 
       &:hover {
@@ -85,10 +86,11 @@
     }
 
     .svgIcons {
-      width: px-to-unit(20);
+      @include screen-size(px-to-unit(20, 'em'), px-to-unit(20, 'em'));
     }
 
     .iconRight {
+      @include display-flex;
       right: px-to-unit(10);
       color: var(--color-light-100);
     }
