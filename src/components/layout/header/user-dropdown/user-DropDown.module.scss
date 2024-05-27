@@ -1,0 +1,73 @@
+@import '@/styles/function';
+@import '@/styles/mixins';
+
+.userMenu {
+  background: var(--color-dark-700);
+  border: 1px solid var(--color-dark-300);
+
+  .userAvatarBtn {
+    //cursor: pointer;
+  }
+
+  .userInfoItem {
+    &:first-child {
+      margin-bottom: px-to-unit(10);
+    }
+
+    .userAvatar {
+      cursor: default;
+    }
+
+    .userDetails {
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      @include screen-size(70%);
+      .userName {
+        //padding: 5px 0;
+      }
+
+      .userEmail {
+        color: var(--color-dark-100);
+      }
+    }
+  }
+
+  //.menuDivider {
+  //}
+
+  .btn {
+    @include screen-size(100%, 36px);
+    @include display-flex($align: center, $gap: 10px);
+  }
+  //.profileItem {
+  //  .profileLink {
+  //  }
+  //}
+  //.logoutItem {
+  //  .logoutLink {
+  //    .logoutBtn {
+  //    }
+  //  }
+  //}
+  .link {
+    color: var(--color-light-100);
+    text-decoration: none;
+
+    @include screen-size(100%, 100%);
+    &:hover {
+      font-size: var(--font-size-s);
+      &:before {
+        content: '';
+        display: flex;
+
+        position: relative;
+        top: 18px;
+        width: 100%;
+        height: 1%;
+
+        box-shadow: 0 0 15px 7px rgba(7, 115, 224, 0.38);
+      }
+    }
+  }
+}
