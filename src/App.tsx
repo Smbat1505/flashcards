@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
+import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
 import { SelectItem, SelectNew } from '@/components/ui/select/select'
+import { TextField } from '@/components/ui/textField'
 
 const onChangeHandler = (value: number | string) => {
   console.log(value)
@@ -41,6 +43,7 @@ export function App() {
         padding: '50px',
       }}
     >
+      <Header></Header>
       <Button>Primary Button</Button>
       <Button
         as={'a'}
@@ -103,6 +106,13 @@ export function App() {
         <SelectItem value={'2'}>Item 2</SelectItem>
         <SelectItem value={'3'}>Item 3</SelectItem>
       </SelectNew>
+      <TextField
+        labelText={'Default'}
+        onChange={() => {}}
+        onClearClick={() => {}}
+        placeholder={'Enter text...'}
+        type={'text'}
+      />
     </div>
   )
 }
