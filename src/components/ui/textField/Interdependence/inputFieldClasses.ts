@@ -9,13 +9,13 @@ import styles from '@/components/ui/textField/textField.module.scss'
  *
  * @param {InputFieldClassesProps} props - The props for generating the input field classes.
  * @param {string} props.className - The additional class name for the input field.
- * @param {ComponentPropsWithoutRef<'input'>} props.inputRestProps - The rest props for the input element.
+ * @param {ComponentPropsWithoutRef<"input">} props.inputRestProps - The rest props for the input element.
  * @param {boolean} props.isShowClearButton - Indicates whether the clear button should be shown.
  * @param {boolean} props.isTypePassword - Indicates whether the input field is of type password.
  * @param {boolean} props.isTypeSearch - Indicates whether the input field is of type search.
- * @param {ComponentPropsWithoutRef<'label'>} props.labelCustomProps - The custom props for the label element.
+ * @param {ComponentPropsWithoutRef<"label">} props.labelCustomProps - The custom props for the label element.
  * @param {boolean} props.showError - Indicates whether there is an error with the input field.
- * @param {ComponentPropsWithoutRef<'div'>} props.wrapperProps - The props for the wrapper div element.
+ * @param {ComponentPropsWithoutRef<"div">} props.wrapperProps - The props for the wrapper div element.
  * @return {Object} - The generated classes for the input field.
  * @property {string} errorClass - The class for the error state.
  * @property {string} errorTextClass - The class for the error text.

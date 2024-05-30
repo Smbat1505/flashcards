@@ -5,8 +5,6 @@ import {
   ComponentType,
   KeyboardEvent,
   forwardRef,
-  useCallback,
-  useMemo,
   useState,
 } from 'react'
 
@@ -35,7 +33,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     onEnter,
     onKeyDown,
     placeholder,
-    type,
+    type = 'text',
     validationError,
     wrapperProps,
     ...inputRestProps
@@ -56,38 +54,20 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const handleInputChange = useHandleInputChange(onChange, handleValueChange)
   const handleKeyDown = useHandleKeyDown(onEnter, onKeyDown)
 
-  /**
-   * Toggles the visibility of the password by updating the state of `isPasswordVisible`.
-   *
-   * @return {void} No return value.
-   */
   const handleTogglePasswordVisibility = (): void => {
     togglePasswordVisibility(prevState => !prevState)
   }
 
-  const InputFieldClasses = useMemo(
-    () =>
-      getInputFieldClasses({
-        className,
-        inputRestProps,
-        isShowClearButton,
-        isTypePassword,
-        isTypeSearch,
-        labelCustomProps,
-        showError,
-        wrapperProps,
-      }),
-    [
-      className,
-      inputRestProps,
-      isShowClearButton,
-      isTypePassword,
-      isTypeSearch,
-      labelCustomProps,
-      showError,
-      wrapperProps,
-    ]
-  )
+  const InputFieldClasses = getInputFieldClasses({
+    className,
+    inputRestProps,
+    isShowClearButton,
+    isTypePassword,
+    isTypeSearch,
+    labelCustomProps,
+    showError,
+    wrapperProps,
+  })
 
   return (
     <div className={InputFieldClasses.wrapperClass}>
@@ -151,9 +131,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 /**
  * Resolves the input type based on the given input type and password visibility.
  *
- * @param {ComponentProps<'input'>['type']} inputType - The input type.
+ * @param {ComponentProps<"input">["type"]} inputType - The input type.
  * @param {boolean} isPasswordVisible - Indicates whether the password is visible.
- * @return {ComponentProps<'input'>['type']} The resolved input type.
+ * @return {ComponentProps<"input">["type"]} The resolved input type.
  */
 function resolveInputType(
   inputType: ComponentProps<'input'>['type'],
@@ -163,25 +143,22 @@ function resolveInputType(
 }
 
 /**
- * Returns a memoized callback function that handles input change events by calling the provided onChange and handleValueChange functions.
+ * Returns a callback function that handles input change events on an input element.
  *
- * @param {(event: ChangeEvent<HTMLInputElement>) => void} onChange - Callback function for input change events.
- * @param {(value: string) => void} handleValueChange - Callback function for handling the input value change.
- * @return {(event: ChangeEvent<HTMLInputElement>) => void} Memoized callback function for input change events.
+ * @param {function} onChange - Optional callback function to be called when the input value changes.
+ * @param {function} handleValueChange - Optional callback function to be called with the new input value.
+ * @return {function} The callback function that handles input change events.
  */
 const useHandleInputChange = (
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
   handleValueChange?: (value: string) => void
 ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
-  return useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.currentTarget.value
+  return (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.currentTarget.value
 
-      onChange?.(event)
-      handleValueChange?.(inputValue)
-    },
-    [onChange, handleValueChange]
-  )
+    onChange?.(event)
+    handleValueChange?.(inputValue)
+  }
 }
 
 /**
@@ -212,6 +189,7 @@ export interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
   labelText?: string
   onClearClick?: () => void
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
+  type?: 'password' | 'search' | 'text'
   validationError?: string
   value?: string
   wrapperProps?: ComponentProps<'div'>

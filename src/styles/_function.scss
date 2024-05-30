@@ -9,8 +9,6 @@
 @function px-to-unit($px-value, $target-unit: 'rem') {
   $base-size: 16; // Default base font size in px
 
-  /* $px-value-num: if(type-of($px-value) == 'number', $px-value, str-to-num($px-value));*/
-
   @if $target-unit == 'rem' {
     @return math.div($px-value, $base-size) + rem;
   } @else if $target-unit == 'em' {
