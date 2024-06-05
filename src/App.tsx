@@ -65,17 +65,19 @@ export function App() {
       </Button>
       <CheckboxDemo
         defaultChecked
-        onChange={a => {
+        onValueChange={a => {
           console.log(a)
         }}
-      />
-      <CheckboxDemo />
-      <CheckboxDemo defaultChecked>Check-box</CheckboxDemo>
-      <CheckboxDemo>Check-box</CheckboxDemo>
-      <CheckboxDemo disabled>Check-box</CheckboxDemo>
-      <CheckboxDemo defaultChecked disabled>
-        Check-box
+      >
+        rememberMe
       </CheckboxDemo>
+      {/*<CheckboxDemo name={'rememberMe'} />*/}
+      {/*<CheckboxDemo name={'Check-box'} defaultChecked>Check-box</CheckboxDemo>*/}
+      {/*<CheckboxDemo name={'rememberMe'}>Check-box</CheckboxDemo>*/}
+      {/*<CheckboxDemo disabled>Check-box</CheckboxDemo>*/}
+      {/*<CheckboxDemo defaultChecked disabled>*/}
+      {/*  Check-box*/}
+      {/*</CheckboxDemo>*/}
 
       <Pagination
         onPageChange={onChangeHandler}
