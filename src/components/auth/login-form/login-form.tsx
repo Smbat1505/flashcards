@@ -38,7 +38,7 @@ export const LoginForm = () => {
         labelText={'password'}
         validationError={errors.password?.message}
       />
-      <ControlledCheckbox control={control} name={'rememberMe'} />
+      <ControlledCheckbox control={control} name={'rememberMe'}  />
       <Button type={'submit'}>Submit</Button>
     </form>
   )

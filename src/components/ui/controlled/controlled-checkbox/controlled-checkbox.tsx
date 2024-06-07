@@ -5,9 +5,9 @@ import { CheckboxDemo, CheckboxPropsType } from '@/components/ui/checkbox'
 type Props = {
   control: any
   name: string
-} & CheckboxPropsType
+} & Omit<CheckboxPropsType, 'defaultChecked' | 'onValueChange'>
 
-export const ControlledCheckbox = ({ control, name, onValueChange, ...rest }: Props) => {
+export const ControlledCheckbox = ({ control, name, ...rest }: Props) => {
   const {
     field: { onChange, value },
   } = useController({
