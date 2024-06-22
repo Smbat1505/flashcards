@@ -29,7 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     labelCustomProps,
     labelText,
     onChange,
-    onClearClick,
+    onClear,
     onEnter,
     onKeyDown,
     placeholder,
@@ -47,7 +47,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const inputId = useGetId(id)
 
   const showError = !!validationError && validationError.length > 0
-  const isShowClearButton = onClearClick && inputRestProps?.value?.length! > 0
+  const isShowClearButton = onClear && inputRestProps?.value?.length! > 0
 
   const resolvedInputType = resolveInputType(type, isPasswordVisible)
 
@@ -101,7 +101,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         {isShowClearButton && !isTypePassword && CloseIcon && (
           <SvgWrapper
             SvgComponent={Close}
-            onClick={onClearClick}
+            onClick={onClear}
             size={'0.875rem'}
             svgClassName={InputFieldClasses.svgClearClass}
             wrapper={'button'}
@@ -187,9 +187,9 @@ export interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
   handleValueChange?: (value: string) => void
   labelCustomProps?: ComponentProps<'label'>
   labelText?: string
-  onClearClick?: () => void
+  onClear?: () => void
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
-  type?: 'password' | 'search' | 'text'
+  type?: ComponentProps<'input'>['type']
   validationError?: string
   value?: string
   wrapperProps?: ComponentProps<'div'>

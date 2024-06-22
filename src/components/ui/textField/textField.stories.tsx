@@ -13,7 +13,7 @@ const meta: Meta<typeof TextField> = {
       options: ['Default', 'password', 'search'],
     },
     onChange: { action: 'changed' },
-    onClearClick: { action: 'cleared' },
+    onClear: { action: 'cleared' },
     placeholder: {
       control: { type: 'multi-select' },
       options: ['Enter text...', 'Enter password...', 'Enter search...'],
@@ -41,7 +41,7 @@ export const Universal: Story = {
   args: {
     labelText: 'text',
     onChange: action('onChange'),
-    onClearClick: action('onClearClick'),
+    onClear: action('onClearClick'),
     placeholder: 'Enter text...',
     type: 'text',
     validationError: 'validation error',
