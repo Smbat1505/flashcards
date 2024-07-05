@@ -1,3 +1,4 @@
+import { LogOut, Search } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Header } from '@/components/ui/header'
@@ -45,6 +46,14 @@ export function App() {
     >
       <Header></Header>
       <Button>Primary Button</Button>
+      <Button>
+        <Search width={'1rem'} />
+        Primary Button
+      </Button>
+      <Button>
+        <LogOut width={'1rem'} />
+        Hearth
+      </Button>
       <Button
         as={'a'}
         fullWidth={false}
@@ -53,13 +62,9 @@ export function App() {
       >
         Primary Button As a
       </Button>
-      <Button onClick={() => console.log('clicked')} showIcon>
-        Primary Button with Icon
-      </Button>
+      <Button onClick={() => console.log('clicked')}>Primary Button with Icon</Button>
       <Button variant={'secondary'}>Secondary Button</Button>
-      <Button showIcon variant={'secondary'}>
-        Secondary Button with Icon
-      </Button>
+      <Button variant={'secondary'}>Secondary Button with Icon</Button>
       <Button fullWidth variant={'secondary'}>
         Secondary Button with Icon
       </Button>
