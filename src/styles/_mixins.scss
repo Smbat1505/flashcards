@@ -1,6 +1,6 @@
 @mixin container {
   width: 100%;
-  max-width: 117rem;
+  max-width: px-to-unit(1170);
   min-height: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -10,6 +10,11 @@
   all: unset;
 
   cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none; 
   user-select: none;
 
   display: inline-flex;
@@ -40,28 +45,48 @@
   }
 }
 
-@mixin typography($fontSize, $fontWeight, $lineHeight, $color: currentcolor) {
+@mixin typography(
+  $fontFamily: null,
+  $fontSize: null,
+  $fontWeight: null,
+  $lineHeight: null,
+  $color: currentcolor
+) {
   margin: 0;
-  @if ($lineHeight) {
-    line-height: $lineHeight;
-  }
-  @if ($fontSize) {
-    font-size: $fontSize;
-  }
 
-  @if ($fontWeight) {
-    font-weight: $fontWeight;
-  }
-
-  @if ($color) {
-    color: $color;
-  }
+  font-family: $fontFamily;
+  line-height: $lineHeight;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  color: $color;
 }
 
-@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0, $wrap: nowrap) {
-  display: flex;
+@mixin screen-size(
+  $width: null,
+  $height: null,
+  $max-width: null,
+  $max-height: null,
+  $min-width: null,
+  $min-height: null
+) {
+  width: $width;
+  height: $height;
+  max-width: $max-width;
+  max-height: $max-height;
+  min-width: $min-width;
+  min-height: $min-height;
+}
+
+@mixin display-flex(
+  $display: flex,
+  $direction: null,
+  $justify: null,
+  $align: null,
+  $gap: null,
+  $wrap: null
+) {
+  display: $display;
   flex-flow: $direction $wrap;
-  flex-wrap: $wrap;
   gap: $gap;
   align-items: $align;
   justify-content: $justify;
@@ -84,7 +109,7 @@
 }
 
 @mixin pagination-item {
-  @include flex($justify: center, $align: center);
+  @include display-flex($justify: center, $align: center);
 
   min-width: 2.4rem;
   height: 2.4rem;
@@ -96,7 +121,7 @@
 }
 
 @mixin input-icon($left, $right) {
-  @include flex($align: center);
+  @include display-flex($align: center);
 
   cursor: pointer;
 

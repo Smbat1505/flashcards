@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     disabled: false,
-    onChange: value => console.log(value),
+    onChange: (value: string) => console.log(value),
     options: [
       {
         label: 'Apple',
@@ -37,6 +37,7 @@ export const Fullwidth: Story = {
   args: {
     disabled: false,
     fullwidth: true,
+    onChange: (value: string) => console.log(value),
     options: [
       {
         label: 'Apple',
@@ -58,6 +59,7 @@ export const Fullwidth: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+    onChange: (value: string) => console.log(value),
     placeholder: 'Select...',
   },
 }

@@ -1,0 +1,50 @@
+@import '../../styles/function';
+
+.form {
+  &__title {
+    margin-bottom: px-to-unit(51);
+    text-align: center;
+  }
+
+  &__icon {
+    justify-content: center;
+    margin-bottom: px-to-unit(27);
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+    margin-bottom: px-to-unit(65);
+    opacity: 0.5;
+    color: var(--color-light-900);
+  }
+
+  &__verifyBtn {
+    /*d*/
+  }
+
+  &__loginLink {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-bold);
+
+    &[href] {
+      color: var(--color-accent-500);
+
+      &:hover {
+        color: var(--color-accent-700);
+        background: transparent;
+      }
+    }
+  }
+
+  &__questionTitle {
+    color: var(--color-light-900);
+    line-height: var(--line-height-m);
+    padding-bottom: px-to-unit(10);
+    text-align: center;
+  }
+}

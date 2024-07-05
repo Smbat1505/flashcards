@@ -8,10 +8,10 @@
 
   .label {
     @include typography(
-      var(--font-size-s),
-      var(--font-weight-regular),
-      var(--line-height-m),
-      var(--color-dark-100)
+      $fontSize: var(--font-size-s),
+      $fontWeight: var(--font-weight-regular),
+      $lineHeight: var(--line-height-m),
+      $color: var(--color-dark-100)
     );
 
     display: inline-block;
@@ -19,7 +19,7 @@
   }
 
   .inputWrapper {
-    @include flex($align: center);
+    @include display-flex($align: center);
 
     position: relative;
     overflow: hidden;
@@ -28,44 +28,46 @@
 
     .input {
       @include border-with-color(var(--color-dark-300));
-      @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+      @include typography(
+        $fontSize: var(--font-size-m),
+        $fontWeight: var(--font-weight-regular,),
+        $lineHeight: var(--line-height-m,)
+      );
 
       width: 100%;
       height: 100%;
-      padding: px-to-unit(8) px-to-unit(41);
+      padding: px-to-unit(8) px-to-unit(12);
 
+      box-sizing: border-box;
       background-color: transparent;
       border-radius: 2px;
       outline: none;
 
       &:hover {
         @include border-with-color(var(--color-dark-100));
-
         color: var(--color-dark-100);
         background: var(--color-dark-700);
       }
 
       &:focus {
         @include border-with-color(var(--color-light-100));
-
         color: var(--color-light-100);
       }
 
       &:focus-visible,
       &:focus-within {
         @include border-with-color(var(--color-info-700));
-
         outline: 1px solid var(--color-info-700);
       }
 
       &.error {
         color: var(--color-danger-300);
-        border: 1px solid var(--color-danger-300);
+        @include border-with-color(var(--color-danger-300));
       }
 
       &:disabled {
         color: var(--color-dark-300);
-        border: 1px solid var(--color-dark-300);
+        @include border-with-color(var(--color-dark-300));
 
         &::placeholder {
           color: var(--color-dark-300);
@@ -74,7 +76,7 @@
         &:hover {
           color: var(--color-dark-300);
           background-color: transparent;
-          border: 1px solid var(--color-dark-300);
+          @include border-with-color(var(--color-dark-300));
         }
       }
     }
@@ -82,6 +84,13 @@
     .SvgWrapper {
       position: absolute;
       box-sizing: content-box;
+
+      &:focus-visible,
+      &:focus-within {
+        @include border-with-color(var(--color-info-700));
+        outline: 1px solid var(--color-info-700);
+        border-radius: 5px;
+      }
     }
 
     .svgIcons {
@@ -89,8 +98,10 @@
     }
 
     .iconRight {
+      display: flex;
       right: px-to-unit(10);
       color: var(--color-light-100);
+      padding: 0;
     }
 
     .iconLeft {
@@ -119,9 +130,16 @@
       pointer-events: none;
       color: var(--color-dark-300);
     }
+
     input:disabled ~ .iconRight {
       pointer-events: none;
       color: var(--color-dark-300);
+    }
+
+    input[type='text'] ~ .SvgWrapper {
+      right: 10px;
+      display: flex;
+      color: var(--color-light-100);
     }
 
     input[type='search']:active ~ .search,
@@ -137,17 +155,22 @@
       outline: none;
     }
 
-    input[type='password'] {
-      padding: px-to-unit(8) px-to-unit(41);
+    input[type='search'] {
+      padding: px-to-unit(8) px-to-unit(12) px-to-unit(8) px-to-unit(41);
+    }
+
+    input[type='password'],
+    input[type='text'] {
+      padding: px-to-unit(8) px-to-unit(41) px-to-unit(8) px-to-unit(12);
     }
   }
 
   .errorText {
     @include typography(
-      var(--font-size-xs),
-      var(--font-weight-regular),
-      var(--line-height-m),
-      var(--color-danger-300)
+      $fontSize: var(--font-size-xs),
+      $fontWeight: var(--font-weight-regular,),
+      $lineHeight: var(--line-height-m,),
+      $color: var(--color-danger-300,)
     );
 
     padding: px-to-unit(7) 0;
