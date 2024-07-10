@@ -7,19 +7,19 @@ import { CheckIcon } from '@radix-ui/react-icons'
 
 import s from './checkbox.module.scss'
 
-type PropsType = {
+export type CheckboxPropsType = {
   children?: ReactNode
   defaultChecked?: boolean
   disabled?: boolean
-  onChange?: (checked: CheckedState) => void
+  onValueChange?: (checked: CheckedState) => void
 }
 
 export const CheckboxDemo = ({
   children,
   defaultChecked = false,
   disabled,
-  onChange,
-}: PropsType) => {
+  onValueChange,
+}: CheckboxPropsType) => {
   const [checked, setChecked] = useState<CheckedState>(defaultChecked)
 
   return (
@@ -41,8 +41,8 @@ export const CheckboxDemo = ({
               disabled={disabled}
               onCheckedChange={(checked: CheckedState) => {
                 setChecked(checked)
-                if (onChange) {
-                  onChange(checked)
+                if (onValueChange) {
+                  onValueChange(checked)
                 }
               }}
             >
