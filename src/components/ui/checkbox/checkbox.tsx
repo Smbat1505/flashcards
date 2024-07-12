@@ -11,11 +11,15 @@ export type CheckboxPropsType = {
   children?: ReactNode
   defaultChecked?: boolean
   disabled?: boolean
+  onBlur?: () => void
   onValueChange?: (checked: CheckedState) => void
 }
 
 export const CheckboxDemo = forwardRef<ElementRef<typeof Checkbox.Root>, CheckboxPropsType>(
-  ({ children, defaultChecked = false, disabled, onValueChange }: CheckboxPropsType, ref) => {
+  (
+    { children, defaultChecked = false, disabled, onBlur, onValueChange }: CheckboxPropsType,
+    ref
+  ) => {
     const [checked, setChecked] = useState<CheckedState>(defaultChecked)
 
     return (
@@ -35,6 +39,7 @@ export const CheckboxDemo = forwardRef<ElementRef<typeof Checkbox.Root>, Checkbo
                   (checked ? s.Selected : s.Unselected)
                 }
                 disabled={disabled}
+                onBlur={onBlur}
                 onCheckedChange={(checked: CheckedState) => {
                   setChecked(checked)
                   if (onValueChange) {
