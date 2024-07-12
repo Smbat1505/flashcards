@@ -17,6 +17,11 @@ export const LoginForm = () => {
     handleSubmit,
     register,
   } = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
     resolver: zodResolver(loginSchema),
   })
 
