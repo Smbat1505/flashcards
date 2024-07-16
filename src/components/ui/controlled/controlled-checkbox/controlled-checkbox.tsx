@@ -2,13 +2,19 @@ import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { CheckboxDemo, CheckboxPropsType } from '@/components/ui/checkbox'
 
+type labelProps = {
+  labelText: string
+}
+
 type Props<T extends FieldValues> = Omit<CheckboxPropsType, 'defaultChecked' | 'onValueChange'> &
-  UseControllerProps<T>
+  UseControllerProps<T> &
+  labelProps
 
 export const ControlledCheckbox = <T extends FieldValues>({
   control,
   defaultValue,
   disabled,
+  labelText,
   name,
   rules,
   shouldUnregister,
@@ -27,7 +33,7 @@ export const ControlledCheckbox = <T extends FieldValues>({
 
   return (
     <CheckboxDemo {...rest} defaultChecked={value} onValueChange={onChange} {...field}>
-      {name}
+      {labelText}
     </CheckboxDemo>
   )
 }

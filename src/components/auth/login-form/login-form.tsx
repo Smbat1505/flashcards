@@ -38,15 +38,15 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           {...register('email')}
-          labelText={'email'}
+          labelText={'Email'}
           validationError={errors.email?.message}
         />
         <TextField
           {...register('password')}
-          labelText={'password'}
+          labelText={'Password'}
           validationError={errors.password?.message}
         />
-        <ControlledCheckbox control={control} name={'rememberMe'} />
+        <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
         <Button type={'submit'}>Submit</Button>
       </form>
     </>
