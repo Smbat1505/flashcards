@@ -44,6 +44,7 @@ export const LoginForm = () => {
         <TextField
           {...register('password')}
           labelText={'Password'}
+          type={'password'}
           validationError={errors.password?.message}
         />
         <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
