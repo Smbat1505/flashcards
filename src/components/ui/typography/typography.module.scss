@@ -42,7 +42,7 @@
 }
 
 .body2 {
-  @include typography(var(--font-size-m), var(--font-weight-regular), var(--font-size-s));
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--font-size-s));
 }
 
 .subtitle1 {

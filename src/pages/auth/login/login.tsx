@@ -5,7 +5,9 @@ import { Typography } from '@/components/ui/typography'
 export const Login = () => {
   return (
     <Card>
-      <Typography variant={'h1'}>Sign In</Typography>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '27px' }}>
+        <Typography variant={'h1'}>Sign In</Typography>
+      </div>
       <LoginForm />
     </Card>
   )

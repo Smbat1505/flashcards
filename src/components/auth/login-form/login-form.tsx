@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
+import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+
+import s from './login-form.module.scss'
 
 import { Button } from '../../ui/button'
 import { TextField } from '../../ui/textField'
@@ -36,19 +39,47 @@ export const LoginForm = () => {
     <>
       <DevTool control={control} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          {...register('email')}
-          labelText={'Email'}
-          validationError={errors.email?.message}
-        />
+        <div className={s.emailField}>
+          <TextField
+            {...register('email')}
+            labelText={'Email'}
+            validationError={errors.email?.message}
+          />
+        </div>
         <TextField
           {...register('password')}
           labelText={'Password'}
           type={'password'}
           validationError={errors.password?.message}
         />
-        <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
-        <Button type={'submit'}>Submit</Button>
+        <div className={s.checkBoxField}>
+          <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
+        </div>
+        <div className={s.forgotPasswWrapper}>
+          <Typography as={'a'} className={s.forgotPasswTxt} href={'#'} variant={'body2'}>
+            Forgot Password?
+          </Typography>
+        </div>
+        <Button fullWidth type={'submit'}>
+          Sign In
+        </Button>
+        <Typography
+          className={s.dontHaveAccountTxt}
+          color={'var(--color-light-900'}
+          variant={'body2'}
+        >
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          Don't have an account?
+        </Typography>
+        <Typography
+          as={'a'}
+          className={s.signUpLink}
+          color={'var(--color-accent-500'}
+          href={'#'}
+          variant={'subtitle1'}
+        >
+          Sign Up
+        </Typography>
       </form>
     </>
   )

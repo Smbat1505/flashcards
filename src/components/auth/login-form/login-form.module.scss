@@ -1,0 +1,38 @@
+.emailField {
+  margin-bottom: 24px;
+}
+
+.checkBoxField {
+  margin: 12px 0 0 -10px;
+}
+
+.forgotPasswWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 16px 66px 0;
+}
+
+.forgotPasswTxt {
+  color: var(--color-light-100);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+}
+
+.dontHaveAccountTxt {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 11px 0;
+}
+
+.signUpLink {
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

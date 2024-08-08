@@ -21,14 +21,18 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    children: 'Primary Button',
+    children: 'Button Primary',
     disabled: false,
     variant: 'primary',
   },
 }
 export const PrimaryWithIcon: Story = {
   args: {
-    children: 'Primary Button',
+    children: (
+      <>
+        <LogOut width={'1rem'} /> Button Primary
+      </>
+    ),
     disabled: false,
     showIcon: true,
     variant: 'primary',
