@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
+import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,12 +40,15 @@ export const LoginForm = () => {
     <>
       <DevTool control={control} />
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/*<div className={s.emailField}>*/}
+        {/*  <TextField*/}
+        {/*    {...register('email')}*/}
+        {/*    labelText={'Email'}*/}
+        {/*    validationError={errors.email?.message}*/}
+        {/*  />*/}
+        {/*</div>*/}
         <div className={s.emailField}>
-          <TextField
-            {...register('email')}
-            labelText={'Email'}
-            validationError={errors.email?.message}
-          />
+          <ControlledTextField control={control} labelText={'Email'} name={'email'} />
         </div>
         <TextField
           {...register('password')}
