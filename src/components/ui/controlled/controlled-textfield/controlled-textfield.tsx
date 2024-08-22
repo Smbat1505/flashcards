@@ -16,6 +16,7 @@ export const ControlledTextField = <T extends FieldValues>({
 }: Props<T>) => {
   const {
     field: { onChange, value, ...field },
+    fieldState: { error },
   } = useController({
     control,
     defaultValue,
@@ -25,5 +26,13 @@ export const ControlledTextField = <T extends FieldValues>({
     shouldUnregister,
   })
 
-  return <TextField {...rest} handleValueChange={onChange} {...field} labelText={labelText} />
+  return (
+    <TextField
+      {...rest}
+      handleValueChange={onChange}
+      {...field}
+      labelText={labelText}
+      validationError={error?.message}
+    />
+  )
 }

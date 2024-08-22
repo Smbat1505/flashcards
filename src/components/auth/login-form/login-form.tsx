@@ -10,7 +10,6 @@ import { z } from 'zod'
 import s from './login-form.module.scss'
 
 import { Button } from '../../ui/button'
-import { TextField } from '../../ui/textField'
 import { loginSchema } from './login-schema'
 
 type FormValues = z.infer<typeof loginSchema>
@@ -20,7 +19,6 @@ export const LoginForm = () => {
     control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<FormValues>({
     defaultValues: {
       email: '',
@@ -40,21 +38,14 @@ export const LoginForm = () => {
     <>
       <DevTool control={control} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/*<div className={s.emailField}>*/}
-        {/*  <TextField*/}
-        {/*    {...register('email')}*/}
-        {/*    labelText={'Email'}*/}
-        {/*    validationError={errors.email?.message}*/}
-        {/*  />*/}
-        {/*</div>*/}
         <div className={s.emailField}>
           <ControlledTextField control={control} labelText={'Email'} name={'email'} />
         </div>
-        <TextField
-          {...register('password')}
+        <ControlledTextField
+          control={control}
           labelText={'Password'}
+          name={'password'}
           type={'password'}
-          validationError={errors.password?.message}
         />
         <div className={s.checkBoxField}>
           <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
