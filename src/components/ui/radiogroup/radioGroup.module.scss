@@ -1,0 +1,34 @@
+button {
+  all: unset;
+}
+.RadioGroupItem {
+  background-color: var(--color-accent-500);
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+}
+.RadioGroupItem:hover {
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-accent-900);
+}
+.RadioGroupItem:focus {
+  box-shadow: 0 0 0 2px black;
+}
+.RadioGroupIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.RadioGroupIndicator::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-100);
+}

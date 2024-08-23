@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
+import { RadioGroupDemo } from '@/components/ui/radiogroup'
 import { SelectItem, SelectNew } from '@/components/ui/select/select'
 import { TextField } from '@/components/ui/textField'
 
@@ -85,13 +86,8 @@ export function App() {
       >
         rememberMe
       </CheckboxDemo>
-      {/*<ControlledCheckbox name={'ssdv'} ></ControlledCheckbox>*/}
-      {/*<CheckboxDemo name={'Check-box'} defaultChecked>Check-box</CheckboxDemo>*/}
-      {/*<CheckboxDemo name={'rememberMe'}>Check-box</CheckboxDemo>*/}
-      {/*<CheckboxDemo disabled>Check-box</CheckboxDemo>*/}
-      {/*<CheckboxDemo defaultChecked disabled>*/}
-      {/*  Check-box*/}
-      {/*</CheckboxDemo>*/}
+
+      <RadioGroupDemo></RadioGroupDemo>
 
       <Pagination
         onPageChange={onChangeHandler}
