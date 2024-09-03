@@ -1,20 +1,76 @@
 button {
   all: unset;
 }
+
+.RadioItemWrapper {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  //gap: 2px;
+
+  &:hover:before {
+    position: absolute;
+    left: 2px;
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-dark-500);
+
+  }
+
+  &:active:before {
+    position: absolute;
+    left: 2px;
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-accent-900);
+  }
+
+  &:focus:before {
+    position: absolute;
+    left: 2px;
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-accent-700);
+  }
+
+}
+
+.RadioItemWrapperDisabled {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+
 .RadioGroupItem {
-  background-color: var(--color-accent-500);
+  position: relative;
   width: 16px;
   height: 16px;
-  border-radius: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent-500);
+  margin: 10px;
+
+  & .disabled {
+    background-color: var(--color-accent-900);
+  }
+
 }
-.RadioGroupItem:hover {
-  width: 36px;
-  height: 36px;
-  background-color: var(--color-accent-900);
-}
-.RadioGroupItem:focus {
-  box-shadow: 0 0 0 2px black;
-}
+
+
+
+
 .RadioGroupIndicator {
   display: flex;
   align-items: center;
@@ -30,5 +86,13 @@ button {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--color-accent-100);
+  background-color: var(--color-accent-500);
+}
+
+.labelText {
+  cursor: pointer;
+}
+
+.labelTextDisabled {
+     color: var(--color-light-900);
 }

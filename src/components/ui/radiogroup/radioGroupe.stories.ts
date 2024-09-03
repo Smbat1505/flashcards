@@ -24,3 +24,11 @@ export const Default: Story = {
     variant: 'Default',
   },
 }
+
+export const Disabled: Story = {
+  args: {
+    children: 'RadioGroup',
+    disabled: true,
+    variant: 'Default',
+  },
+}
