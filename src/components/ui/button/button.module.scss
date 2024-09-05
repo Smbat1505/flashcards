@@ -37,7 +37,7 @@
     background-color: var(--color-accent-700);
   }
 
-  & .disabled {
+  &.disabled {
     background-color: var(--color-accent-900);
   }
 }
@@ -54,7 +54,7 @@
     background-color: var(--color-dark-500);
   }
 
-  & .disabled {
+  &.disabled {
     background-color: var(--color-dark-300);
   }
 }
