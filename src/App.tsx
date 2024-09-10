@@ -87,8 +87,25 @@ export function App() {
         rememberMe
       </CheckboxDemo>
 
-      <RadioGroupDemo></RadioGroupDemo>
-
+      <RadioGroupDemo
+        defaultValue={'apple'}
+        name={'radio1'}
+        onValueChange={value => console.log(value)}
+        options={options}
+      />
+      <RadioGroupDemo
+        defaultValue={'grapes'}
+        disabled
+        name={'radio2'}
+        onValueChange={value => console.log(value)}
+        options={options}
+      />
+      <RadioGroupDemo
+        defaultValue={'apple'}
+        name={'radio3'}
+        onValueChange={value => console.log(value)}
+        options={options}
+      />
       <Pagination
         onPageChange={onChangeHandler}
         onPerPageChange={onChangeHandler}
