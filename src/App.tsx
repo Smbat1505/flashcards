@@ -71,6 +71,7 @@ export function App() {
       </Button>
       <CheckboxDemo
         defaultChecked
+        onFocus={() => console.log('checkbox focus')}
         onValueChange={a => {
           console.log(a)
         }}
@@ -90,6 +91,7 @@ export function App() {
       <RadioGroupDemo
         defaultValue={'apple'}
         name={'radio1'}
+        onFocus={() => console.log('radio1')}
         onValueChange={value => console.log(value)}
         options={options}
       />

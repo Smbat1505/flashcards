@@ -76,7 +76,7 @@ export const AsLink: Story = {
   },
 }
 
-export const DisabledWithLogoutIcon: Story = {
+export const DisabledPrimaryWithLogoutIcon: Story = {
   args: {
     children: (
       <>
@@ -85,5 +85,17 @@ export const DisabledWithLogoutIcon: Story = {
     ),
     disabled: true,
     variant: 'primary',
+  },
+}
+
+export const DisabledSecondaryWithLogoutIcon: Story = {
+  args: {
+    children: (
+      <>
+        <LogOut width={'1rem'} /> Sign out
+      </>
+    ),
+    disabled: true,
+    variant: 'secondary',
   },
 }

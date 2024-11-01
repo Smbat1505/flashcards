@@ -12,6 +12,7 @@ export type CheckboxPropsType = {
   defaultChecked?: boolean
   disabled?: boolean
   onBlur?: () => void
+  onFocus?: () => void
   onValueChange?: (checked: CheckedState) => void
 }
 
