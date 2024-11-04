@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import { LogOut, Search } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
@@ -32,6 +34,8 @@ const options: Array<optionsType> = [
 ]
 
 export function App() {
+  const myRef = useRef(null)
+
   return (
     <div
       style={{
@@ -91,9 +95,10 @@ export function App() {
       <RadioGroupDemo
         defaultValue={'apple'}
         name={'radio1'}
-        onFocus={() => console.log('radio1')}
+        onFocus={() => console.log('focused value: ' + myRef.current)}
         onValueChange={value => console.log(value)}
         options={options}
+        ref={myRef}
       />
       <RadioGroupDemo
         defaultValue={'grapes'}

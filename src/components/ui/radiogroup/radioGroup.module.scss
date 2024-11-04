@@ -29,11 +29,12 @@ button {
     @include circle(var(--color-accent-900));
   }
 
-  &:focus:before {
-    @include circle(var(--color-info-700));
+  &:focus-within:before {
+    @include circle(var(--color-dark-700));
   }
 
 }
+
 
 .RadioItemWrapperDisabled {
   position: relative;

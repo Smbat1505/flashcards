@@ -29,6 +29,7 @@ export const RadioGroupDemo = forwardRef<ElementRef<typeof RadioGroup.Root>, Rad
           defaultValue={props.defaultValue}
           disabled={props.disabled}
           name={props.name}
+          onFocus={props.onFocus}
           onValueChange={props.onValueChange}
           ref={ref}
         >
