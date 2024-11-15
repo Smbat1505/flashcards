@@ -19,7 +19,6 @@ button {
   display: flex;
   align-items: center;
   width: fit-content;
-  //gap: 2px;
 
   &:hover:before {
     @include circle(var(--color-dark-500));

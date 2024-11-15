@@ -13,7 +13,6 @@ type RadioGroupPropsType = {
   defaultValue?: string
   disabled?: boolean
   name: string
-  onFocus?: () => void
   onValueChange?: (value: string) => void
   options: Array<RadioOptionsType>
   required?: boolean
@@ -29,7 +28,6 @@ export const RadioGroupDemo = forwardRef<ElementRef<typeof RadioGroup.Root>, Rad
           defaultValue={props.defaultValue}
           disabled={props.disabled}
           name={props.name}
-          onFocus={props.onFocus}
           onValueChange={props.onValueChange}
           ref={ref}
         >

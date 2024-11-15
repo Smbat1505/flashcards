@@ -16,6 +16,7 @@ export const Default: Story = {
   args: {
     defaultValue: 'blueberry',
     disabled: false,
+    name: 'radio1',
     options: [
       {
         label: 'Apple',
@@ -53,6 +54,7 @@ export const Disabled: Story = {
   args: {
     defaultValue: 'apple',
     disabled: true,
+    name: 'radio2',
     options: [
       {
         label: 'Apple',

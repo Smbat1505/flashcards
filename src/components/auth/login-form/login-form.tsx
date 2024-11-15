@@ -14,7 +14,7 @@ import { loginSchema } from './login-schema'
 
 type FormValues = z.infer<typeof loginSchema>
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
   const {
     control,
     formState: { errors },
@@ -30,9 +30,9 @@ export const LoginForm = () => {
 
   console.log('errors: ', errors)
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
-  }
+  // const onSubmit = (data: FormValues) => {
+  //   console.log(data)
+  // }
 
   return (
     <>
