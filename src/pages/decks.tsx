@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+
 import {
   Table,
   TableBody,
@@ -9,7 +12,9 @@ import {
 import { useGetDecksQuery } from '@/services/base-api'
 
 export const Decks = () => {
-  const { data, error, isLoading } = useGetDecksQuery()
+  const { currentPage } = useParams<{ currentPage: string }>()
+  const [skip, setSkip] = useState(false)
+  const { data, error, isLoading } = useGetDecksQuery(currentPage ?? '', { skip })
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -42,9 +47,7 @@ export const Decks = () => {
                   <TableCell>
                     {new Date(Date.parse(item.updated)).toLocaleDateString('ru-RU')}
                   </TableCell>
-                  <TableCell>
-                    {new Date(Date.parse(item.created)).toLocaleDateString('ru-RU')}
-                  </TableCell>
+                  <TableCell>{item.author.name}</TableCell>
                 </TableRow>
               )
             })

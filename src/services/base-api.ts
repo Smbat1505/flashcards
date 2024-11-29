@@ -11,8 +11,15 @@ export const baseApi = createApi({
   }),
   endpoints: builder => {
     return {
-      getDecks: builder.query<GetDecksResponse, void>({
-        query: () => 'v1/decks',
+      getDecks: builder.query<GetDecksResponse, string>({
+        query: () => {
+          return {
+            params: {
+              currentPage: 3,
+            },
+            url: 'v1/decks',
+          }
+        },
       }),
     }
   },
