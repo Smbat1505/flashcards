@@ -25,3 +25,13 @@ export type GetDecksResponsePagination = {
   totalItems: number
   totalPages: number
 }
+export type GetDecksQuery = {
+  authorId?: string
+  currentPage?: number
+  favoritedBy?: string
+  itemsPerPage?: number
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
+  orderBy?: string
+}

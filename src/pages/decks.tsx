@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -10,24 +11,46 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { useGetDecksQuery } from '@/services/base-api'
+import { GetDecksQuery } from '@/services/flashcards.types'
 
 export const Decks = () => {
-  const { currentPage } = useParams<{ currentPage: string }>()
-  const [skip, setSkip] = useState(false)
-  const { data, error, isLoading } = useGetDecksQuery(currentPage ?? '', { skip })
+  // const { currentPage } = useParams<{ currentPage: string }>()
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5)
+  const getDecksQuery: GetDecksQuery = { currentPage, itemsPerPage }
+
+  // const [skip, setSkip] = useState(false)
+  const { data, isLoading } = useGetDecksQuery(getDecksQuery)
+
+  const onCurrentPageButtonClickHandler = (currentPage: number) => {
+    setCurrentPage(currentPage)
+  }
+
+  const onItemsPerPageClickHandler = (itemsPerPage: number) => {
+    setItemsPerPage(itemsPerPage)
+  }
 
   if (isLoading) {
     return <div>Loading...</div>
   }
-  if (error) {
-    return <div>{JSON.stringify(error.data.message)}</div>
-  }
+  // if (error) {
+  //   return <div>{JSON.stringify(error.data.message)}</div>
+  // }
 
-  console.log(data)
+  // console.log(data)
 
   return (
-    <div>
+    <>
       decks
+      <Link to={'/decks2'}>Decks 2</Link>
+      <Button onClick={() => onCurrentPageButtonClickHandler(1)}>currentPage 1</Button>
+      <Button onClick={() => onCurrentPageButtonClickHandler(2)}>currentPage 2</Button>
+      <Button onClick={() => onCurrentPageButtonClickHandler(3)}>currentPage 3</Button>
+      <div>
+        <Button onClick={() => onItemsPerPageClickHandler(5)}>itemsPerPage 5</Button>
+        <Button onClick={() => onItemsPerPageClickHandler(10)}>itemsPerPage 10</Button>
+        <Button onClick={() => onItemsPerPageClickHandler(15)}>itemsPerPage 15</Button>
+      </div>
       <Table>
         <TableHead>
           <TableRow>
@@ -58,6 +81,6 @@ export const Decks = () => {
           )}
         </TableBody>
       </Table>
-    </div>
+    </>
   )
 }
