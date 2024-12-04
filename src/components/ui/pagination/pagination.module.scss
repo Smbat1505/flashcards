@@ -1,11 +1,17 @@
 
-.container {
+.wrapContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.pageNumbersContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
 }
-
 
 .item {
   all: unset;
@@ -63,7 +69,11 @@
 }
 
 .showTxt {
-  margin: 0 6px 0 18px;
+  margin: 0 6px 0 24px;
+}
+
+.onPageTxt {
+  margin: 0 6px 0 9px;
 }
 
 .select {

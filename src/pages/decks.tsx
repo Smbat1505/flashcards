@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
+import { Pagination } from '@/components/ui/pagination'
+import { Slider } from '@/components/ui/slider'
 import {
   Table,
   TableBody,
@@ -10,47 +11,42 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/tables/table-components'
+import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
 export const Decks = () => {
   // const { currentPage } = useParams<{ currentPage: string }>()
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5)
+  const [currentPage, setCurrentPage] = useState<number>()
+  const [itemsPerPage, setItemsPerPage] = useState<number>()
   const getDecksQuery: GetDecksQuery = { currentPage, itemsPerPage }
 
   // const [skip, setSkip] = useState(false)
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
-  const onCurrentPageButtonClickHandler = (currentPage: number) => {
-    setCurrentPage(currentPage)
+  const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
+    setCurrentPage(Number(currentPage))
   }
 
-  const onItemsPerPageClickHandler = (itemsPerPage: number) => {
-    setItemsPerPage(itemsPerPage)
+  const onItemsPerPageClickHandler = (itemsPerPage: string) => {
+    setItemsPerPage(Number(itemsPerPage))
+  }
+
+  const onSliderChangeHandler = (values: number[]) => {
+    console.log(values)
   }
 
   if (isLoading) {
     return <div>Loading...</div>
   }
-  // if (error) {
-  //   return <div>{JSON.stringify(error.data.message)}</div>
-  // }
-
-  // console.log(data)
 
   return (
     <>
-      decks
-      <Link to={'/decks2'}>Decks 2</Link>
-      <Button onClick={() => onCurrentPageButtonClickHandler(1)}>currentPage 1</Button>
-      <Button onClick={() => onCurrentPageButtonClickHandler(2)}>currentPage 2</Button>
-      <Button onClick={() => onCurrentPageButtonClickHandler(3)}>currentPage 3</Button>
       <div>
-        <Button onClick={() => onItemsPerPageClickHandler(5)}>itemsPerPage 5</Button>
-        <Button onClick={() => onItemsPerPageClickHandler(10)}>itemsPerPage 10</Button>
-        <Button onClick={() => onItemsPerPageClickHandler(15)}>itemsPerPage 15</Button>
+        <Slider maxValue={100} minValue={10} onChange={onSliderChangeHandler} value={[20, 40]} />
       </div>
+      <Typography variant={'h1'}>Decks list</Typography>
+      <Link to={'/decks2'}>Decks 2</Link>
       <Table>
         <TableHead>
           <TableRow>
@@ -81,6 +77,12 @@ export const Decks = () => {
           )}
         </TableBody>
       </Table>
+      <Pagination
+        onPageChange={onCurrentPageButtonClickHandler}
+        onPerPageChange={onItemsPerPageClickHandler}
+        perPageOptions={['10', '20', '30', '50', '100']}
+        totalPages={data ? data.pagination.totalPages : 1}
+      />
     </>
   )
 }

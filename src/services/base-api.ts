@@ -17,8 +17,8 @@ export const baseApi = createApi({
             params: {
               currentPage: getDecksQuery?.currentPage,
               itemsPerPage: getDecksQuery?.itemsPerPage,
-              maxCardsCount: 3,
-              minCardsCount: 1,
+              maxCardsCount: 10,
+              minCardsCount: 0,
             },
             url: 'v1/decks',
           }
