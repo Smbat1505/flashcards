@@ -5,60 +5,51 @@ import * as SliderRadix from '@radix-ui/react-slider'
 import s from './slider.module.scss'
 
 type Props = {
+  defaultValue: number[]
   maxValue: number
   minValue: number
   onChange?: (values: number[]) => void
-  value: number[]
 }
 
 export const Slider = (props: Props) => {
-  const { maxValue = 10, minValue = 0, onChange, value } = props
+  const { defaultValue, maxValue, minValue, onChange } = props
 
-  const [inputValue, setInputValue] = useState<number[]>(value)
+  console.log(defaultValue, typeof defaultValue)
 
-  const handleValueChange = (value: number[]) => {
+  const [inputValue, setInputValue] = useState<number[]>(defaultValue)
+
+  const onSliderValueChangeHandler = (value: number[]) => {
     onChange?.(value)
     setInputValue([...value])
   }
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.startsWith('0')) {
-      e.target.value = e.target.value.slice(1)
-    }
+  const onMinInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue([Number(e.currentTarget.value), inputValue[1]])
+    console.log(e.currentTarget.value)
+    onChange?.([Number(e.currentTarget.value), inputValue[1]])
   }
-
-  const onMinInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (+e.currentTarget.value <= maxValue && +e.currentTarget.value >= minValue) {
-      onChange?.([+e.currentTarget.value, value[1]])
-    } else {
-      onChange?.([minValue, value[1]])
-    }
-  }
-
-  const onMaxInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (+e.currentTarget.value <= maxValue && +e.currentTarget.value >= minValue) {
-      onChange?.([value[0], +e.currentTarget.value])
-    } else {
-      onChange?.([value[0], maxValue])
-    }
+  const onMaxInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue([inputValue[0], Number(e.currentTarget.value)])
+    console.log(e.currentTarget.value)
+    onChange?.([inputValue[0], Number(e.currentTarget.value)])
   }
 
   return (
     <form className={s.sliderContainer}>
       <input
         className={s.value}
-        onChange={onMinInputChange}
-        onInput={handleInput}
+        onChange={onMinInputChangeHandler}
         type={'number'}
-        // value={value[0] ?? minValue}
         value={inputValue[0]}
       />
       <SliderRadix.Root
         className={s.SliderRoot}
-        defaultValue={value.length ? value : [minValue, maxValue]}
+        defaultValue={defaultValue}
         max={maxValue}
-        onValueChange={handleValueChange}
+        min={minValue}
+        onValueChange={onSliderValueChangeHandler}
         step={1}
+        value={inputValue}
       >
         <SliderRadix.Track className={s.SliderTrack}>
           <SliderRadix.Range className={s.SliderRange} />
@@ -77,10 +68,8 @@ export const Slider = (props: Props) => {
       </SliderRadix.Root>
       <input
         className={s.value}
-        onChange={onMaxInputChange}
-        onInput={handleInput}
+        onChange={onMaxInputChangeHandler}
         type={'number'}
-        // value={value[1] ?? maxValue}
         value={inputValue[1]}
       />
     </form>

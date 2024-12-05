@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Slider } from './index'
 
 const meta = {
-  args: { maxValue: 60, minValue: 1, value: [10, 60] },
+  args: { defaultValue: [10, 60], maxValue: 60, minValue: 0 },
   component: Slider,
   tags: ['autodocs'],
   title: 'Components/ui/Slider',

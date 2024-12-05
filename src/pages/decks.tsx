@@ -19,10 +19,12 @@ export const Decks = () => {
   // const { currentPage } = useParams<{ currentPage: string }>()
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
-  const getDecksQuery: GetDecksQuery = { currentPage, itemsPerPage }
+  const getDecksQuery: GetDecksQuery = { currentPage, itemsPerPage, maxCardsCount, minCardsCount }
 
   // const [skip, setSkip] = useState(false)
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
+
+  const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
 
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
     setCurrentPage(Number(currentPage))
@@ -33,7 +35,8 @@ export const Decks = () => {
   }
 
   const onSliderChangeHandler = (values: number[]) => {
-    console.log(values)
+    console.log(values, typeof values)
+    setSliderValues(values)
   }
 
   if (isLoading) {
@@ -42,11 +45,16 @@ export const Decks = () => {
 
   return (
     <>
-      <div>
-        <Slider maxValue={100} minValue={10} onChange={onSliderChangeHandler} value={[20, 40]} />
-      </div>
       <Typography variant={'h1'}>Decks list</Typography>
       <Link to={'/decks2'}>Decks 2</Link>
+      <div>
+        <Slider
+          defaultValue={sliderValues}
+          maxValue={15}
+          minValue={0}
+          onChange={onSliderChangeHandler}
+        />
+      </div>
       <Table>
         <TableHead>
           <TableRow>
