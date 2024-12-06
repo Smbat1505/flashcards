@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import {
@@ -12,19 +13,27 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
-import { useGetDecksQuery } from '@/services/base-api'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
 export const Decks = () => {
   // const { currentPage } = useParams<{ currentPage: string }>()
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
-  const getDecksQuery: GetDecksQuery = { currentPage, itemsPerPage, maxCardsCount, minCardsCount }
+  const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
+  const getDecksQuery: GetDecksQuery = {
+    currentPage,
+    itemsPerPage,
+    maxCardsCount: sliderValues[1],
+    minCardsCount: sliderValues[0],
+  }
 
   // const [skip, setSkip] = useState(false)
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
-  const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
+  const [createDeck, createDeckResponse] = useCreateDeckMutation()
+
+  console.log(createDeckResponse)
 
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
     setCurrentPage(Number(currentPage))
@@ -46,8 +55,15 @@ export const Decks = () => {
   return (
     <>
       <Typography variant={'h1'}>Decks list</Typography>
-      <Link to={'/decks2'}>Decks 2</Link>
-      <div>
+      <Button
+        onClick={() => {
+          createDeck({ name: 'Hola' })
+        }}
+      >
+        Create New Deck
+      </Button>
+      <div style={{ margin: '20px' }}>
+        <Typography variant={'body2'}>Number of cards</Typography>
         <Slider
           defaultValue={sliderValues}
           maxValue={15}

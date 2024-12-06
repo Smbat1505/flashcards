@@ -35,3 +35,8 @@ export type GetDecksQuery = {
   name?: string
   orderBy?: string
 }
+export type CreateDeck = {
+  cover?: string
+  isPrivate?: boolean
+  name: string
+}
