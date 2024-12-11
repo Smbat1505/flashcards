@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import {
@@ -54,13 +54,14 @@ export const Decks = () => {
 
   return (
     <>
+      <Header showAvatar />
       <Typography variant={'h1'}>Decks list</Typography>
       <Button
         onClick={() => {
           createDeck({ name: 'Hola' })
         }}
       >
-        Create New Deck
+        Add New Deck
       </Button>
       <div style={{ margin: '20px' }}>
         <Typography variant={'body2'}>Number of cards</Typography>

@@ -78,7 +78,7 @@ export const Avatar = (props: AvatarProps): ReactElement => {
 interface AvatarProps extends ComponentPropsWithoutRef<typeof RadixAvatar.Root> {
   className?: string | undefined
   fallbackAvatarText?: string | undefined
-  imageAltText: string | undefined
+  imageAltText?: string | undefined
   imageUrl: string | undefined
   size?: number | string
   style?: CSSProperties

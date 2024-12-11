@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 
-import { LogOut, Search } from '@/assets/icons/components'
+import { LogOut, PlayCircle, Search } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { CheckboxDemo } from '@/components/ui/checkbox'
 import { Header } from '@/components/ui/header'
@@ -41,6 +41,7 @@ export function App() {
       <Provider store={store}>
         <Router />
       </Provider>
+
       {/*<div*/}
       {/*  style={{*/}
       {/*    alignContent: 'flex-start',*/}
