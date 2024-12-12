@@ -32,11 +32,19 @@ export const Header = (props: HeaderPropsType) => {
               <DropDownMenu
                 onClose={() => {}}
                 onOpenChange={() => {}}
-                trigger={<Avatar imageUrl={'/src/assets/img/ivan.jpeg'} />}
+                trigger={
+                  <Avatar
+                    imageUrl={
+                      'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
+                    }
+                  />
+                }
               >
                 <React.Fragment key={'.0'}>
                   <UserBarDropDown
-                    avatar={'/src/assets/img/ivan.jpeg'}
+                    avatar={
+                      'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
+                    }
                     email={'j&johnson@gmail.com'}
                     id={1}
                     userName={'Ivan'}
