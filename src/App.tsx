@@ -37,7 +37,7 @@ const options: Array<optionsType> = [
 
 export function App() {
   return (
-    <>
+    <div>
       <Provider store={store}>
         <Router />
       </Provider>
@@ -158,6 +158,6 @@ export function App() {
       {/*    type={'text'}*/}
       {/*  />*/}
       {/*</div>*/}
-    </>
+    </div>
   )
 }

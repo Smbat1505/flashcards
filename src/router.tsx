@@ -6,12 +6,13 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Login } from '@/pages/auth/login'
 import { Decks } from '@/pages/decks'
 import { Decks2 } from '@/pages/decks2'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <div>login</div>,
+    element: <Login />,
     errorElement: <div>This is login error!</div>,
     path: '/login',
   },

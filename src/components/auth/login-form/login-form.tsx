@@ -12,7 +12,7 @@ import s from './login-form.module.scss'
 import { Button } from '../../ui/button'
 import { loginSchema } from './login-schema'
 
-type FormValues = z.infer<typeof loginSchema>
+export type FormValues = z.infer<typeof loginSchema>
 
 export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
   const {

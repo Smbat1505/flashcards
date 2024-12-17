@@ -68,7 +68,7 @@ input {
   width: 25px;
   height: 25px;
 
-  color: transparent;
+  color: var(--color-light-100);
 
   border: none;
   border-radius: 100%;
@@ -90,6 +90,13 @@ input {
   width: 100%;
   min-height: 100px;
   padding: 20px 25px 0;
+}
+
+.footerWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px 36px 24px;
+
 }
 
 @keyframes overlay-show {

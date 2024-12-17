@@ -1,7 +1,6 @@
 import { ComponentProps, ComponentRef, ReactNode, forwardRef } from 'react'
 
-import CloseCrossOutline from '@/assets/icons/components/LogOutOutline'
-import { Button } from '@/components/ui/button'
+import CloseCrossOutline from '@/assets/icons/components/Close'
 import * as Dialog from '@radix-ui/react-dialog'
 import { clsx } from 'clsx'
 
@@ -12,10 +11,14 @@ import { Typography } from '../typography'
 type ModalProps = {
   closeHandler?: (isOpen: boolean) => void
   contentContainerClassName?: string
+  footer?: {
+    buttonPrimary: ReactNode
+    buttonSecondary: ReactNode
+  }
   onOpenChange?: (open: boolean) => void
   open?: boolean
   overlayClassName?: string
-  title: string
+  title?: string
   trigger: ReactNode
   withCloseBtn?: boolean
 } & ComponentProps<'div'>
@@ -25,6 +28,7 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     children,
     className,
     contentContainerClassName,
+    footer,
     onOpenChange,
     overlayClassName,
     title,
@@ -57,18 +61,22 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
               </Typography>
             </Dialog.Title>
             {withCloseBtn && (
-              <Dialog.Close asChild>
-                {/*<button*/}
-                {/*  aria-label={'Close'}*/}
-                {/*  className={classNames.iconButton}*/}
-                {/*  onClick={clickHandler}*/}
-                {/*>*/}
-                {/*  <CloseCrossOutline fill={'#fff'} />*/}
-                {/*</button>*/}
+              <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
+                <button
+                  aria-label={'Close'}
+                  className={classNames.iconButton}
+                  // onClick={clickHandler}
+                >
+                  <CloseCrossOutline />
+                </button>
               </Dialog.Close>
             )}
           </header>
           <div className={classNames.contentWrapper}>{children}</div>
+          <div className={s.footerWrapper}>
+            <div>{footer?.buttonSecondary}</div>
+            <div>{footer?.buttonPrimary}</div>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
