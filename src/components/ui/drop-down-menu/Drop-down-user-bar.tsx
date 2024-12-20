@@ -9,7 +9,7 @@ export type Props = {
   avatar: string
   email: string
   id: number
-  userName: string
+  userName: string | undefined
 }
 
 export const UserBarDropDown = (props: Props) => {

@@ -6,13 +6,15 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Login } from '@/pages/auth/login'
+import { LoginPage } from '@/pages/auth/login/loginPage'
 import { Decks } from '@/pages/decks'
 import { Decks2 } from '@/pages/decks2'
+import { Premium } from '@/pages/premium'
+import { useAuthMeQuery } from '@/services/auth/auth.service'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <Login />,
+    element: <LoginPage />,
     errorElement: <div>This is login error!</div>,
     path: '/login',
   },
@@ -31,7 +33,8 @@ const privateRoutes: RouteObject[] = [
 
 const premiumRoutes: RouteObject[] = [
   {
-    element: <div>premium content</div>,
+    //element: <div>premium content</div>,
+    element: <Premium />,
     path: '/premium',
   },
 ]
@@ -55,7 +58,13 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { isError, isLoading } = useAuthMeQuery()
+
+  if (isLoading) {
+    return null
+  }
+
+  const isAuthenticated = !isError
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }

@@ -13,7 +13,9 @@ import s from './header.module.scss'
 import logo from './logo.svg'
 
 type HeaderPropsType = {
+  imageUrl?: string | undefined
   showAvatar: boolean
+  userName?: string | undefined
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -27,18 +29,12 @@ export const Header = (props: HeaderPropsType) => {
           {props.showAvatar ? (
             <>
               <Typography className={s.userName} variant={'subtitle1'}>
-                Ivan
+                {props.userName}
               </Typography>
               <DropDownMenu
                 onClose={() => {}}
                 onOpenChange={() => {}}
-                trigger={
-                  <Avatar
-                    imageUrl={
-                      'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
-                    }
-                  />
-                }
+                trigger={<Avatar imageUrl={props.imageUrl} />}
               >
                 <React.Fragment key={'.0'}>
                   <UserBarDropDown
@@ -47,7 +43,7 @@ export const Header = (props: HeaderPropsType) => {
                     }
                     email={'j&johnson@gmail.com'}
                     id={1}
-                    userName={'Ivan'}
+                    userName={props.userName}
                   />
                   <DropDownList
                     options={[
@@ -67,7 +63,9 @@ export const Header = (props: HeaderPropsType) => {
               </DropDownMenu>
             </>
           ) : (
-            <Button variant={'secondary'}>Sign In</Button>
+            <Button as={'a'} href={'./login'} variant={'secondary'}>
+              Sign In
+            </Button>
           )}
         </div>
       </div>

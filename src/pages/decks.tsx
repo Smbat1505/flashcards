@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
+import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import {
@@ -13,6 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
+import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
@@ -30,6 +32,8 @@ export const Decks = () => {
 
   // const [skip, setSkip] = useState(false)
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
+
+  const meResponse = useAuthMeQuery()
 
   const [createDeck, createDeckResponse] = useCreateDeckMutation()
 
@@ -54,8 +58,12 @@ export const Decks = () => {
 
   return (
     <>
-      <Header showAvatar />
+      <Header imageUrl={meResponse.data?.avatar} showAvatar userName={meResponse.data?.name} />
       <Typography variant={'h1'}>Decks list</Typography>
+      <Modal
+        title={'Add New Deck'}
+        trigger={<Button variant={'primary'}>Add New Deck</Button>}
+      ></Modal>
       <Button
         onClick={() => {
           createDeck({ name: 'Hola' })
