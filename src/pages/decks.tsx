@@ -14,7 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
-import { useAuthMeQuery } from '@/services/auth/auth.service'
+import { useAuthMeQuery, useLogoutMutation } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
@@ -30,14 +30,22 @@ export const Decks = () => {
     minCardsCount: sliderValues[0],
   }
 
-  // const [skip, setSkip] = useState(false)
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
+  const [createDeck] = useCreateDeckMutation()
+
+  const [logout] = useLogoutMutation()
   const meResponse = useAuthMeQuery()
 
-  const [createDeck, createDeckResponse] = useCreateDeckMutation()
+  const logoutHandler = async () => {
+    try {
+      await logout()
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
-  console.log(createDeckResponse)
+  console.log(meResponse)
 
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
     setCurrentPage(Number(currentPage))
@@ -58,15 +66,16 @@ export const Decks = () => {
 
   return (
     <>
-      <Header imageUrl={meResponse.data?.avatar} showAvatar userName={meResponse.data?.name} />
+      <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
       <Modal
         title={'Add New Deck'}
         trigger={<Button variant={'primary'}>Add New Deck</Button>}
       ></Modal>
+      <Button onClick={logoutHandler}>Sign Out</Button>
       <Button
         onClick={() => {
-          createDeck({ name: 'Hola' })
+          createDeck({ name: 'afaf' })
         }}
       >
         Add New Deck

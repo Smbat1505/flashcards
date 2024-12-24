@@ -5,7 +5,7 @@ export type LoginArgs = {
 }
 
 export type AuthMeResponseType = {
-  avatar?: string | undefined
+  avatar: string
   created: string
   email: string
   id: string

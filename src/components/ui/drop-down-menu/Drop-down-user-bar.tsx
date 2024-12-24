@@ -6,9 +6,9 @@ import { Avatar } from '../avatar/avatar'
 import { Typography } from '../typography'
 
 export type Props = {
-  avatar: string
-  email: string
-  id: number
+  avatar: string | undefined
+  email: string | undefined
+  id: string | undefined
   userName: string | undefined
 }
 

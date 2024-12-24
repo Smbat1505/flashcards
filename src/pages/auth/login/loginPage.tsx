@@ -31,7 +31,7 @@ export const LoginPage = () => {
   return (
     <>
       {isSuccess ? <Navigate to={'/'}></Navigate> : ''}
-      <Header showAvatar={false} />
+      <Header isAuthenticated={false} />
       <div style={{ paddingTop: '36px' }}>
         <Login onSubmit={onSubmitHandler}></Login>
       </div>

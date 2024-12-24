@@ -7,18 +7,18 @@ import { DropDownMenu } from '@/components/ui/drop-down-menu'
 import { DropDownList } from '@/components/ui/drop-down-menu/Drop-down-list'
 import { UserBarDropDown } from '@/components/ui/drop-down-menu/Drop-down-user-bar'
 import { Typography } from '@/components/ui/typography'
+import { AuthMeResponseType } from '@/services/auth/auth.types'
 
 import s from './header.module.scss'
 
 import logo from './logo.svg'
 
 type HeaderPropsType = {
-  imageUrl?: string | undefined
-  showAvatar: boolean
-  userName?: string | undefined
+  isAuthenticated: boolean
+  userInfo?: AuthMeResponseType
 }
 
-export const Header = (props: HeaderPropsType) => {
+export const Header = ({ isAuthenticated, userInfo }: HeaderPropsType) => {
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -26,24 +26,22 @@ export const Header = (props: HeaderPropsType) => {
           <img className={s.logo} src={logo} />
         </div>
         <div className={s.inner}>
-          {props.showAvatar ? (
+          {isAuthenticated ? (
             <>
               <Typography className={s.userName} variant={'subtitle1'}>
-                {props.userName}
+                {userInfo?.name}
               </Typography>
               <DropDownMenu
                 onClose={() => {}}
                 onOpenChange={() => {}}
-                trigger={<Avatar imageUrl={props.imageUrl} />}
+                trigger={<Avatar imageUrl={userInfo?.avatar} />}
               >
-                <React.Fragment key={'.0'}>
+                <React.Fragment key={userInfo?.id}>
                   <UserBarDropDown
-                    avatar={
-                      'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
-                    }
-                    email={'j&johnson@gmail.com'}
-                    id={1}
-                    userName={props.userName}
+                    avatar={userInfo?.avatar}
+                    email={userInfo?.email}
+                    id={userInfo?.id}
+                    userName={userInfo?.name}
                   />
                   <DropDownList
                     options={[
