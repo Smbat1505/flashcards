@@ -7,6 +7,7 @@ import { DropDownMenu } from '@/components/ui/drop-down-menu'
 import { DropDownList } from '@/components/ui/drop-down-menu/Drop-down-list'
 import { UserBarDropDown } from '@/components/ui/drop-down-menu/Drop-down-user-bar'
 import { Typography } from '@/components/ui/typography'
+import { useLogoutMutation } from '@/services/auth/auth.service'
 import { AuthMeResponseType } from '@/services/auth/auth.types'
 
 import s from './header.module.scss'
@@ -19,6 +20,15 @@ type HeaderPropsType = {
 }
 
 export const Header = ({ isAuthenticated, userInfo }: HeaderPropsType) => {
+  const [logout] = useLogoutMutation()
+  const logoutHandler = async () => {
+    try {
+      await logout()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -47,12 +57,12 @@ export const Header = ({ isAuthenticated, userInfo }: HeaderPropsType) => {
                     options={[
                       {
                         icon: <Person height={'16'} width={'16'} />,
-                        redirect: '#',
+                        redirect: '',
                         title: 'My Profile',
                       },
                       {
                         icon: <LogOut height={'16'} width={'16'} />,
-                        redirect: '#',
+                        onClick: logoutHandler,
                         title: 'Sign Out',
                       },
                     ]}

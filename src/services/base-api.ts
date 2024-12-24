@@ -38,6 +38,6 @@ export const baseApi = createApi({
     }
   },
   reducerPath: 'baseApi',
-  tagTypes: ['Decks'],
+  tagTypes: ['Decks', 'Auth'],
 })
 export const { useCreateDeckMutation, useGetDecksQuery } = baseApi

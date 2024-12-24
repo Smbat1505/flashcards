@@ -18,13 +18,7 @@ export const LoginPage = () => {
 
   const navigate = useNavigate()
 
-  const { data, isError, isSuccess } = useAuthMeQuery()
-
-  console.log(data)
-
-  console.log(isError)
-
-  console.log(isSuccess)
+  const { isSuccess } = useAuthMeQuery()
 
   const [login] = useLoginMutation()
 

@@ -4,12 +4,14 @@ import { baseApi } from '@/services/base-api'
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
     authMe: builder.query<AuthMeResponseType, void>({
+      providesTags: ['Auth'],
       query: body => ({
         body,
         url: 'v1/auth/me',
       }),
     }),
     login: builder.mutation<void, LoginArgs>({
+      invalidatesTags: ['Auth'],
       query: body => ({
         body,
         method: 'POST',
@@ -17,6 +19,7 @@ export const authService = baseApi.injectEndpoints({
       }),
     }),
     logout: builder.mutation<void, void>({
+      invalidatesTags: ['Auth'],
       query: body => ({
         body,
         method: 'POST',
