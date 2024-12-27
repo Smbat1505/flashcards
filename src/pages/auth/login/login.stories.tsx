@@ -1,4 +1,5 @@
 import { Login } from '@/pages/auth/login/login'
+import { LoginArgs } from '@/services/auth/auth.types'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -9,4 +10,9 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
-export const Default: Story = {}
+
+export const Default: Story = {
+  args: {
+    onSubmit: (data: LoginArgs) => console.log(data),
+  },
+}

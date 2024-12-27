@@ -8,8 +8,8 @@ import {
 
 import { LoginPage } from '@/pages/auth/login/loginPage'
 import { Decks } from '@/pages/decks'
-import { Decks2 } from '@/pages/decks2'
 import { Premium } from '@/pages/premium'
+import { Profile } from '@/pages/profile'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 
 const publicRoutes: RouteObject[] = [
@@ -26,8 +26,8 @@ const privateRoutes: RouteObject[] = [
     path: '/',
   },
   {
-    element: <Decks2 />,
-    path: '/decks2',
+    element: <Profile />,
+    path: '/profile',
   },
 ]
 

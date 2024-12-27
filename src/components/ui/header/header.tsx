@@ -57,7 +57,7 @@ export const Header = ({ isAuthenticated, userInfo }: HeaderPropsType) => {
                     options={[
                       {
                         icon: <Person height={'16'} width={'16'} />,
-                        redirect: '',
+                        redirect: '/profile',
                         title: 'My Profile',
                       },
                       {

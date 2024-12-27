@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { AddNewDeckForm } from '@/components/decks/forms/addNewDeckForm'
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
 import { Modal } from '@/components/ui/modal'
@@ -14,7 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
-import { useAuthMeQuery, useLogoutMutation } from '@/services/auth/auth.service'
+import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
@@ -30,20 +31,20 @@ export const Decks = () => {
     minCardsCount: sliderValues[0],
   }
 
+  const addNewDeckFooterButtons = {
+    buttonPrimary: (
+      <Button onClick={() => createDeck()} variant={'primary'}>
+        Add New Deck
+      </Button>
+    ),
+    buttonSecondary: <Button variant={'secondary'}>Cancel</Button>,
+  }
+
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
   const [createDeck] = useCreateDeckMutation()
 
-  const [logout] = useLogoutMutation()
   const meResponse = useAuthMeQuery()
-
-  const logoutHandler = async () => {
-    try {
-      await logout()
-    } catch (e) {
-      console.log(e)
-    }
-  }
 
   console.log(meResponse)
 
@@ -69,10 +70,12 @@ export const Decks = () => {
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
       <Modal
+        footer={addNewDeckFooterButtons}
         title={'Add New Deck'}
         trigger={<Button variant={'primary'}>Add New Deck</Button>}
-      ></Modal>
-      <Button onClick={logoutHandler}>Sign Out</Button>
+      >
+        <AddNewDeckForm />
+      </Modal>
       <Button
         onClick={() => {
           createDeck({ name: 'afaf' })
