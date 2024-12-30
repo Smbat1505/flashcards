@@ -41,14 +41,14 @@ const premiumRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    children: premiumRoutes,
-    element: <PremiumRoutes />,
-    errorElement: <div>This is premium error!</div>,
-  },
-  {
     children: privateRoutes,
     element: <PrivateRoutes />,
     errorElement: <div>This is privateRoutes error!</div>,
+  },
+  {
+    children: premiumRoutes,
+    element: <PremiumRoutes />,
+    errorElement: <div>This is premium error!</div>,
   },
   ...publicRoutes,
 ])

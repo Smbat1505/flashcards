@@ -18,6 +18,8 @@ import { Typography } from '@/components/ui/typography'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
+import { AddNewDeckModal } from "@/pages/modals/addNewDeckModal";
+import { addNewDeckFormValues } from "@/pages/modals/addNewDecksModal-schema";
 
 export const Decks = () => {
   // const { currentPage } = useParams<{ currentPage: string }>()
@@ -61,6 +63,15 @@ export const Decks = () => {
     setSliderValues(values)
   }
 
+  const onSubmitHandler =  (data: addNewDeckFormValues ) => {
+   try {
+     console.log(data)
+   }
+   catch (e) {
+     console.log(e)
+   }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -69,6 +80,10 @@ export const Decks = () => {
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
+
+      <AddNewDeckModal onSubmit={onSubmitHandler}/>
+
+
       <Modal
         footer={addNewDeckFooterButtons}
         title={'Add New Deck'}
@@ -76,13 +91,13 @@ export const Decks = () => {
       >
         <AddNewDeckForm />
       </Modal>
-      <Button
-        onClick={() => {
-          createDeck({ name: 'afaf' })
-        }}
-      >
-        Add New Deck
-      </Button>
+      {/*<Button*/}
+      {/*  onClick={() => {*/}
+      {/*    createDeck({ name: 'afaf' })*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Add New Deck*/}
+      {/*</Button>*/}
       <div style={{ margin: '20px' }}>
         <Typography variant={'body2'}>Number of cards</Typography>
         <Slider
