@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
+import { FormValues } from '@/components/auth/login-form'
 import { Button } from '@/components/ui/button'
-import { CheckboxDemo } from '@/components/ui/checkbox'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
 import { Modal } from '@/components/ui/modal'
@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from '@/components/auth/login-form/login-form.module.scss'
 
-export const addNewDeckModal = () => {
+export const addNewDeckModal = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
   const {
     control,
     formState: { errors },
@@ -30,7 +30,7 @@ export const addNewDeckModal = () => {
 
   const addNewDeckFooterButtons = {
     buttonPrimary: (
-      <Button onClick={() => createDeck({ name: 'afaf' })} variant={'primary'}>
+      <Button onClick={() => createDeck({ name: 'afaf' })} type={'submit'} variant={'primary'}>
         Add New Deck
       </Button>
     ),
@@ -45,9 +45,9 @@ export const addNewDeckModal = () => {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.emailField}>
-          <ControlledTextField control={control} labelText={'Name Pack'} name={'email'} />
+          <ControlledTextField control={control} labelText={'Name Pack'} name={'name'} />
         </div>
-        <ControlledCheckbox control={control} labelText={'Remember Me'} name={'rememberMe'} />
+        <ControlledCheckbox control={control} labelText={'Remember Me'} name={'privatePack'} />
       </form>
     </Modal>
   )
