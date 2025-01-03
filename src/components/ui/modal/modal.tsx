@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentRef, ReactNode, forwardRef } from 'react'
+import { ComponentProps, ComponentRef, ReactNode, forwardRef, useState } from 'react'
 
 import CloseCrossOutline from '@/assets/icons/components/Close'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -15,8 +15,7 @@ type ModalProps = {
     buttonPrimary: ReactNode
     buttonSecondary: ReactNode
   }
-  onOpenChange?: (open: boolean) => void
-  open?: boolean
+  onSubmit?: () => void
   overlayClassName?: string
   title?: string
   trigger: ReactNode
@@ -29,15 +28,12 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     className,
     contentContainerClassName,
     footer,
-    onOpenChange,
+    onSubmit,
     overlayClassName,
     title,
     trigger,
     withCloseBtn = true,
   } = props
-  // const clickHandler = () => {
-  //   closeHandler(false)
-  // }
 
   const classNames = {
     contentWrapper: clsx(s.contentWrapper, contentContainerClassName),
@@ -48,8 +44,10 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     iconButton: s.iconButton,
   }
 
+  const [open, setOpen] = useState(false)
+
   return (
-    <Dialog.Root onOpenChange={onOpenChange}>
+    <Dialog.Root onOpenChange={setOpen} open={open}>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={classNames.dialogOverlay} />
@@ -62,21 +60,29 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
             </Dialog.Title>
             {withCloseBtn && (
               <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
-                <button
-                  aria-label={'Close'}
-                  className={classNames.iconButton}
-                  // onClick={clickHandler}
-                >
+                <button aria-label={'Close'} className={classNames.iconButton}>
                   <CloseCrossOutline />
                 </button>
               </Dialog.Close>
             )}
           </header>
-          <div className={classNames.contentWrapper}>{children}</div>
-          <div className={s.footerWrapper}>
-            <div>{footer?.buttonSecondary}</div>
-            <div>{footer?.buttonPrimary}</div>
-          </div>
+          <form
+            onSubmit={event => {
+              if (onSubmit) {
+                onSubmit()
+                setOpen(false)
+              }
+              event.preventDefault()
+            }}
+          >
+            <div className={classNames.contentWrapper}>{children}</div>
+            <div className={s.footerWrapper}>
+              <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
+                <div>{footer?.buttonSecondary}</div>
+              </Dialog.Close>
+              <div>{footer?.buttonPrimary}</div>
+            </div>
+          </form>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

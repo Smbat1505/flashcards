@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -9,21 +10,25 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from '@/components/auth/login-form/login-form.module.scss'
 
-export const AddNewDeckModal = ({ onSubmit }: { onSubmit: (data: addNewDeckFormValues) => void }) => {
+export const AddNewDeckModal = ({
+  onSubmit,
+}: {
+  onSubmit: (data: addNewDeckFormValues) => void
+}) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<addNewDeckFormValues>({
     defaultValues: {
+      isPrivate: true,
       name: '',
-      privatePack: true,
     },
     resolver: zodResolver(addNewDeckSchema),
   })
 
   console.log('errors: ', errors)
-
 
   const addNewDeckFooterButtons = {
     buttonPrimary: (
@@ -37,18 +42,19 @@ export const AddNewDeckModal = ({ onSubmit }: { onSubmit: (data: addNewDeckFormV
   return (
     <Modal
       footer={addNewDeckFooterButtons}
+      onSubmit={handleSubmit(onSubmit)}
       title={'Add New Deck'}
       trigger={<Button variant={'primary'}>Add New Deck</Button>}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={s.emailField}>
-          <ControlledTextField control={control} labelText={'Name Pack'} name={'name'} />
-        </div>
-        <ControlledCheckbox control={control} labelText={'Private Pack'} name={'privatePack'} />
-        <Button type={'submit'} variant={'primary'}>
-          Add New Deck
-        </Button>
-      </form>
+      <div className={s.emailField}>
+        <ControlledTextField
+          control={control}
+          defaultValue={''}
+          labelText={'Name Pack'}
+          name={'name'}
+        />
+      </div>
+      <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
     </Modal>
   )
 }

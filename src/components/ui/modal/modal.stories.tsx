@@ -147,6 +147,7 @@ export const WithFooter: Story = {
       buttonPrimary: <Button variant={'primary'}>Button Primary</Button>,
       buttonSecondary: <Button variant={'secondary'}>Button Secondary</Button>,
     },
+    onOpenChange: open => onOpenChange(open),
     trigger: <Button variant={'primary'}>Add New Deck</Button>,
   },
 }

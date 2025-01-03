@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
-import { AddNewDeckForm } from '@/components/decks/forms/addNewDeckForm'
-import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
-import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import {
@@ -15,11 +12,11 @@ import {
   TableRow,
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
+import { AddNewDeckModal } from '@/pages/modals/addNewDeckModal'
+import { addNewDeckFormValues } from '@/pages/modals/addNewDecksModal-schema'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
-import { AddNewDeckModal } from "@/pages/modals/addNewDeckModal";
-import { addNewDeckFormValues } from "@/pages/modals/addNewDecksModal-schema";
 
 export const Decks = () => {
   // const { currentPage } = useParams<{ currentPage: string }>()
@@ -31,15 +28,6 @@ export const Decks = () => {
     itemsPerPage,
     maxCardsCount: sliderValues[1],
     minCardsCount: sliderValues[0],
-  }
-
-  const addNewDeckFooterButtons = {
-    buttonPrimary: (
-      <Button onClick={() => createDeck()} variant={'primary'}>
-        Add New Deck
-      </Button>
-    ),
-    buttonSecondary: <Button variant={'secondary'}>Cancel</Button>,
   }
 
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
@@ -63,13 +51,13 @@ export const Decks = () => {
     setSliderValues(values)
   }
 
-  const onSubmitHandler =  (data: addNewDeckFormValues ) => {
-   try {
-     console.log(data)
-   }
-   catch (e) {
-     console.log(e)
-   }
+  const onAddDeckSubmitHandler = (data: addNewDeckFormValues) => {
+    try {
+      createDeck(data)
+      console.log(data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   if (isLoading) {
@@ -81,23 +69,8 @@ export const Decks = () => {
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
 
-      <AddNewDeckModal onSubmit={onSubmitHandler}/>
+      <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
 
-
-      <Modal
-        footer={addNewDeckFooterButtons}
-        title={'Add New Deck'}
-        trigger={<Button variant={'primary'}>Add New Deck</Button>}
-      >
-        <AddNewDeckForm />
-      </Modal>
-      {/*<Button*/}
-      {/*  onClick={() => {*/}
-      {/*    createDeck({ name: 'afaf' })*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  Add New Deck*/}
-      {/*</Button>*/}
       <div style={{ margin: '20px' }}>
         <Typography variant={'body2'}>Number of cards</Typography>
         <Slider

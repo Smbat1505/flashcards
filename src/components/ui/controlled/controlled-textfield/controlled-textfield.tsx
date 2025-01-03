@@ -31,6 +31,7 @@ export const ControlledTextField = <T extends FieldValues>({
       {...rest}
       handleValueChange={onChange}
       {...field}
+      defaultValue={defaultValue}
       labelText={labelText}
       validationError={error?.message}
     />
