@@ -7,6 +7,7 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 import { Typography } from '../typography'
+import { FieldErrors, UseFormReset } from "react-hook-form";
 
 type ModalProps = {
   closeHandler?: (isOpen: boolean) => void
@@ -20,6 +21,8 @@ type ModalProps = {
   title?: string
   trigger: ReactNode
   withCloseBtn?: boolean
+  reset: UseFormReset<any>
+  formState: {errors: FieldErrors<{isPrivate: boolean, name: string}>}
 } & ComponentProps<'div'>
 
 export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) => {
@@ -33,6 +36,8 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     title,
     trigger,
     withCloseBtn = true,
+    reset,
+    formState
   } = props
 
   const classNames = {
@@ -67,13 +72,18 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
             )}
           </header>
           <form
-            onSubmit={event => {
+            onSubmit={(event) => {
               if (onSubmit) {
-                onSubmit()
-                setOpen(false)
+                onSubmit();
+                if (!formState.errors.name) {
+                  setOpen(false);
+                  reset();
+                }
               }
               event.preventDefault()
-            }}
+            }
+
+            }
           >
             <div className={classNames.contentWrapper}>{children}</div>
             <div className={s.footerWrapper}>

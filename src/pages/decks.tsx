@@ -51,10 +51,10 @@ export const Decks = () => {
     setSliderValues(values)
   }
 
-  const onAddDeckSubmitHandler = (data: addNewDeckFormValues) => {
+  const onAddDeckSubmitHandler =  async (data: addNewDeckFormValues) => {
     try {
-      createDeck(data)
       console.log(data)
+      await createDeck(data)
     } catch (e) {
       console.log(e)
     }

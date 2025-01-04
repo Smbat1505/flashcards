@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -45,6 +44,8 @@ export const AddNewDeckModal = ({
       onSubmit={handleSubmit(onSubmit)}
       title={'Add New Deck'}
       trigger={<Button variant={'primary'}>Add New Deck</Button>}
+      reset={reset}
+      formState={{ errors }}
     >
       <div className={s.emailField}>
         <ControlledTextField
