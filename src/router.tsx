@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { LoginPage } from '@/pages/auth/login/loginPage'
+import { SignUpPage } from '@/pages/auth/signUp/signUpPage'
 import { Decks } from '@/pages/decks'
 import { Premium } from '@/pages/premium'
 import { Profile } from '@/pages/profile'
@@ -17,6 +18,11 @@ const publicRoutes: RouteObject[] = [
     element: <LoginPage />,
     errorElement: <div>This is login error!</div>,
     path: '/login',
+  },
+  {
+    element: <SignUpPage />,
+    errorElement: <div>This is sign-up error!</div>,
+    path: '/signup',
   },
 ]
 

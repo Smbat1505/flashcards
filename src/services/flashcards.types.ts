@@ -40,3 +40,21 @@ export type CreateDeck = {
   isPrivate?: boolean
   name: string
 }
+export type SignUpRequest = {
+  email: string
+  html?: string
+  name?: string
+  password: string
+  sendConfirmationEmail: boolean
+  subject: string
+}
+
+export type SignUpResponse = {
+  avatar: string
+  created: string
+  email: string
+  id: string
+  isEmailVerified: true
+  name: string
+  updated: string
+}

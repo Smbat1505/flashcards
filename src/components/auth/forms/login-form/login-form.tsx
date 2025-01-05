@@ -9,17 +9,17 @@ import { z } from 'zod'
 
 import s from './login-form.module.scss'
 
-import { Button } from '../../ui/button'
+import { Button } from '../../../ui/button'
 import { loginSchema } from './login-schema'
 
-export type FormValues = z.infer<typeof loginSchema>
+export type loginFormValues = z.infer<typeof loginSchema>
 
-export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }) => {
+export const LoginForm = ({ onSubmit }: { onSubmit: (data: loginFormValues) => void }) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormValues>({
+  } = useForm<loginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -29,10 +29,6 @@ export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
   })
 
   console.log('errors: ', errors)
-
-  // const onSubmit = (data: FormValues) => {
-  //   console.log(data)
-  // }
 
   return (
     <>
@@ -70,7 +66,7 @@ export const LoginForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
           as={'a'}
           className={s.signUpLink}
           color={'var(--color-accent-500'}
-          href={'#'}
+          href={'./signup'}
           variant={'subtitle1'}
         >
           Sign Up

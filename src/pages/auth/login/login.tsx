@@ -1,7 +1,8 @@
-import { LoginForm } from '@/components/auth/login-form'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { LoginArgs } from '@/services/auth/auth.types'
+
+import { LoginForm } from '../../../components/auth/forms/login-form'
 
 type LoginType = {
   onSubmit: (data: LoginArgs) => void

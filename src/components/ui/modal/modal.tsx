@@ -7,7 +7,7 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 import { Typography } from '../typography'
-import { FieldErrors, UseFormReset } from "react-hook-form";
+import { UseFormReset } from "react-hook-form";
 
 type ModalProps = {
   closeHandler?: (isOpen: boolean) => void
@@ -21,8 +21,8 @@ type ModalProps = {
   title?: string
   trigger: ReactNode
   withCloseBtn?: boolean
-  reset: UseFormReset<any>
-  formState: {errors: FieldErrors<{isPrivate: boolean, name: string}>}
+  reset?: UseFormReset<{ name: string, isPrivate: boolean}>
+  isValid?: boolean
 } & ComponentProps<'div'>
 
 export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) => {
@@ -37,7 +37,8 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     trigger,
     withCloseBtn = true,
     reset,
-    formState
+    isValid
+
   } = props
 
   const classNames = {
@@ -74,13 +75,17 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
           <form
             onSubmit={(event) => {
               if (onSubmit) {
-                onSubmit();
-                if (!formState.errors.name) {
-                  setOpen(false);
-                  reset();
+                {
+                  onSubmit();
+                  if (isValid) {
+                    setOpen(false);
+                    if (reset) {
+                      reset();
+                    }
+                  }
                 }
               }
-              event.preventDefault()
+              event.preventDefault();
             }
 
             }

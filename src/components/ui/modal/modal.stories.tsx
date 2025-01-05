@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useState } from 'react'
-
 import { Button } from '../button'
 import { Modal } from './modal'
-import { ModalFooter } from './modal-footer'
 
 const meta = {
   component: Modal,
@@ -15,9 +12,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const onOpenChange = (open: boolean) => {
-  console.log('open change handler ' + open)
-}
+
 //
 // const ServiceModalComponent = ({
 //   withCloseBtn = true,
@@ -147,7 +142,6 @@ export const WithFooter: Story = {
       buttonPrimary: <Button variant={'primary'}>Button Primary</Button>,
       buttonSecondary: <Button variant={'secondary'}>Button Secondary</Button>,
     },
-    onOpenChange: open => onOpenChange(open),
     trigger: <Button variant={'primary'}>Add New Deck</Button>,
   },
 }

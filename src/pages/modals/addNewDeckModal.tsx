@@ -7,7 +7,7 @@ import { Modal } from '@/components/ui/modal'
 import { addNewDeckFormValues, addNewDeckSchema } from '@/pages/modals/addNewDecksModal-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from '@/components/auth/login-form/login-form.module.scss'
+import s from '@/components/auth/forms/login-form/login-form.module.scss'
 
 export const AddNewDeckModal = ({
   onSubmit,
@@ -16,7 +16,7 @@ export const AddNewDeckModal = ({
 }) => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     reset,
   } = useForm<addNewDeckFormValues>({
@@ -41,11 +41,11 @@ export const AddNewDeckModal = ({
   return (
     <Modal
       footer={addNewDeckFooterButtons}
+      isValid={isValid}
       onSubmit={handleSubmit(onSubmit)}
+      reset={reset}
       title={'Add New Deck'}
       trigger={<Button variant={'primary'}>Add New Deck</Button>}
-      reset={reset}
-      formState={{ errors }}
     >
       <div className={s.emailField}>
         <ControlledTextField

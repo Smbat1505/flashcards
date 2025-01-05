@@ -1,5 +1,6 @@
 import { AuthMeResponseType, LoginArgs } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
+import { SignUpRequest, SignUpResponse } from '@/services/flashcards.types'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -26,7 +27,15 @@ export const authService = baseApi.injectEndpoints({
         url: 'v1/auth/logout',
       }),
     }),
+    signUp: builder.mutation<SignUpResponse, SignUpRequest>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: 'v1/auth/sign-up',
+      }),
+    }),
   }),
 })
 
-export const { useAuthMeQuery, useLoginMutation, useLogoutMutation } = authService
+export const { useAuthMeQuery, useLoginMutation, useLogoutMutation, useSignUpMutation } =
+  authService
