@@ -27,7 +27,7 @@ export const authService = baseApi.injectEndpoints({
         url: 'v1/auth/logout',
       }),
     }),
-    signUp: builder.mutation<SignUpResponse, SignUpRequest>({
+    signup: builder.mutation<SignUpResponse, SignUpRequest>({
       query: body => ({
         body,
         method: 'POST',
@@ -37,5 +37,5 @@ export const authService = baseApi.injectEndpoints({
   }),
 })
 
-export const { useAuthMeQuery, useLoginMutation, useLogoutMutation, useSignUpMutation } =
+export const { useAuthMeQuery, useLoginMutation, useLogoutMutation, useSignupMutation } =
   authService
