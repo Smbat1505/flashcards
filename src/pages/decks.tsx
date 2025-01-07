@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
@@ -15,7 +16,7 @@ import { Typography } from '@/components/ui/typography'
 import { AddNewDeckModal } from '@/pages/modals/addNewDeckModal'
 import { addNewDeckFormValues } from '@/pages/modals/addNewDecksModal-schema'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/services/base-api'
+import { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
 export const Decks = () => {
@@ -34,9 +35,15 @@ export const Decks = () => {
 
   const [createDeck] = useCreateDeckMutation()
 
+  const [deleteDeck] = useDeleteDeckMutation()
+
   const meResponse = useAuthMeQuery()
 
   console.log(meResponse)
+
+  const deleteDeckHandler = () => {
+    deleteDeck('cm5ms04uo00q0o001jtt8njew')
+  }
 
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
     setCurrentPage(Number(currentPage))
@@ -51,7 +58,7 @@ export const Decks = () => {
     setSliderValues(values)
   }
 
-  const onAddDeckSubmitHandler =  async (data: addNewDeckFormValues) => {
+  const onAddDeckSubmitHandler = async (data: addNewDeckFormValues) => {
     try {
       console.log(data)
       await createDeck(data)
@@ -68,6 +75,9 @@ export const Decks = () => {
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
+      <Button onClick={deleteDeckHandler} variant={'secondary'}>
+        Delete My Deck
+      </Button>
 
       <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
 
@@ -83,10 +93,10 @@ export const Decks = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader>Name</TableHeader>
-            <TableHeader>Cards</TableHeader>
-            <TableHeader>Last Updated</TableHeader>
-            <TableHeader>Created by</TableHeader>
+            <TableHeader align={'left'}>Name</TableHeader>
+            <TableHeader align={'left'}>Cards</TableHeader>
+            <TableHeader align={'left'}>Last Updated</TableHeader>
+            <TableHeader align={'left'}>Created by</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -94,7 +104,21 @@ export const Decks = () => {
             data.items.map(item => {
               return (
                 <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>
+                    <div style={{ alignItems: 'center', display: 'flex' }}>
+                      {item.cover ? (
+                        <img
+                          alt={item.name}
+                          src={item.cover}
+                          style={{ marginRight: '10px' }}
+                          width={'118px'}
+                        />
+                      ) : (
+                        ''
+                      )}
+                      {item.name}
+                    </div>
+                  </TableCell>
                   <TableCell>{item.cardsCount}</TableCell>
                   <TableCell>
                     {new Date(Date.parse(item.updated)).toLocaleDateString('ru-RU')}

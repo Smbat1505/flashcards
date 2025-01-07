@@ -1,4 +1,5 @@
 import { signUpFormValues } from '@/components/auth/forms/signUp-form/signUp-schema'
+import { Header } from '@/components/ui/header'
 import { SignUp } from '@/pages/auth/signUp/signUp'
 import { useSignupMutation } from '@/services/auth/auth.service'
 import { SignUpRequest } from '@/services/flashcards.types'
@@ -24,5 +25,12 @@ export const SignUpPage = () => {
     }
   }
 
-  return <SignUp onSubmit={onSubmitHandler}></SignUp>
+  return (
+    <>
+      <Header isAuthenticated={false} />
+      <div style={{ paddingTop: '36px' }}>
+        <SignUp onSubmit={onSubmitHandler}></SignUp>
+      </div>
+    </>
+  )
 }
