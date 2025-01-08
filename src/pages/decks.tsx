@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Edit2Outline, PlayCircleOutline, Trash } from '@/assets/icons/components'
+import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
@@ -41,10 +42,6 @@ export const Decks = () => {
 
   console.log(meResponse)
 
-  const deleteDeckHandler = () => {
-    deleteDeck('cm5ms04uo00q0o001jtt8njew')
-  }
-
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
     setCurrentPage(Number(currentPage))
   }
@@ -75,9 +72,6 @@ export const Decks = () => {
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <Typography variant={'h1'}>Decks list</Typography>
-      <Button onClick={deleteDeckHandler} variant={'secondary'}>
-        Delete My Deck
-      </Button>
 
       <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
 
@@ -97,6 +91,7 @@ export const Decks = () => {
             <TableHeader align={'left'}>Cards</TableHeader>
             <TableHeader align={'left'}>Last Updated</TableHeader>
             <TableHeader align={'left'}>Created by</TableHeader>
+            <TableHeader></TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -124,6 +119,31 @@ export const Decks = () => {
                     {new Date(Date.parse(item.updated)).toLocaleDateString('ru-RU')}
                   </TableCell>
                   <TableCell>{item.author.name}</TableCell>
+                  <TableCell>
+                    <div
+                      style={{ display: 'flex', justifyContent: 'space-between', width: '68px' }}
+                    >
+                      <SvgWrapper
+                        SvgComponent={PlayCircleOutline}
+                        // color={'white'}
+                        size={'16'}
+                        wrapper={'button'}
+                      />
+                      <SvgWrapper
+                        SvgComponent={Edit2Outline}
+                        // color={'white'}
+                        size={'16'}
+                        wrapper={'button'}
+                      />
+                      <SvgWrapper
+                        SvgComponent={Trash}
+                        color={'white'}
+                        onClick={() => deleteDeck(item.id)}
+                        size={'16'}
+                        wrapper={'button'}
+                      />
+                    </div>
+                  </TableCell>
                 </TableRow>
               )
             })

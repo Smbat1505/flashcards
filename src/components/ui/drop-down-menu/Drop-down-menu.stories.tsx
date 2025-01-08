@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Edit2, LogOut, Person, PlayCircle, Trash } from '@/assets/icons/components'
+import { Edit2, LogOut, Person, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import ivan from '@/assets/img/ivan.jpeg'
 import { DropDownMenu, dropDownMenuList, userBarProps } from '@/components/ui/drop-down-menu'
 import { withRouter } from 'storybook-addon-react-router-v6'
@@ -23,9 +23,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const options: dropDownMenuList[] = [
-  { icon: <PlayCircle height={'16'} width={'16'} />, redirect: '#', title: 'Learn' },
+  { icon: <PlayCircleOutline height={'16'} width={'16'} />, redirect: '#', title: 'Learn' },
   { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
-  { icon: <Trash height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
+  { icon: <TrashOutline height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
 ]
 
 const userOptions: dropDownMenuList[] = [

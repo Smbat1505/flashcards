@@ -58,3 +58,12 @@ export type SignUpResponse = {
   name: string
   updated: string
 }
+
+export type GetDeckCardsQuery = {
+  answer?: string
+  currentPage?: number
+  id: string
+  itemsPerPage?: number
+  orderBy?: string
+  question?: string
+}

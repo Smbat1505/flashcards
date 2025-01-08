@@ -72,19 +72,19 @@ const ExampleTable: FC<DecksTableProps> = ({ decks }) => {
               <TableCell>
                 <SvgWrapper
                   SvgComponent={Trash}
-                  color={'blue'}
+                  color={'white'}
                   size={'1.25rem'}
                   wrapper={'button'}
                 />
                 <SvgWrapper
                   SvgComponent={Edit2Outline}
-                  color={'blue'}
+                  color={'white'}
                   size={'1.25rem'}
                   wrapper={'button'}
                 />
                 <SvgWrapper
                   SvgComponent={PlayCircleOutline}
-                  color={'blue'}
+                  color={'white'}
                   size={'1.25rem'}
                   wrapper={'button'}
                 />
