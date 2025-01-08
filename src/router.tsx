@@ -8,6 +8,7 @@ import {
 
 import { LoginPage } from '@/pages/auth/login/loginPage'
 import { SignUpPage } from '@/pages/auth/signUp/signUpPage'
+import { Cards } from '@/pages/cards'
 import { Decks } from '@/pages/decks'
 import { Premium } from '@/pages/premium'
 import { Profile } from '@/pages/profile'
@@ -34,6 +35,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <Profile />,
     path: '/profile',
+  },
+  {
+    element: <Cards state={'sdfsdf'} />,
+    path: '/cards',
   },
 ]
 

@@ -67,3 +67,23 @@ export type GetDeckCardsQuery = {
   orderBy?: string
   question?: string
 }
+export type GetDeckCardsResponse = {
+  items: GetDeckCardsItems[]
+  pagination: GetDecksResponsePagination
+}
+
+export type GetDeckCardsItems = {
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  grade: number
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  shots: number
+  updated: string
+  userId: string
+}

@@ -1,6 +1,7 @@
 import {
   CreateDeck,
   GetDeckCardsQuery,
+  GetDeckCardsResponse,
   GetDecksQuery,
   GetDecksResponse,
 } from '@/services/flashcards.types'
@@ -33,7 +34,7 @@ export const baseApi = createApi({
           url: `v1/decks/${id}`,
         }),
       }),
-      getDeckCards: builder.query<void, GetDeckCardsQuery>({
+      getDeckCards: builder.query<GetDeckCardsResponse, GetDeckCardsQuery>({
         providesTags: ['Cards'],
         query: getDeckCardsQuery => {
           return {

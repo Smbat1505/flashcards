@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, Trash } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
@@ -25,6 +26,7 @@ export const Decks = () => {
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
+  const [cardsPage, setCardsPage] = useState<string>()
   const getDecksQuery: GetDecksQuery = {
     currentPage,
     itemsPerPage,
@@ -68,6 +70,11 @@ export const Decks = () => {
     return <div>Loading...</div>
   }
 
+  const onDeckClickHandler = (id: string) => {
+    console.log(id)
+    setCardsPage(id)
+  }
+
   return (
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
@@ -104,6 +111,7 @@ export const Decks = () => {
                       {item.cover ? (
                         <img
                           alt={item.name}
+                          onClick={() => onDeckClickHandler(item.id)}
                           src={item.cover}
                           style={{ marginRight: '10px' }}
                           width={'118px'}
@@ -160,6 +168,7 @@ export const Decks = () => {
         perPageOptions={['10', '20', '30', '50', '100']}
         totalPages={data ? data.pagination.totalPages : 1}
       />
+      {cardsPage && <Navigate state={cardsPage} to={'./cards'} />}
     </>
   )
 }
