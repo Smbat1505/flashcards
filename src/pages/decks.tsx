@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
-import { Edit2Outline, PlayCircleOutline, Trash } from '@/assets/icons/components'
+import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
+import { Filter } from '@/components/layout/filter/filter'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
-import { Slider } from '@/components/ui/slider'
 import {
   Table,
   TableBody,
@@ -21,8 +21,9 @@ import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
+import s from './decks.module.scss'
+
 export const Decks = () => {
-  // const { currentPage } = useParams<{ currentPage: string }>()
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
@@ -52,15 +53,10 @@ export const Decks = () => {
     setItemsPerPage(Number(itemsPerPage))
   }
 
-  const onSliderChangeHandler = (values: number[]) => {
-    console.log(values, typeof values)
-    setSliderValues(values)
-  }
-
   const onAddDeckSubmitHandler = async (data: addNewDeckFormValues) => {
     try {
       console.log(data)
-      await createDeck(data)
+      await createDeck(data).then(() => console.log('new deck ' + data.name + ' created'))
     } catch (e) {
       console.log(e)
     }
@@ -75,21 +71,19 @@ export const Decks = () => {
     setCardsPage(id)
   }
 
+  const onSliderChangeHandler = (values: number[]) => {
+    setSliderValues(values)
+  }
+
   return (
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
-      <Typography variant={'h1'}>Decks list</Typography>
-
-      <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
-
-      <div style={{ margin: '20px' }}>
-        <Typography variant={'body2'}>Number of cards</Typography>
-        <Slider
-          defaultValue={sliderValues}
-          maxValue={15}
-          minValue={0}
-          onChange={onSliderChangeHandler}
-        />
+      <div className={s.container}>
+        <div className={s.pageHeadingWrapper}>
+          <Typography variant={'h1'}>Decks list</Typography>
+          <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
+        </div>
+        <Filter defaultSliderValue={sliderValues} onSliderChange={onSliderChangeHandler} />
       </div>
       <Table>
         <TableHead>
@@ -144,7 +138,7 @@ export const Decks = () => {
                         wrapper={'button'}
                       />
                       <SvgWrapper
-                        SvgComponent={Trash}
+                        SvgComponent={TrashOutline}
                         color={'white'}
                         onClick={() => deleteDeck(item.id)}
                         size={'16'}

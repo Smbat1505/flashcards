@@ -8,7 +8,7 @@ import { Typography } from '../typography'
 export type Props = {
   avatar: string | undefined
   email: string | undefined
-  id: number | undefined
+  id: string | undefined
   userName: string | undefined
 }
 
