@@ -54,6 +54,7 @@ export const baseApi = createApi({
         query: getDecksQuery => {
           return {
             params: {
+              authorId: getDecksQuery?.authorId,
               currentPage: getDecksQuery?.currentPage,
               itemsPerPage: getDecksQuery?.itemsPerPage,
               maxCardsCount: getDecksQuery?.maxCardsCount,

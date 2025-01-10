@@ -28,20 +28,31 @@ export const Decks = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
   const [cardsPage, setCardsPage] = useState<string>()
+  const [tabSwitcherValue, setTabSwitcherValue] = useState<string>()
+
+  const meResponse = useAuthMeQuery()
+
+  let authorId
+
+  if (tabSwitcherValue == 'myCards') {
+    authorId = meResponse.data?.id
+    // setCurrentPage(1)
+  } else {
+    authorId = undefined
+  }
+
   const getDecksQuery: GetDecksQuery = {
+    authorId,
     currentPage,
     itemsPerPage,
     maxCardsCount: sliderValues[1],
     minCardsCount: sliderValues[0],
   }
-
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
   const [createDeck] = useCreateDeckMutation()
 
   const [deleteDeck] = useDeleteDeckMutation()
-
-  const meResponse = useAuthMeQuery()
 
   console.log(meResponse)
 
@@ -75,6 +86,11 @@ export const Decks = () => {
     setSliderValues(values)
   }
 
+  const onTabSwitcherChangeHandler = (value: string) => {
+    console.log(value)
+    setTabSwitcherValue(value)
+  }
+
   return (
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
@@ -83,7 +99,11 @@ export const Decks = () => {
           <Typography variant={'h1'}>Decks list</Typography>
           <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
         </div>
-        <Filter defaultSliderValue={sliderValues} onSliderChange={onSliderChangeHandler} />
+        <Filter
+          defaultSliderValue={sliderValues}
+          onSliderChange={onSliderChangeHandler}
+          onTabSwitcherChange={onTabSwitcherChangeHandler}
+        />
       </div>
       <Table>
         <TableHead>

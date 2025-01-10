@@ -10,6 +10,7 @@ import s from './filter.module.scss'
 export type FilterPropsType = {
   defaultSliderValue: number[]
   onSliderChange: (values: number[]) => void
+  onTabSwitcherChange: (value: string) => void
 }
 
 export const Filter = (props: FilterPropsType) => {
@@ -21,6 +22,10 @@ export const Filter = (props: FilterPropsType) => {
     console.log('clear filter')
   }
 
+  // const onTabSwitcherChangeHandler = (value: string) => {
+  //   console.log(value)
+  // }
+
   return (
     <div className={s.filterWrapper}>
       <div>
@@ -28,6 +33,7 @@ export const Filter = (props: FilterPropsType) => {
       </div>
       <div>
         <TabSwitcher
+          changeHandler={props.onTabSwitcherChange}
           defaultValue={'allCards'}
           tabs={[
             {
