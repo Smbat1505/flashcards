@@ -37,7 +37,7 @@ const privateRoutes: RouteObject[] = [
     path: '/profile',
   },
   {
-    element: <Cards state={'sdfsdf'} />,
+    element: <Cards />,
     path: '/cards',
   },
 ]

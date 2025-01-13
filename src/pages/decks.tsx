@@ -36,7 +36,6 @@ export const Decks = () => {
 
   if (tabSwitcherValue == 'myCards') {
     authorId = meResponse.data?.id
-    // setCurrentPage(1)
   } else {
     authorId = undefined
   }
@@ -89,6 +88,7 @@ export const Decks = () => {
   const onTabSwitcherChangeHandler = (value: string) => {
     console.log(value)
     setTabSwitcherValue(value)
+    setCurrentPage(undefined)
   }
 
   return (
