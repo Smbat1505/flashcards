@@ -59,6 +59,7 @@ export const baseApi = createApi({
               itemsPerPage: getDecksQuery?.itemsPerPage,
               maxCardsCount: getDecksQuery?.maxCardsCount,
               minCardsCount: getDecksQuery?.minCardsCount,
+              name: getDecksQuery?.name,
             },
             url: 'v1/decks',
           }

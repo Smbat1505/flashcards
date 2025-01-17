@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from 'react'
+
 import { TrashOutline } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
@@ -9,27 +11,31 @@ import s from './filter.module.scss'
 
 export type FilterPropsType = {
   defaultSliderValue: number[]
+  onClearFilter: () => void
+  onInputSearchChange: (event: ChangeEvent<HTMLInputElement>) => void
   onSliderChange: (values: number[]) => void
   onTabSwitcherChange: (value: string) => void
 }
 
 export const Filter = (props: FilterPropsType) => {
-  const onSliderChangeHandler = (values: number[]) => {
-    props.onSliderChange(values)
-  }
+  const [inputValue, setInputValue] = useState<string | undefined>()
+  const onClearFilterHandler = () => {
+    props.onClearFilter()
+    const newInputValue = undefined
 
-  const clearFilterHandler = () => {
-    console.log('clear filter')
+    setInputValue(newInputValue)
+    console.log(inputValue)
   }
-
-  // const onTabSwitcherChangeHandler = (value: string) => {
-  //   console.log(value)
-  // }
 
   return (
     <div className={s.filterWrapper}>
       <div>
-        <TextField placeholder={'Input search'} type={'search'} />
+        <TextField
+          onChange={props.onInputSearchChange}
+          placeholder={'Input search'}
+          type={'search'}
+          value={inputValue}
+        />
       </div>
       <div>
         <TabSwitcher
@@ -56,11 +62,11 @@ export const Filter = (props: FilterPropsType) => {
           defaultValue={props.defaultSliderValue}
           maxValue={15}
           minValue={0}
-          onChange={onSliderChangeHandler}
+          onChange={props.onSliderChange}
         />
       </div>
       <div>
-        <Button onClick={clearFilterHandler} variant={'secondary'}>
+        <Button onClick={onClearFilterHandler} variant={'secondary'}>
           <TrashOutline width={'1rem'} />
           Clear filter
         </Button>

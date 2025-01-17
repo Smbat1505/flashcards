@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
@@ -29,6 +29,14 @@ export const Decks = () => {
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
   const [cardsPage, setCardsPage] = useState<string>()
   const [tabSwitcherValue, setTabSwitcherValue] = useState<string>()
+  const [searchDeckName, setSearchDeckName] = useState<string>()
+
+  const onClearFilterHandler = () => {
+    console.log('clear filter')
+    setSearchDeckName(undefined)
+    setSliderValues([2, 10])
+    setTabSwitcherValue(undefined)
+  }
 
   const meResponse = useAuthMeQuery()
 
@@ -46,6 +54,7 @@ export const Decks = () => {
     itemsPerPage,
     maxCardsCount: sliderValues[1],
     minCardsCount: sliderValues[0],
+    name: searchDeckName,
   }
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
@@ -91,6 +100,11 @@ export const Decks = () => {
     setCurrentPage(undefined)
   }
 
+  const onInputSearchChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.currentTarget.value)
+    setSearchDeckName(event.currentTarget.value)
+  }
+
   return (
     <>
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
@@ -101,6 +115,8 @@ export const Decks = () => {
         </div>
         <Filter
           defaultSliderValue={sliderValues}
+          onClearFilter={onClearFilterHandler}
+          onInputSearchChange={onInputSearchChangeHandler}
           onSliderChange={onSliderChangeHandler}
           onTabSwitcherChange={onTabSwitcherChangeHandler}
         />
