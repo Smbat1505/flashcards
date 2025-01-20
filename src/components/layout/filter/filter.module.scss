@@ -1,6 +1,7 @@
 .filterWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  //align-items: flex-end;
   padding-bottom: 36px;
 }

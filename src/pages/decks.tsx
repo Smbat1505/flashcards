@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
@@ -100,9 +100,9 @@ export const Decks = () => {
     setCurrentPage(undefined)
   }
 
-  const onInputSearchChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.currentTarget.value)
-    setSearchDeckName(event.currentTarget.value)
+  const onInputSearchChangeHandler = (value: string) => {
+    console.log(value)
+    setSearchDeckName(value)
   }
 
   return (
