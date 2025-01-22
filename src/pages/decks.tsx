@@ -29,11 +29,11 @@ export const Decks = () => {
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
   const [cardsPage, setCardsPage] = useState<string>()
   const [tabSwitcherValue, setTabSwitcherValue] = useState<string>()
-  const [searchDeckName, setSearchDeckName] = useState<string>()
+  const [searchInputValue, setSearchInputValue] = useState<string>()
 
   const onClearFilterHandler = () => {
     console.log('clear filter')
-    setSearchDeckName(undefined)
+    setSearchInputValue('')
     setSliderValues([2, 10])
     setTabSwitcherValue(undefined)
   }
@@ -54,7 +54,7 @@ export const Decks = () => {
     itemsPerPage,
     maxCardsCount: sliderValues[1],
     minCardsCount: sliderValues[0],
-    name: searchDeckName,
+    name: searchInputValue,
   }
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
 
@@ -102,7 +102,7 @@ export const Decks = () => {
 
   const onInputSearchChangeHandler = (value: string) => {
     console.log(value)
-    setSearchDeckName(value)
+    setSearchInputValue(value)
   }
 
   return (
@@ -114,11 +114,12 @@ export const Decks = () => {
           <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
         </div>
         <Filter
-          defaultSliderValue={sliderValues}
+          inputValue={searchInputValue}
           onClearFilter={onClearFilterHandler}
           onInputSearchChange={onInputSearchChangeHandler}
           onSliderChange={onSliderChangeHandler}
           onTabSwitcherChange={onTabSwitcherChangeHandler}
+          sliderValues={sliderValues}
         />
       </div>
       <Table>

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { TrashOutline } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
@@ -10,37 +8,24 @@ import { Typography } from '@/components/ui/typography'
 import s from './filter.module.scss'
 
 export type FilterPropsType = {
-  defaultSliderValue: number[]
+  inputValue: string | undefined
   onClearFilter: () => void
   onInputSearchChange: (value: string) => void
   onSliderChange: (values: number[]) => void
   onTabSwitcherChange: (value: string) => void
+  sliderValues: number[]
 }
 
 export const Filter = (props: FilterPropsType) => {
-  const [inputValue, setInputValue] = useState<string>()
-
-  const onClearFilterHandler = () => {
-    props.onClearFilter()
-    setInputValue('')
-  }
-
-  console.log(inputValue)
-
-  const onInputSearchChangeHandler = (value: string) => {
-    props.onInputSearchChange(value)
-    setInputValue(value)
-  }
-
   return (
     <div className={s.filterWrapper}>
       <div>
         <TextField
-          handleValueChange={onInputSearchChangeHandler}
-          onClear={onClearFilterHandler}
+          handleValueChange={props.onInputSearchChange}
+          onClear={props.onClearFilter}
           placeholder={'Input search'}
           type={'search'}
-          value={inputValue}
+          value={props.inputValue}
         />
       </div>
       <div>
@@ -66,14 +51,14 @@ export const Filter = (props: FilterPropsType) => {
         <div>
           <Typography variant={'body2'}>Number of cards</Typography>
           <Slider
-            defaultValue={props.defaultSliderValue}
             maxValue={15}
             minValue={0}
             onChange={props.onSliderChange}
+            sliderValues={props.sliderValues}
           />
         </div>
         <div>
-          <Button onClick={onClearFilterHandler} variant={'secondary'}>
+          <Button onClick={props.onClearFilter} variant={'secondary'}>
             <TrashOutline width={'1rem'} />
             Clear filter
           </Button>
