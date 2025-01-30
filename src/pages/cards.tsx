@@ -30,7 +30,7 @@ export const Cards = () => {
       <TableBody>
         {data
           ? data.items.map(item => (
-              <TableRow>
+              <TableRow key={item.id}>
                 <TableCell key={item.id}>{item.question}</TableCell>
                 <TableCell>{item.answer}</TableCell>
                 <TableCell>{item.updated}</TableCell>

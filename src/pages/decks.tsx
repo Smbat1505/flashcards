@@ -28,14 +28,14 @@ export const Decks = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
   const [cardsPage, setCardsPage] = useState<string>()
-  const [tabSwitcherValue, setTabSwitcherValue] = useState<string>()
+  const [tabSwitcherValue, setTabSwitcherValue] = useState<string>('allCards')
   const [searchInputValue, setSearchInputValue] = useState<string>()
 
   const onClearFilterHandler = () => {
     console.log('clear filter')
     setSearchInputValue('')
     setSliderValues([2, 10])
-    setTabSwitcherValue(undefined)
+    setTabSwitcherValue('allCards')
   }
 
   const meResponse = useAuthMeQuery()
@@ -97,7 +97,7 @@ export const Decks = () => {
   const onTabSwitcherChangeHandler = (value: string) => {
     console.log(value)
     setTabSwitcherValue(value)
-    setCurrentPage(undefined)
+    setCurrentPage(1)
   }
 
   const onInputSearchChangeHandler = (value: string) => {
@@ -120,85 +120,79 @@ export const Decks = () => {
           onSliderChange={onSliderChangeHandler}
           onTabSwitcherChange={onTabSwitcherChangeHandler}
           sliderValues={sliderValues}
+          tabSwitcherValue={tabSwitcherValue}
+        />
+
+        <Table width={'100%'}>
+          <TableHead>
+            <TableRow>
+              <TableHeader align={'left'}>Name</TableHeader>
+              <TableHeader align={'left'}>Cards</TableHeader>
+              <TableHeader align={'left'}>Last Updated</TableHeader>
+              <TableHeader align={'left'}>Created by</TableHeader>
+              <TableHeader></TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data ? (
+              data.items.map(item => {
+                return (
+                  <TableRow key={item.id}>
+                    <TableCell>
+                      <div style={{ alignItems: 'center', display: 'flex' }}>
+                        {item.cover ? (
+                          <img
+                            alt={item.name}
+                            onClick={() => onDeckClickHandler(item.id)}
+                            src={item.cover}
+                            style={{ cursor: 'pointer', marginRight: '10px' }}
+                            width={'118px'}
+                          />
+                        ) : (
+                          ''
+                        )}
+                        {item.name}
+                      </div>
+                    </TableCell>
+                    <TableCell>{item.cardsCount}</TableCell>
+                    <TableCell>
+                      {new Date(Date.parse(item.updated)).toLocaleDateString('ru-RU')}
+                    </TableCell>
+                    <TableCell>{item.author.name}</TableCell>
+                    <TableCell className={s.iconsCell}>
+                      <div className={s.iconsDiv}>
+                        <SvgWrapper
+                          SvgComponent={PlayCircleOutline}
+                          onClick={() => onDeckClickHandler(item.id)}
+                          size={'16'}
+                          wrapper={'button'}
+                        />
+                        <SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />
+                        <SvgWrapper
+                          SvgComponent={TrashOutline}
+                          onClick={() => deleteDeck(item.id)}
+                          size={'16'}
+                          wrapper={'button'}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )
+              })
+            ) : (
+              <TableRow>
+                <TableCell></TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <Pagination
+          onPageChange={onCurrentPageButtonClickHandler}
+          onPerPageChange={onItemsPerPageClickHandler}
+          perPageOptions={['10', '20', '30', '50', '100']}
+          totalPages={data ? data.pagination.totalPages : 1}
         />
       </div>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeader align={'left'}>Name</TableHeader>
-            <TableHeader align={'left'}>Cards</TableHeader>
-            <TableHeader align={'left'}>Last Updated</TableHeader>
-            <TableHeader align={'left'}>Created by</TableHeader>
-            <TableHeader></TableHeader>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data ? (
-            data.items.map(item => {
-              return (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <div style={{ alignItems: 'center', display: 'flex' }}>
-                      {item.cover ? (
-                        <img
-                          alt={item.name}
-                          onClick={() => onDeckClickHandler(item.id)}
-                          src={item.cover}
-                          style={{ marginRight: '10px' }}
-                          width={'118px'}
-                        />
-                      ) : (
-                        ''
-                      )}
-                      {item.name}
-                    </div>
-                  </TableCell>
-                  <TableCell>{item.cardsCount}</TableCell>
-                  <TableCell>
-                    {new Date(Date.parse(item.updated)).toLocaleDateString('ru-RU')}
-                  </TableCell>
-                  <TableCell>{item.author.name}</TableCell>
-                  <TableCell>
-                    <div
-                      style={{ display: 'flex', justifyContent: 'space-between', width: '68px' }}
-                    >
-                      <SvgWrapper
-                        SvgComponent={PlayCircleOutline}
-                        // color={'white'}
-                        size={'16'}
-                        wrapper={'button'}
-                      />
-                      <SvgWrapper
-                        SvgComponent={Edit2Outline}
-                        // color={'white'}
-                        size={'16'}
-                        wrapper={'button'}
-                      />
-                      <SvgWrapper
-                        SvgComponent={TrashOutline}
-                        color={'white'}
-                        onClick={() => deleteDeck(item.id)}
-                        size={'16'}
-                        wrapper={'button'}
-                      />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )
-            })
-          ) : (
-            <TableRow>
-              <TableCell></TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <Pagination
-        onPageChange={onCurrentPageButtonClickHandler}
-        onPerPageChange={onItemsPerPageClickHandler}
-        perPageOptions={['10', '20', '30', '50', '100']}
-        totalPages={data ? data.pagination.totalPages : 1}
-      />
       {cardsPage && <Navigate state={cardsPage} to={'./cards'} />}
     </>
   )

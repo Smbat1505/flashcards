@@ -28,26 +28,12 @@ type TabSwitcherProps = {
 }
 
 export const TabSwitcher = (props: TabSwitcherProps) => {
-  const {
-    changeHandler,
-    children,
-    className,
-    defaultValue,
-    tabs,
-    tabsListClassName,
-    title,
-    value,
-  } = props
+  const { changeHandler, children, className, tabs, tabsListClassName, title, value } = props
 
   return (
-    <Tabs.Root
-      className={clsx(s.tabsRoot, className)}
-      defaultValue={defaultValue}
-      onValueChange={changeHandler}
-      value={value}
-    >
+    <Tabs.Root className={clsx(s.tabsRoot, className)} onValueChange={changeHandler} value={value}>
       {title && (
-        <Typography as={'h2'} className={s.title} variant={'subtitle2'}>
+        <Typography className={s.title} variant={'body2'}>
           {title}
         </Typography>
       )}

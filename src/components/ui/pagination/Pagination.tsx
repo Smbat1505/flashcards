@@ -17,6 +17,10 @@ type PaginationPropsType = {
 export const Pagination = ({ perPageOptions, totalPages, ...props }: PaginationPropsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1)
 
+  if (totalPages === 0) {
+    totalPages = 1
+  }
+
   const pagesArray: Array<any> = []
 
   if (totalPages < 8) {

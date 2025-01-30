@@ -14,6 +14,7 @@ export type FilterPropsType = {
   onSliderChange: (values: number[]) => void
   onTabSwitcherChange: (value: string) => void
   sliderValues: number[]
+  tabSwitcherValue: string
 }
 
 export const Filter = (props: FilterPropsType) => {
@@ -29,40 +30,40 @@ export const Filter = (props: FilterPropsType) => {
         />
       </div>
       <div>
-        <div>
-          <TabSwitcher
-            changeHandler={props.onTabSwitcherChange}
-            defaultValue={'allCards'}
-            tabs={[
-              {
-                disabled: false,
-                name: 'My Cards',
-                value: 'myCards',
-              },
-              {
-                disabled: false,
-                name: 'All Cards',
-                value: 'allCards',
-              },
-            ]}
-            title={'Show decks cards'}
-          />
-        </div>
-        <div>
-          <Typography variant={'body2'}>Number of cards</Typography>
-          <Slider
-            maxValue={15}
-            minValue={0}
-            onChange={props.onSliderChange}
-            sliderValues={props.sliderValues}
-          />
-        </div>
-        <div>
-          <Button onClick={props.onClearFilter} variant={'secondary'}>
-            <TrashOutline width={'1rem'} />
-            Clear filter
-          </Button>
-        </div>
+        <TabSwitcher
+          changeHandler={props.onTabSwitcherChange}
+          tabs={[
+            {
+              disabled: false,
+              name: 'My Cards',
+              value: 'myCards',
+            },
+            {
+              disabled: false,
+              name: 'All Cards',
+              value: 'allCards',
+            },
+          ]}
+          title={'Show decks cards'}
+          value={props.tabSwitcherValue}
+        />
+      </div>
+      <div>
+        <Typography className={s.title} variant={'body2'}>
+          Number of cards
+        </Typography>
+        <Slider
+          maxValue={15}
+          minValue={0}
+          onChange={props.onSliderChange}
+          sliderValues={props.sliderValues}
+        />
+      </div>
+      <div>
+        <Button onClick={props.onClearFilter} variant={'secondary'}>
+          <TrashOutline width={'1rem'} />
+          Clear filter
+        </Button>
       </div>
     </div>
   )
