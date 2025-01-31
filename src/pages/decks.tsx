@@ -6,6 +6,7 @@ import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Filter } from '@/components/layout/filter/filter'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
+import { Rating } from '@/components/ui/rating'
 import {
   Table,
   TableBody,
@@ -192,6 +193,7 @@ export const Decks = () => {
           perPageOptions={['10', '20', '30', '50', '100']}
           totalPages={data ? data.pagination.totalPages : 1}
         />
+        <Rating value={3} />
       </div>
       {cardsPage && <Navigate state={cardsPage} to={'./cards'} />}
     </>
