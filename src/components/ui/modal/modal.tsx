@@ -1,4 +1,5 @@
 import { ComponentProps, ComponentRef, ReactNode, forwardRef, useState } from 'react'
+import { UseFormReset } from 'react-hook-form'
 
 import CloseCrossOutline from '@/assets/icons/components/Close'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -7,7 +8,6 @@ import { clsx } from 'clsx'
 import s from './modal.module.scss'
 
 import { Typography } from '../typography'
-import { UseFormReset } from "react-hook-form";
 
 type ModalProps = {
   closeHandler?: (isOpen: boolean) => void
@@ -16,13 +16,13 @@ type ModalProps = {
     buttonPrimary: ReactNode
     buttonSecondary: ReactNode
   }
+  isValid?: boolean
   onSubmit?: () => void
   overlayClassName?: string
+  reset?: UseFormReset<{ isPrivate: boolean; name: string }>
   title?: string
   trigger: ReactNode
   withCloseBtn?: boolean
-  reset?: UseFormReset<{ name: string, isPrivate: boolean}>
-  isValid?: boolean
 } & ComponentProps<'div'>
 
 export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) => {
@@ -31,14 +31,13 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     className,
     contentContainerClassName,
     footer,
+    isValid,
     onSubmit,
     overlayClassName,
+    reset,
     title,
     trigger,
     withCloseBtn = true,
-    reset,
-    isValid
-
   } = props
 
   const classNames = {
@@ -73,22 +72,20 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
             )}
           </header>
           <form
-            onSubmit={(event) => {
+            onSubmit={event => {
               if (onSubmit) {
                 {
-                  onSubmit();
+                  onSubmit()
                   if (isValid) {
-                    setOpen(false);
+                    setOpen(false)
                     if (reset) {
-                      reset();
+                      reset()
                     }
                   }
                 }
               }
-              event.preventDefault();
-            }
-
-            }
+              event.preventDefault()
+            }}
           >
             <div className={classNames.contentWrapper}>{children}</div>
             <div className={s.footerWrapper}>

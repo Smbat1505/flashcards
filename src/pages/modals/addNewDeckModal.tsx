@@ -1,5 +1,7 @@
+import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { Image } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
@@ -29,6 +31,12 @@ export const AddNewDeckModal = ({
 
   console.log('errors: ', errors)
 
+  const [cover, setCover] = useState<File | null>(null)
+
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCover(e.currentTarget.files?.[0] ?? null)
+  }
+
   const addNewDeckFooterButtons = {
     buttonPrimary: (
       <Button type={'submit'} variant={'primary'}>
@@ -55,6 +63,12 @@ export const AddNewDeckModal = ({
           name={'name'}
         />
       </div>
+      <div>
+        <input id={'addDeckCoverInput'} onChange={onFileChange} type={'file'} />
+      </div>
+      <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
+        <Image width={'1rem'} /> Upload Image
+      </Button>
       <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
     </Modal>
   )
