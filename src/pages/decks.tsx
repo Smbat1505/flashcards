@@ -17,9 +17,8 @@ import {
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
 import { AddNewDeckModal } from '@/pages/modals/addNewDeckModal'
-import { addNewDeckFormValues } from '@/pages/modals/addNewDecksModal-schema'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
-import { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery } from '@/services/base-api'
+import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
 
 import s from './decks.module.scss'
@@ -28,7 +27,7 @@ export const Decks = () => {
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
-  const [cardsPage, setCardsPage] = useState<string>()
+  const [cardsPage, setCardsPage] = useState<string[]>()
   const [tabSwitcherValue, setTabSwitcherValue] = useState<string>('allCards')
   const [searchInputValue, setSearchInputValue] = useState<string>()
 
@@ -58,9 +57,6 @@ export const Decks = () => {
     name: searchInputValue,
   }
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
-
-  const [createDeck] = useCreateDeckMutation()
-
   const [deleteDeck] = useDeleteDeckMutation()
 
   console.log(meResponse)
@@ -73,22 +69,13 @@ export const Decks = () => {
     setItemsPerPage(Number(itemsPerPage))
   }
 
-  const onAddDeckSubmitHandler = async (data: addNewDeckFormValues) => {
-    try {
-      console.log(data)
-      await createDeck(data).then(() => console.log('new deck ' + data.name + ' created'))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   if (isLoading) {
     return <div>Loading...</div>
   }
 
-  const onDeckClickHandler = (id: string) => {
-    console.log(id)
-    setCardsPage(id)
+  const onDeckClickHandler = (id: string, name: string) => {
+    console.log(id, name)
+    setCardsPage([id, name])
   }
 
   const onSliderChangeHandler = (values: number[]) => {
@@ -112,7 +99,7 @@ export const Decks = () => {
       <div className={s.container}>
         <div className={s.pageHeadingWrapper}>
           <Typography variant={'h1'}>Decks list</Typography>
-          <AddNewDeckModal onSubmit={onAddDeckSubmitHandler} />
+          <AddNewDeckModal />
         </div>
         <Filter
           inputValue={searchInputValue}
@@ -144,7 +131,7 @@ export const Decks = () => {
                         {item.cover ? (
                           <img
                             alt={item.name}
-                            onClick={() => onDeckClickHandler(item.id)}
+                            onClick={() => onDeckClickHandler(item.id, item.name)}
                             src={item.cover}
                             style={{ cursor: 'pointer', marginRight: '10px' }}
                             width={'118px'}
@@ -164,7 +151,7 @@ export const Decks = () => {
                       <div className={s.iconsDiv}>
                         <SvgWrapper
                           SvgComponent={PlayCircleOutline}
-                          onClick={() => onDeckClickHandler(item.id)}
+                          onClick={() => onDeckClickHandler(item.id, item.name)}
                           size={'16'}
                           wrapper={'button'}
                         />

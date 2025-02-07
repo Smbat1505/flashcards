@@ -1,4 +1,4 @@
-import { ComponentProps, ComponentRef, ReactNode, forwardRef, useState } from 'react'
+import { ComponentProps, ComponentRef, ReactNode, forwardRef } from 'react'
 import { UseFormReset } from 'react-hook-form'
 
 import CloseCrossOutline from '@/assets/icons/components/Close'
@@ -17,7 +17,9 @@ type ModalProps = {
     buttonSecondary: ReactNode
   }
   isValid?: boolean
+  onOpenChange: (open: boolean) => void
   onSubmit?: () => void
+  open: boolean
   overlayClassName?: string
   reset?: UseFormReset<{ isPrivate: boolean; name: string }>
   title?: string
@@ -30,11 +32,9 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     children,
     className,
     contentContainerClassName,
-    footer,
-    isValid,
-    onSubmit,
+    onOpenChange,
+    open,
     overlayClassName,
-    reset,
     title,
     trigger,
     withCloseBtn = true,
@@ -49,10 +49,8 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     iconButton: s.iconButton,
   }
 
-  const [open, setOpen] = useState(false)
-
   return (
-    <Dialog.Root onOpenChange={setOpen} open={open}>
+    <Dialog.Root onOpenChange={onOpenChange} open={open}>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={classNames.dialogOverlay} />
@@ -71,30 +69,7 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
               </Dialog.Close>
             )}
           </header>
-          <form
-            onSubmit={event => {
-              if (onSubmit) {
-                {
-                  onSubmit()
-                  if (isValid) {
-                    setOpen(false)
-                    if (reset) {
-                      reset()
-                    }
-                  }
-                }
-              }
-              event.preventDefault()
-            }}
-          >
-            <div className={classNames.contentWrapper}>{children}</div>
-            <div className={s.footerWrapper}>
-              <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
-                <div>{footer?.buttonSecondary}</div>
-              </Dialog.Close>
-              <div>{footer?.buttonPrimary}</div>
-            </div>
-          </form>
+          <div className={classNames.contentWrapper}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

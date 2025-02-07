@@ -36,7 +36,7 @@ export type GetDecksQuery = {
   orderBy?: string
 }
 export type CreateDeck = {
-  cover?: string
+  cover?: File | null
   isPrivate?: boolean
   name: string
 }

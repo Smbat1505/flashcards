@@ -20,8 +20,16 @@ export const baseApi = createApi({
       createDeck: builder.mutation<void, CreateDeck>({
         invalidatesTags: ['Decks'],
         query: arg => {
+          const formData = new FormData()
+
+          if (arg.cover) {
+            formData.append('cover', arg.cover)
+          }
+          formData.append('name', arg.name)
+          formData.append('isPrivate', String(arg.isPrivate))
+
           return {
-            body: arg,
+            body: formData,
             method: 'POST',
             url: 'v1/decks',
           }
