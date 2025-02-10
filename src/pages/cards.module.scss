@@ -1,3 +1,27 @@
+.container {
+  padding: 0px 136px;
+}
+
+.backArrowDivWrapper {
+  display: inline-flex;
+  flex-direction: row;
+  margin: 24px 0 33px 0;
+}
+
+.backLinkTxt {
+  text-decoration: none;
+}
+
+.arrowSpan {
+  margin-right: 6px;
+  margin-top: 16px;
+}
+
+.backLinkTxt1 {
+  display: inline-block;
+}
+
+
 .iconsCell {
   text-align: -webkit-right;
 }

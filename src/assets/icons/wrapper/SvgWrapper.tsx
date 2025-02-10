@@ -56,7 +56,7 @@ export function SvgWrapper<T extends ElementType>(props: SvgWrapperProps<T>): Re
 
   // Determines the override styles for the wrapper element based on its type.
   const overrideStyles: CSSProperties = {
-    display: isSpanWrapper ? 'flex' : undefined,
+    display: isSpanWrapper ? 'inline-flex' : undefined,
     ...(isButtonWrapper ? { background: 'initial', border: 'initial', cursor: 'pointer' } : style),
   }
 
