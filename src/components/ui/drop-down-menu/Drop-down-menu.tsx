@@ -9,7 +9,7 @@ import s from './drop-down-menu.module.scss'
 export type userBarProps = {
   avatar: string
   email: string
-  id: number
+  id: string
   userName: string
 }
 
@@ -44,7 +44,7 @@ export const DropDownMenu = (props: DropDownMenuProps) => {
           {trigger ? (
             trigger
           ) : (
-            <SvgWrapper SvgComponent={MoreVerticalOutline} size={'2rem'} wrapper={'button'} />
+            <SvgWrapper SvgComponent={MoreVerticalOutline} size={'26px'} wrapper={'button'} />
           )}
         </button>
       </DropdownMenu.Trigger>

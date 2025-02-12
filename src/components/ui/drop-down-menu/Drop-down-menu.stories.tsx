@@ -36,7 +36,7 @@ const userOptions: dropDownMenuList[] = [
 const userBarInfo: userBarProps = {
   avatar: ivan,
   email: 'j&johnson@gmail.com',
-  id: 1,
+  id: '1',
   userName: 'Ivan',
 }
 

@@ -10,7 +10,7 @@ export type GetDecksResponseItemsAuthor = {
 export type GetDecksResponseItems = {
   author: GetDecksResponseItemsAuthor
   cardsCount: number
-  cover?: null | string
+  cover: null | string
   created: string
   id: string
   isFavorite: boolean
@@ -64,7 +64,7 @@ export type GetDeckCardsQuery = {
   currentPage?: number
   id: string
   itemsPerPage?: number
-  orderBy?: string
+  orderBy?: null | string
   question?: string
 }
 export type GetDeckCardsResponse = {

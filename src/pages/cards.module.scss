@@ -2,25 +2,42 @@
   padding: 0px 136px;
 }
 
-.backArrowDivWrapper {
-  display: inline-flex;
-  flex-direction: row;
-  margin: 24px 0 33px 0;
+.backLinkTxtWrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 24px;
 }
 
 .backLinkTxt {
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .arrowSpan {
   margin-right: 6px;
-  margin-top: 16px;
+  margin-bottom: 4px;
 }
 
-.backLinkTxt1 {
-  display: inline-block;
+.pageHeadingWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 36px 0px 15px 0px;
 }
 
+.titleWithMenuWrapper {
+  display: flex;
+  gap: 6px;
+}
+
+.menuIconWrapper {
+  padding-top: 5px;
+}
+
+.searchInputWrapper {
+  padding: 25px 0;
+}
 
 .iconsCell {
   text-align: -webkit-right;

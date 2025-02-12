@@ -50,7 +50,7 @@ export const baseApi = createApi({
               answer: getDeckCardsQuery.answer,
               currentPage: getDeckCardsQuery?.currentPage,
               itemsPerPage: getDeckCardsQuery?.itemsPerPage,
-              orderBy: getDeckCardsQuery?.currentPage,
+              orderBy: getDeckCardsQuery?.orderBy,
               question: getDeckCardsQuery?.question,
             },
             url: `v1/decks/${getDeckCardsQuery.id}/cards`,

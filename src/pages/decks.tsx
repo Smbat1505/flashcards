@@ -6,7 +6,6 @@ import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Filter } from '@/components/layout/filter/filter'
 import { Header } from '@/components/ui/header'
 import { Pagination } from '@/components/ui/pagination'
-import { Rating } from '@/components/ui/rating'
 import {
   Table,
   TableBody,
@@ -23,11 +22,17 @@ import { GetDecksQuery } from '@/services/flashcards.types'
 
 import s from './decks.module.scss'
 
+type cardsPageDataType = {
+  cover: null | string
+  id: string
+  name: string
+}
+
 export const Decks = () => {
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
-  const [cardsPage, setCardsPage] = useState<string[]>()
+  const [cardsPageData, setCardsPageData] = useState<cardsPageDataType>()
   const [tabSwitcherValue, setTabSwitcherValue] = useState<string>('allCards')
   const [searchInputValue, setSearchInputValue] = useState<string>()
 
@@ -73,9 +78,9 @@ export const Decks = () => {
     return <div>Loading...</div>
   }
 
-  const onDeckClickHandler = (id: string, name: string) => {
-    console.log(id, name)
-    setCardsPage([id, name])
+  const onDeckClickHandler = (id: string, name: string, cover: null | string) => {
+    console.log(id, name, cover)
+    setCardsPageData({ cover, id, name })
   }
 
   const onSliderChangeHandler = (values: number[]) => {
@@ -98,7 +103,9 @@ export const Decks = () => {
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <div className={s.container}>
         <div className={s.pageHeadingWrapper}>
-          <Typography variant={'h1'}>Decks list</Typography>
+          <Typography as={'h1'} variant={'h1'}>
+            Decks list
+          </Typography>
           <AddNewDeckModal />
         </div>
         <Filter
@@ -131,7 +138,7 @@ export const Decks = () => {
                         {item.cover ? (
                           <img
                             alt={item.name}
-                            onClick={() => onDeckClickHandler(item.id, item.name)}
+                            onClick={() => onDeckClickHandler(item.id, item.name, item.cover)}
                             src={item.cover}
                             style={{ cursor: 'pointer', marginRight: '10px' }}
                             width={'118px'}
@@ -151,7 +158,7 @@ export const Decks = () => {
                       <div className={s.iconsDiv}>
                         <SvgWrapper
                           SvgComponent={PlayCircleOutline}
-                          onClick={() => onDeckClickHandler(item.id, item.name)}
+                          onClick={() => onDeckClickHandler(item.id, item.name, item.cover)}
                           size={'16'}
                           wrapper={'button'}
                         />
@@ -180,9 +187,8 @@ export const Decks = () => {
           perPageOptions={['10', '20', '30', '50', '100']}
           totalPages={data ? data.pagination.totalPages : 1}
         />
-        <Rating value={3} />
       </div>
-      {cardsPage && <Navigate state={cardsPage} to={'./cards'} />}
+      {cardsPageData && <Navigate state={cardsPageData} to={'./cards'} />}
     </>
   )
 }
