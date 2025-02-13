@@ -3,113 +3,94 @@ import { useForm } from 'react-hook-form'
 
 import { Image } from '@/assets/icons/components'
 import { Button } from '@/components/ui/button'
-import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
 import { Modal } from '@/components/ui/modal'
-import { addNewDeckFormValues, addNewDeckSchema } from '@/pages/modals/addNewDecksModal-schema'
+import { Typography } from '@/components/ui/typography'
+import { addNewCardFormValues, addNewCardSchema } from '@/pages/modals/addNewCardModal-schema'
 import { useCreateDeckMutation } from '@/services/base-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from '@/components/auth/forms/login-form/login-form.module.scss'
+import s from './addNewCardModal.module.scss'
 
-export const AddNewDeckModal = () => {
+export const AddNewCardModal = () => {
   const {
     control,
     formState: { errors, isValid },
     handleSubmit,
     reset,
-  } = useForm<addNewDeckFormValues>({
+  } = useForm<addNewCardFormValues>({
     defaultValues: {
-      isPrivate: true,
-      name: '',
+      answer: '',
+      question: '',
     },
-    resolver: zodResolver(addNewDeckSchema),
+    resolver: zodResolver(addNewCardSchema),
   })
 
   console.log('errors: ', errors)
 
-  const [createDeck] = useCreateDeckMutation()
+  // const [createDeck] = useCreateDeckMutation()
 
   const [cover, setCover] = useState<File | null>(null)
 
-  let coverFile
-
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setCover(e.target.files?.[0])
-    }
-
-    // coverFile = window.URL.createObjectURL(
-    //     new Blob([e.target.files.?[0]], {
-    //       type: 'image/png',
-    //     })
-    //   )
+    setCover(e.target.files?.[0] ?? null)
+    console.log(cover)
   }
 
-  // console.log(coverFile)
-
-  console.log(cover)
-  const onSubmit = async (data: addNewDeckFormValues) => {
+  const onSubmit = async (data: addNewCardFormValues) => {
     console.log(data)
     const dataWithCover = { ...data, cover }
 
     console.log(dataWithCover)
 
-    if (isValid) {
-      try {
-        await createDeck(dataWithCover).then(() =>
-          console.log('new deck ' + data.name + ' created')
-        )
-      } catch (e) {
-        console.log(e)
-      }
-      setOpen(false)
-      reset()
-    }
+    //   if (isValid) {
+    //     try {
+    //       await createDeck(dataWithCover).then(() =>
+    //         console.log('new deck ' + data.name + ' created')
+    //       )
+    //     } catch (e) {
+    //       console.log(e)
+    //     }
+    //     setOpen(false)
+    //     reset()
+    //   }
   }
 
   const [open, setOpen] = useState(false)
-
-  const renderAttachedFilePreview = () => {
-    return (
-      <div>
-        <img src={URL.createObjectURL(cover)} />
-        {cover?.name}
-      </div>
-    )
-  }
 
   return (
     <Modal
       isValid={isValid}
       onOpenChange={setOpen}
       open={open}
-      reset={reset}
-      title={'Add New Deck'}
-      trigger={<Button variant={'primary'}>Add New Deck</Button>}
+      // reset={reset}
+      title={'Add New Card'}
+      trigger={<Button variant={'primary'}>Add New Card</Button>}
     >
       <form onSubmit={event => event.preventDefault()}>
+        <Typography className={s.question} variant={'subtitle2'}>
+          Question:
+        </Typography>
         <div className={s.emailField}>
           <ControlledTextField
             control={control}
             defaultValue={''}
-            labelText={'Name Pack'}
-            name={'name'}
+            labelText={'Question?'}
+            name={'question'}
+            placeholder={'Name'}
           />
         </div>
         <div>
           <input
-            id={'addDeckCoverInput'}
+            id={'addCardQuestionImage'}
             onChange={onFileChange}
             style={{ display: 'none' }}
             type={'file'}
           />
         </div>
-        <div>{cover && renderAttachedFilePreview()}</div>
-        <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
+        <Button as={'label'} fullWidth htmlFor={'addCardQuestionImage'} variant={'secondary'}>
           <Image width={'1rem'} /> Upload Image
         </Button>
-        <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
         <div className={s.footerWrapper}>
           <div>
             <Button onClick={() => setOpen(false)} variant={'secondary'}>

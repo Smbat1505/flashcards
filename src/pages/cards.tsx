@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/tables/table-components'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import { AddNewDeckModal } from '@/pages/modals/addNewDeckModal'
+import { AddNewCardModal } from '@/pages/modals/addNewCardModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useGetDeckCardsQuery } from '@/services/base-api'
 
@@ -92,7 +92,7 @@ export const Cards = () => {
               </DropDownMenu>
             </div>
           </div>
-          <AddNewDeckModal />
+          <AddNewCardModal />
         </div>
         {location.state.cover ? (
           <img alt={location.state.name} src={location.state.cover} width={'170px'} />
