@@ -71,15 +71,14 @@ export const AddNewCardModal = () => {
         <Typography className={s.question} variant={'subtitle2'}>
           Question:
         </Typography>
-        <div className={s.emailField}>
-          <ControlledTextField
-            control={control}
-            defaultValue={''}
-            labelText={'Question?'}
-            name={'question'}
-            placeholder={'Name'}
-          />
-        </div>
+        <ControlledTextField
+          control={control}
+          defaultValue={''}
+          labelText={'Question?'}
+          name={'question'}
+          placeholder={'Name'}
+          wrapperProps={{ className: s.txtFieldWrapper }}
+        />
         <div>
           <input
             id={'addCardQuestionImage'}

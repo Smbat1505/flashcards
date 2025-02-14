@@ -12,6 +12,7 @@ export const ControlledTextField = <T extends FieldValues>({
   name,
   rules,
   shouldUnregister,
+  wrapperProps,
   ...rest
 }: Props<T>) => {
   const {
@@ -30,6 +31,7 @@ export const ControlledTextField = <T extends FieldValues>({
     <TextField
       {...rest}
       handleValueChange={onChange}
+      wrapperProps={wrapperProps}
       {...field}
       defaultValue={defaultValue}
       labelText={labelText}

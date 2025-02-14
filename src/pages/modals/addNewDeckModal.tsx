@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image } from '@/assets/icons/components'
+import CloseCrossOutline from '@/assets/icons/components/Close'
 import { Button } from '@/components/ui/button'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
@@ -10,7 +11,7 @@ import { addNewDeckFormValues, addNewDeckSchema } from '@/pages/modals/addNewDec
 import { useCreateDeckMutation } from '@/services/base-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from '@/components/auth/forms/login-form/login-form.module.scss'
+import s from './addNewDeckModal.module.scss'
 
 export const AddNewDeckModal = () => {
   const {
@@ -30,25 +31,25 @@ export const AddNewDeckModal = () => {
 
   const [createDeck] = useCreateDeckMutation()
 
-  const [cover, setCover] = useState<File | null>(null)
+  const [cover, setCover] = useState<File>()
+  const [open, setOpen] = useState(false)
 
-  let coverFile
+  let coverURL: string = ''
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       setCover(e.target.files?.[0])
     }
-
-    // coverFile = window.URL.createObjectURL(
-    //     new Blob([e.target.files.?[0]], {
-    //       type: 'image/png',
-    //     })
-    //   )
   }
 
-  // console.log(coverFile)
+  if (cover) {
+    coverURL = URL.createObjectURL(cover)
+  }
 
-  console.log(cover)
+  console.log('cover: ', cover)
+
+  console.log('coverURL: ', coverURL)
+
   const onSubmit = async (data: addNewDeckFormValues) => {
     console.log(data)
     const dataWithCover = { ...data, cover }
@@ -68,15 +69,17 @@ export const AddNewDeckModal = () => {
     }
   }
 
-  const [open, setOpen] = useState(false)
-
   const renderAttachedFilePreview = () => {
     return (
-      <div>
-        <img src={URL.createObjectURL(cover)} />
-        {cover?.name}
+      <div className={s.coverImage}>
+        <img src={coverURL} width={'170px'} />
       </div>
     )
+  }
+
+  const onDeleteImageHandler = () => {
+    URL.revokeObjectURL(coverURL)
+    setCover(undefined)
   }
 
   return (
@@ -89,14 +92,13 @@ export const AddNewDeckModal = () => {
       trigger={<Button variant={'primary'}>Add New Deck</Button>}
     >
       <form onSubmit={event => event.preventDefault()}>
-        <div className={s.emailField}>
-          <ControlledTextField
-            control={control}
-            defaultValue={''}
-            labelText={'Name Pack'}
-            name={'name'}
-          />
-        </div>
+        <ControlledTextField
+          control={control}
+          defaultValue={''}
+          labelText={'Name Pack'}
+          name={'name'}
+          wrapperProps={{ className: s.txtFieldWrapper }}
+        />
         <div>
           <input
             id={'addDeckCoverInput'}
@@ -106,8 +108,11 @@ export const AddNewDeckModal = () => {
           />
         </div>
         <div>{cover && renderAttachedFilePreview()}</div>
+        <button className={s.iconButton} onClick={onDeleteImageHandler}>
+          <CloseCrossOutline />
+        </button>
         <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
-          <Image width={'1rem'} /> Upload Image
+          <Image width={'1rem'} /> {cover ? 'Edit Image' : 'Upload Image'}
         </Button>
         <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
         <div className={s.footerWrapper}>

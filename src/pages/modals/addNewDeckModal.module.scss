@@ -1,0 +1,42 @@
+.txtFieldWrapper {
+  margin-bottom: 24px;
+}
+.coverImage {
+  margin-bottom: 24px;
+  width: 170px;
+  border: 1px var(--color-dark-300) solid;
+}
+
+.iconButton {
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  color: var(--color-light-100);
+
+  border: none;
+  border-radius: 100%;
+
+  transition: 0.2s;
+}
+
+.iconButton:hover {
+  background: var(--color-dark-500);
+  box-shadow: 0 0 0 5px var(--color-dark-500);
+}
+
+.iconButton:focus {
+  background: var(--color-dark-700);
+  box-shadow: 0 0 0 5px var(--color-dark-700);
+}
+
+.footerWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0px 36px 0px;
+}
