@@ -107,10 +107,18 @@ export const AddNewDeckModal = () => {
             type={'file'}
           />
         </div>
-        <div>{cover && renderAttachedFilePreview()}</div>
-        <button className={s.iconButton} onClick={onDeleteImageHandler}>
-          <CloseCrossOutline />
-        </button>
+        {cover && (
+          <div style={{ position: 'relative' }}>
+            {renderAttachedFilePreview()}
+            <button
+              className={s.iconButton}
+              onClick={onDeleteImageHandler}
+              style={{ left: '215px', position: 'absolute', top: '10px', zIndex: '100' }}
+            >
+              <CloseCrossOutline />
+            </button>
+          </div>
+        )}
         <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
           <Image width={'1rem'} /> {cover ? 'Edit Image' : 'Upload Image'}
         </Button>
