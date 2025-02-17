@@ -69,14 +69,6 @@ export const AddNewDeckModal = () => {
     }
   }
 
-  const renderAttachedFilePreview = () => {
-    return (
-      <div className={s.coverImage}>
-        <img src={coverURL} width={'170px'} />
-      </div>
-    )
-  }
-
   const onDeleteImageHandler = () => {
     URL.revokeObjectURL(coverURL)
     setCover(undefined)
@@ -108,21 +100,19 @@ export const AddNewDeckModal = () => {
           />
         </div>
         {cover && (
-          <div style={{ position: 'relative' }}>
-            {renderAttachedFilePreview()}
-            <button
-              className={s.iconButton}
-              onClick={onDeleteImageHandler}
-              style={{ left: '215px', position: 'absolute', top: '10px', zIndex: '100' }}
-            >
+          <div className={s.coverImage}>
+            <img src={coverURL} width={'170px'} />
+            <button className={s.iconButton} onClick={onDeleteImageHandler}>
               <CloseCrossOutline />
             </button>
           </div>
         )}
         <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
-          <Image width={'1rem'} /> {cover ? 'Edit Image' : 'Upload Image'}
+          <Image width={'1rem'} /> {cover ? 'Change Image' : 'Upload Image'}
         </Button>
-        <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
+        <div className={s.checkBoxWrapper}>
+          <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
+        </div>
         <div className={s.footerWrapper}>
           <div>
             <Button onClick={() => setOpen(false)} variant={'secondary'}>

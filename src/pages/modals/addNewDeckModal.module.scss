@@ -6,6 +6,7 @@
   padding: 30px;
   width: 250px;
   border: 1px var(--color-dark-300) solid;
+  position: relative;
 }
 
 .iconButton {
@@ -24,6 +25,10 @@
   border-radius: 100%;
 
   transition: 0.2s;
+
+  position: absolute;
+  top: 10px;
+  left: 215px;
 }
 
 .iconButton:hover {
@@ -34,6 +39,10 @@
 .iconButton:focus {
   background: var(--color-dark-700);
   box-shadow: 0 0 0 5px var(--color-dark-700);
+}
+
+.checkBoxWrapper {
+  margin: 24px 0;
 }
 
 .footerWrapper {
