@@ -8,11 +8,16 @@ import { ControlledTextField } from '@/components/ui/controlled/controlled-textf
 import { Modal } from '@/components/ui/modal'
 import { Typography } from '@/components/ui/typography'
 import { addNewCardFormValues, addNewCardSchema } from '@/pages/modals/addNewCardModal-schema'
+import { useCreateCardMutation } from '@/services/base-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './addNewCardModal.module.scss'
 
-export const AddNewCardModal = () => {
+type PropsType = {
+  deckId: string
+}
+
+export const AddNewCardModal = ({ deckId }: PropsType) => {
   const {
     control,
     formState: { errors, isValid },
@@ -27,6 +32,8 @@ export const AddNewCardModal = () => {
   })
 
   console.log('errors: ', errors)
+
+  const [createCard] = useCreateCardMutation()
 
   const [questionCover, setQuestionCover] = useState<File>()
   const [answerCover, setAnswerCover] = useState<File>()
@@ -60,21 +67,21 @@ export const AddNewCardModal = () => {
 
   const onSubmit = async (data: addNewCardFormValues) => {
     console.log(data)
-    const dataWithCover = { ...data, cover }
+    const dataForRequest = { ...data, id: deckId }
 
-    console.log(dataWithCover)
+    console.log(dataForRequest)
 
-    //   if (isValid) {
-    //     try {
-    //       await createDeck(dataWithCover).then(() =>
-    //         console.log('new deck ' + data.name + ' created')
-    //       )
-    //     } catch (e) {
-    //       console.log(e)
-    //     }
-    //     setOpen(false)
-    //     reset()
-    //   }
+    if (isValid) {
+      try {
+        await createCard(dataForRequest).then(() =>
+          console.log('new card ' + data.question + ' created')
+        )
+      } catch (e) {
+        console.log(e)
+      }
+      setOpen(false)
+      reset()
+    }
   }
 
   const [open, setOpen] = useState(false)
@@ -90,10 +97,8 @@ export const AddNewCardModal = () => {
 
   return (
     <Modal
-      isValid={isValid}
       onOpenChange={setOpen}
       open={open}
-      // reset={reset}
       title={'Add New Card'}
       trigger={<Button variant={'primary'}>Add New Card</Button>}
     >

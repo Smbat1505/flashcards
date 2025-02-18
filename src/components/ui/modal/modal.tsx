@@ -54,7 +54,7 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className={classNames.dialogOverlay} />
-        <Dialog.Content className={classNames.dialogContent} ref={ref}>
+        <Dialog.Content aria-describedby={undefined} className={classNames.dialogContent} ref={ref}>
           <header className={classNames.header}>
             <Dialog.Title className={classNames.dialogTitle}>
               <Typography as={'span'} variant={'h2'}>

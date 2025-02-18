@@ -1,4 +1,6 @@
 import {
+  CreateCard,
+  CreateCardResponse,
   CreateDeck,
   GetDeckCardsQuery,
   GetDeckCardsResponse,
@@ -17,6 +19,19 @@ export const baseApi = createApi({
   }),
   endpoints: builder => {
     return {
+      createCard: builder.mutation<CreateCardResponse, CreateCard>({
+        invalidatesTags: ['Cards'],
+        query: arg => {
+          return {
+            body: {
+              answer: arg.answer,
+              question: arg.question,
+            },
+            method: 'POST',
+            url: `v1/decks/${arg.id}/cards`,
+          }
+        },
+      }),
       createDeck: builder.mutation<void, CreateDeck>({
         invalidatesTags: ['Decks'],
         query: arg => {
@@ -32,6 +47,15 @@ export const baseApi = createApi({
             body: formData,
             method: 'POST',
             url: 'v1/decks',
+          }
+        },
+      }),
+      deleteCard: builder.mutation<void, string>({
+        invalidatesTags: ['Cards'],
+        query: id => {
+          return {
+            method: 'DELETE',
+            url: `v1/cards/${id}/`,
           }
         },
       }),
@@ -79,7 +103,9 @@ export const baseApi = createApi({
   tagTypes: ['Decks', 'Auth', 'Cards'],
 })
 export const {
+  useCreateCardMutation,
   useCreateDeckMutation,
+  useDeleteCardMutation,
   useDeleteDeckMutation,
   useGetDeckCardsQuery,
   useGetDecksQuery,

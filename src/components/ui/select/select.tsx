@@ -90,10 +90,7 @@ export const SelectItem = React.forwardRef(
         {...props}
         ref={forwardedRef}
       >
-        <SelectPrimitive.ItemText>
-          {/*<Typography variant={'body2'}>{children}</Typography>*/}
-          {children}
-        </SelectPrimitive.ItemText>
+        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
       </SelectPrimitive.Item>
     )
   }

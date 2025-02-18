@@ -20,8 +20,9 @@ import {
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCardModal } from '@/pages/modals/addNewCardModal'
+import { LearnDeckModal } from '@/pages/modals/learnDeckModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
-import { useGetDeckCardsQuery } from '@/services/base-api'
+import { useDeleteCardMutation, useGetDeckCardsQuery } from '@/services/base-api'
 
 import s from './cards.module.scss'
 
@@ -43,6 +44,7 @@ export const Cards = () => {
   console.log(data)
 
   const meResponse = useAuthMeQuery()
+  const [deleteCard] = useDeleteCardMutation()
 
   const options: dropDownMenuList[] = [
     { icon: <PlayCircleOutline height={'16'} width={'16'} />, redirect: '#', title: 'Learn' },
@@ -92,13 +94,14 @@ export const Cards = () => {
               </DropDownMenu>
             </div>
           </div>
-          <AddNewCardModal />
+          <AddNewCardModal deckId={location.state.id} />
         </div>
         {location.state.cover ? (
           <img alt={location.state.name} src={location.state.cover} width={'170px'} />
         ) : (
           ''
         )}
+        <LearnDeckModal />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}
@@ -131,7 +134,12 @@ export const Cards = () => {
                     <TableCell className={s.iconsCell}>
                       <div className={s.iconsDiv}>
                         <SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />
-                        <SvgWrapper SvgComponent={TrashOutline} size={'16'} wrapper={'button'} />
+                        <SvgWrapper
+                          SvgComponent={TrashOutline}
+                          onClick={() => deleteCard(item.id)}
+                          size={'16'}
+                          wrapper={'button'}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

@@ -87,3 +87,28 @@ export type GetDeckCardsItems = {
   updated: string
   userId: string
 }
+
+export type CreateCard = {
+  answer: string
+  answerImg?: string
+  answerVideo?: string
+  id: string
+  question: string
+  questionImg?: string
+  questionVideo?: string
+}
+
+export type CreateCardResponse = {
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  shots: number
+  updated: string
+  userId: string
+}
