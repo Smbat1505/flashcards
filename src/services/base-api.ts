@@ -6,6 +6,8 @@ import {
   GetDeckCardsResponse,
   GetDecksQuery,
   GetDecksResponse,
+  retrieveRandomCardQuery,
+  retrieveRandomCardResponse,
 } from '@/services/flashcards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -97,6 +99,14 @@ export const baseApi = createApi({
           }
         },
       }),
+      retrieveRandomCard: builder.query<retrieveRandomCardResponse, retrieveRandomCardQuery>({
+        query: retrieveRandomCardQuery => {
+          return {
+            params: { previousCardId: retrieveRandomCardQuery?.previousCardId },
+            url: `v1/decks/${retrieveRandomCardQuery.deckId}/learn`,
+          }
+        },
+      }),
     }
   },
   reducerPath: 'baseApi',
@@ -109,4 +119,5 @@ export const {
   useDeleteDeckMutation,
   useGetDeckCardsQuery,
   useGetDecksQuery,
+  useRetrieveRandomCardQuery,
 } = baseApi

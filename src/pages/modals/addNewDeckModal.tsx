@@ -76,10 +76,8 @@ export const AddNewDeckModal = () => {
 
   return (
     <Modal
-      isValid={isValid}
       onOpenChange={setOpen}
       open={open}
-      reset={reset}
       title={'Add New Deck'}
       trigger={<Button variant={'primary'}>Add New Deck</Button>}
     >

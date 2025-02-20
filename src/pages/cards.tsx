@@ -101,7 +101,7 @@ export const Cards = () => {
         ) : (
           ''
         )}
-        <LearnDeckModal />
+        <LearnDeckModal data={data ? data.items : []} deckName={location.state.name} />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}

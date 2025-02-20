@@ -112,3 +112,24 @@ export type CreateCardResponse = {
   updated: string
   userId: string
 }
+
+export type retrieveRandomCardQuery = {
+  deckId: string
+  previousCardId?: string
+}
+
+export type retrieveRandomCardResponse = {
+  answer: string
+  answerImg: string
+  answerVideo: string
+  created: string
+  deckId: string
+  grade: number
+  id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  shots: number
+  updated: string
+  userId: string
+}

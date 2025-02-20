@@ -1,5 +1,4 @@
 import { ComponentProps, ComponentRef, ReactNode, forwardRef } from 'react'
-import { UseFormReset } from 'react-hook-form'
 
 import CloseCrossOutline from '@/assets/icons/components/Close'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -10,21 +9,12 @@ import s from './modal.module.scss'
 import { Typography } from '../typography'
 
 type ModalProps = {
-  closeHandler?: (isOpen: boolean) => void
   contentContainerClassName?: string
-  footer?: {
-    buttonPrimary: ReactNode
-    buttonSecondary: ReactNode
-  }
-  isValid?: boolean
   onOpenChange: (open: boolean) => void
-  onSubmit?: () => void
   open: boolean
   overlayClassName?: string
-  reset?: UseFormReset<{ isPrivate: boolean; name: string }>
   title?: string
   trigger: ReactNode
-  withCloseBtn?: boolean
 } & ComponentProps<'div'>
 
 export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) => {
@@ -37,7 +27,6 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
     overlayClassName,
     title,
     trigger,
-    withCloseBtn = true,
   } = props
 
   const classNames = {
@@ -61,13 +50,11 @@ export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) =>
                 {title}
               </Typography>
             </Dialog.Title>
-            {withCloseBtn && (
-              <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
-                <button aria-label={'Close'} className={classNames.iconButton}>
-                  <CloseCrossOutline />
-                </button>
-              </Dialog.Close>
-            )}
+            <Dialog.Close aria-label={'Close'} style={{ height: '25px' }}>
+              <button aria-label={'Close'} className={classNames.iconButton}>
+                <CloseCrossOutline />
+              </button>
+            </Dialog.Close>
           </header>
           <div className={classNames.contentWrapper}>{children}</div>
         </Dialog.Content>
