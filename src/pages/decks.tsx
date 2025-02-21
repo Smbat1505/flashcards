@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
@@ -146,7 +146,7 @@ export const Decks = () => {
                         ) : (
                           ''
                         )}
-                        {item.name}
+                        <Link to={`./cards/${item.id}`}>{item.name}</Link>
                       </div>
                     </TableCell>
                     <TableCell>{item.cardsCount}</TableCell>

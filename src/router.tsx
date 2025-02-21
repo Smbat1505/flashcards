@@ -39,7 +39,7 @@ const privateRoutes: RouteObject[] = [
   },
   {
     element: <Cards />,
-    path: '/cards',
+    path: '/cards/:deckId',
   },
   {
     element: <LearnDeckPage />,

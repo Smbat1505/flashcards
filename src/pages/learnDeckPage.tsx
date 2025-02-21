@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -66,7 +67,7 @@ export const LearnDeckPage = () => {
             <RadioGroupDemo name={'aasd'} options={radioOptions} />
           </Typography>
           <div className={s.button}>
-            <Button>Next Question</Button>
+            <Button onClick={() => Navigate({ to: './login' })}>Next Question</Button>
           </div>
         </div>
       )}

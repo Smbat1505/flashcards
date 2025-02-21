@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { Edit2, Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
@@ -27,6 +27,10 @@ import { useDeleteCardMutation, useGetDeckCardsQuery } from '@/services/base-api
 import s from './cards.module.scss'
 
 export const Cards = () => {
+  const { deckId } = useParams()
+
+  console.log(deckId)
+
   const location = useLocation()
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
@@ -35,7 +39,7 @@ export const Cards = () => {
   console.log(location.state)
   const { data, isLoading } = useGetDeckCardsQuery({
     currentPage,
-    id: location.state.id,
+    id: deckId,
     itemsPerPage,
     orderBy: null,
     question: searchInputValue,
@@ -47,7 +51,7 @@ export const Cards = () => {
   const [deleteCard] = useDeleteCardMutation()
 
   const options: dropDownMenuList[] = [
-    { icon: <PlayCircleOutline height={'16'} width={'16'} />, redirect: '#', title: 'Learn' },
+    { icon: <PlayCircleOutline height={'16'} width={'16'} />, redirect: './learn', title: 'Learn' },
     { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
     { icon: <TrashOutline height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
   ]
@@ -68,6 +72,7 @@ export const Cards = () => {
 
   return (
     <>
+      {deckId}
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <div className={s.container}>
         <div className={s.backLinkTxtWrapper}>
@@ -86,7 +91,7 @@ export const Cards = () => {
         <div className={s.pageHeadingWrapper}>
           <div className={s.titleWithMenuWrapper}>
             <Typography as={'h1'} variant={'h1'}>
-              {location.state.name}
+              {/*{location.state.name}*/}
             </Typography>
             <div className={s.menuIconWrapper}>
               <DropDownMenu>
@@ -94,14 +99,14 @@ export const Cards = () => {
               </DropDownMenu>
             </div>
           </div>
-          <AddNewCardModal deckId={location.state.id} />
+          {/*<AddNewCardModal deckId={location.state.id} />*/}
         </div>
-        {location.state.cover ? (
-          <img alt={location.state.name} src={location.state.cover} width={'170px'} />
-        ) : (
-          ''
-        )}
-        <LearnDeckModal data={data ? data.items : []} deckName={location.state.name} />
+        {/*{location.state.cover ? (*/}
+        {/*  <img alt={location.state.name} src={location.state.cover} width={'170px'} />*/}
+        {/*) : (*/}
+        {/*  ''*/}
+        {/*)}*/}
+        {/*<LearnDeckModal data={data ? data.items : []} deckName={location.state.name} />*/}
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}
