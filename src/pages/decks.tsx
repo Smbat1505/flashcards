@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
@@ -22,17 +22,10 @@ import { GetDecksQuery } from '@/services/flashcards.types'
 
 import s from './decks.module.scss'
 
-type cardsPageDataType = {
-  cover: null | string
-  id: string
-  name: string
-}
-
 export const Decks = () => {
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [sliderValues, setSliderValues] = useState<number[]>([2, 10])
-  const [cardsPageData, setCardsPageData] = useState<cardsPageDataType>()
   const [tabSwitcherValue, setTabSwitcherValue] = useState<string>('allCards')
   const [searchInputValue, setSearchInputValue] = useState<string>()
 
@@ -76,11 +69,6 @@ export const Decks = () => {
 
   if (isLoading) {
     return <div>Loading...</div>
-  }
-
-  const onDeckClickHandler = (id: string, name: string, cover: null | string) => {
-    console.log(id, name, cover)
-    setCardsPageData({ cover, id, name })
   }
 
   const onSliderChangeHandler = (values: number[]) => {
@@ -136,13 +124,14 @@ export const Decks = () => {
                     <TableCell>
                       <div style={{ alignItems: 'center', display: 'flex' }}>
                         {item.cover ? (
-                          <img
-                            alt={item.name}
-                            onClick={() => onDeckClickHandler(item.id, item.name, item.cover)}
-                            src={item.cover}
-                            style={{ cursor: 'pointer', marginRight: '10px' }}
-                            width={'118px'}
-                          />
+                          <Link to={`./cards/${item.id}`}>
+                            <img
+                              alt={item.name}
+                              src={item.cover}
+                              style={{ cursor: 'pointer', marginRight: '10px' }}
+                              width={'118px'}
+                            />
+                          </Link>
                         ) : (
                           ''
                         )}
@@ -156,12 +145,13 @@ export const Decks = () => {
                     <TableCell>{item.author.name}</TableCell>
                     <TableCell className={s.iconsCell}>
                       <div className={s.iconsDiv}>
-                        <SvgWrapper
-                          SvgComponent={PlayCircleOutline}
-                          onClick={() => onDeckClickHandler(item.id, item.name, item.cover)}
-                          size={'16'}
-                          wrapper={'button'}
-                        />
+                        <Link to={`./cards/${item.id}`}>
+                          <SvgWrapper
+                            SvgComponent={PlayCircleOutline}
+                            size={'16'}
+                            wrapper={'button'}
+                          />
+                        </Link>
                         <SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />
                         <SvgWrapper
                           SvgComponent={TrashOutline}
@@ -188,7 +178,6 @@ export const Decks = () => {
           totalPages={data ? data.pagination.totalPages : 1}
         />
       </div>
-      {cardsPageData && <Navigate state={cardsPageData} to={'./cards'} />}
     </>
   )
 }

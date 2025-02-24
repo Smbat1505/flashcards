@@ -6,6 +6,7 @@ import {
   GetDeckCardsResponse,
   GetDecksQuery,
   GetDecksResponse,
+  GetDecksResponseItems,
   retrieveRandomCardQuery,
   retrieveRandomCardResponse,
 } from '@/services/flashcards.types'
@@ -68,6 +69,13 @@ export const baseApi = createApi({
           url: `v1/decks/${id}`,
         }),
       }),
+      getDeckById: builder.query<Omit<GetDecksResponseItems, 'author'>, string | undefined>({
+        query: deckId => {
+          return {
+            url: `v1/decks/${deckId}`,
+          }
+        },
+      }),
       getDeckCards: builder.query<GetDeckCardsResponse, GetDeckCardsQuery>({
         providesTags: ['Cards'],
         query: getDeckCardsQuery => {
@@ -117,6 +125,7 @@ export const {
   useCreateDeckMutation,
   useDeleteCardMutation,
   useDeleteDeckMutation,
+  useGetDeckByIdQuery,
   useGetDeckCardsQuery,
   useGetDecksQuery,
   useRetrieveRandomCardQuery,

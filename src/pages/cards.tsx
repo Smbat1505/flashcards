@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { Edit2, Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
@@ -22,7 +22,11 @@ import { Typography } from '@/components/ui/typography'
 import { AddNewCardModal } from '@/pages/modals/addNewCardModal'
 import { LearnDeckModal } from '@/pages/modals/learnDeckModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
-import { useDeleteCardMutation, useGetDeckCardsQuery } from '@/services/base-api'
+import {
+  useDeleteCardMutation,
+  useGetDeckByIdQuery,
+  useGetDeckCardsQuery,
+} from '@/services/base-api'
 
 import s from './cards.module.scss'
 
@@ -31,12 +35,14 @@ export const Cards = () => {
 
   console.log(deckId)
 
-  const location = useLocation()
+  const { currentData } = useGetDeckByIdQuery(deckId)
+
+  console.log(currentData)
+
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [searchInputValue, setSearchInputValue] = useState<string>()
 
-  console.log(location.state)
   const { data, isLoading } = useGetDeckCardsQuery({
     currentPage,
     id: deckId,
@@ -72,7 +78,6 @@ export const Cards = () => {
 
   return (
     <>
-      {deckId}
       <Header isAuthenticated={!meResponse.isUninitialized} userInfo={meResponse.data} />
       <div className={s.container}>
         <div className={s.backLinkTxtWrapper}>
@@ -91,7 +96,7 @@ export const Cards = () => {
         <div className={s.pageHeadingWrapper}>
           <div className={s.titleWithMenuWrapper}>
             <Typography as={'h1'} variant={'h1'}>
-              {/*{location.state.name}*/}
+              {currentData ? currentData.name : ''}
             </Typography>
             <div className={s.menuIconWrapper}>
               <DropDownMenu>
@@ -99,14 +104,17 @@ export const Cards = () => {
               </DropDownMenu>
             </div>
           </div>
-          {/*<AddNewCardModal deckId={location.state.id} />*/}
+          <AddNewCardModal deckId={currentData ? currentData.id : ''} />
         </div>
-        {/*{location.state.cover ? (*/}
-        {/*  <img alt={location.state.name} src={location.state.cover} width={'170px'} />*/}
-        {/*) : (*/}
-        {/*  ''*/}
-        {/*)}*/}
-        {/*<LearnDeckModal data={data ? data.items : []} deckName={location.state.name} />*/}
+        {currentData?.cover ? (
+          <img alt={currentData.name} src={currentData.cover} width={'170px'} />
+        ) : (
+          ''
+        )}
+        <LearnDeckModal
+          data={data ? data.items : []}
+          deckName={currentData ? currentData.name : ''}
+        />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}
