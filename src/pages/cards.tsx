@@ -20,7 +20,6 @@ import {
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCardModal } from '@/pages/modals/addNewCardModal'
-import { LearnDeckModal } from '@/pages/modals/learnDeckModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import {
   useDeleteCardMutation,
@@ -57,7 +56,11 @@ export const Cards = () => {
   const [deleteCard] = useDeleteCardMutation()
 
   const options: dropDownMenuList[] = [
-    { icon: <PlayCircleOutline height={'16'} width={'16'} />, redirect: './learn', title: 'Learn' },
+    {
+      icon: <PlayCircleOutline height={'16'} width={'16'} />,
+      redirect: `./learn/${deckId}`,
+      title: 'Learn',
+    },
     { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
     { icon: <TrashOutline height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
   ]
@@ -111,10 +114,6 @@ export const Cards = () => {
         ) : (
           ''
         )}
-        <LearnDeckModal
-          data={data ? data.items : []}
-          deckName={currentData ? currentData.name : ''}
-        />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}

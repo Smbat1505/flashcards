@@ -135,7 +135,9 @@ export const Decks = () => {
                         ) : (
                           ''
                         )}
-                        <Link to={`./cards/${item.id}`}>{item.name}</Link>
+                        <Link className={s.nameLink} to={`./cards/${item.id}`}>
+                          {item.name}
+                        </Link>
                       </div>
                     </TableCell>
                     <TableCell>{item.cardsCount}</TableCell>
@@ -148,6 +150,7 @@ export const Decks = () => {
                         <Link to={`./cards/${item.id}`}>
                           <SvgWrapper
                             SvgComponent={PlayCircleOutline}
+                            color={'white'}
                             size={'16'}
                             wrapper={'button'}
                           />

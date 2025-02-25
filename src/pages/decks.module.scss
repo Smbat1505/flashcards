@@ -3,10 +3,18 @@
 }
 
 .pageHeadingWrapper {
-
   display: flex;
   justify-content: space-between;
   padding: 36px 0px;
+}
+
+.nameLink {
+  color: white;
+  text-decoration: none;
+}
+
+.nameLink:hover {
+  text-decoration: underline;
 }
 
 .iconsCell {

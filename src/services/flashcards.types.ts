@@ -114,7 +114,7 @@ export type CreateCardResponse = {
 }
 
 export type retrieveRandomCardQuery = {
-  deckId: string
+  deckId: string | undefined
   previousCardId?: string
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -10,7 +10,9 @@ import { useRetrieveRandomCardQuery } from '@/services/base-api'
 import s from './learnDeckPage.module.scss'
 
 export const LearnDeckPage = () => {
-  const { data } = useRetrieveRandomCardQuery({ deckId: 'cm7cc2vnx0194nu01z32fb5ez' })
+  const { deckId } = useParams()
+
+  const { data } = useRetrieveRandomCardQuery({ deckId })
 
   console.log(data)
 
