@@ -45,6 +45,10 @@ const privateRoutes: RouteObject[] = [
     element: <LearnDeckPage />,
     path: 'cards/learn/:deckId',
   },
+  {
+    element: <LearnDeckPage />,
+    path: 'cards/learn/:deckId/:previousCardId',
+  },
 ]
 
 const premiumRoutes: RouteObject[] = [

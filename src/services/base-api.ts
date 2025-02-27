@@ -9,6 +9,8 @@ import {
   GetDecksResponseItems,
   retrieveRandomCardQuery,
   retrieveRandomCardResponse,
+  updateDeckQuery,
+  updateDeckResponse,
 } from '@/services/flashcards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
@@ -112,6 +114,20 @@ export const baseApi = createApi({
           return {
             params: { previousCardId: retrieveRandomCardQuery?.previousCardId },
             url: `v1/decks/${retrieveRandomCardQuery.deckId}/learn`,
+          }
+        },
+      }),
+      updateDeck: builder.mutation<updateDeckResponse, updateDeckQuery>({
+        invalidatesTags: ['Decks'],
+        query: args => {
+          return {
+            method: 'PATCH',
+            params: {
+              cover: args.cover,
+              isPrivate: args.isPrivate,
+              name: args.name,
+            },
+            url: `v1/decks/${args.id}`,
           }
         },
       }),

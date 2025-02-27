@@ -133,3 +133,21 @@ export type retrieveRandomCardResponse = {
   updated: string
   userId: string
 }
+
+export type updateDeckResponse = {
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+
+export type updateDeckQuery = {
+  cover: string
+  id: string
+  isPrivate: boolean
+  name: string
+}
