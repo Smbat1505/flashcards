@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/tables/table-components'
 import { Typography } from '@/components/ui/typography'
 import { AddNewDeckModal } from '@/pages/modals/addNewDeckModal'
+import { EditDeckModal } from '@/pages/modals/editDeckModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/base-api'
 import { GetDecksQuery } from '@/services/flashcards.types'
@@ -155,7 +156,7 @@ export const Decks = () => {
                             wrapper={'button'}
                           />
                         </Link>
-                        <SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />
+                        <EditDeckModal cover={item.cover} deckId={item.id} name={item.name} />
                         <SvgWrapper
                           SvgComponent={TrashOutline}
                           onClick={() => deleteDeck(item.id)}
