@@ -145,4 +145,5 @@ export const {
   useGetDeckCardsQuery,
   useGetDecksQuery,
   useRetrieveRandomCardQuery,
+  useUpdateDeckMutation,
 } = baseApi

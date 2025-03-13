@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
+import { PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Filter } from '@/components/layout/filter/filter'
 import { Header } from '@/components/ui/header'

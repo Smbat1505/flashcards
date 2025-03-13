@@ -79,7 +79,9 @@ export const EditDeckModal = ({ name, ...props }: PropsType) => {
   }
 
   const onDeleteImageHandler = () => {
-    URL.revokeObjectURL(coverURL)
+    if (coverURL != null) {
+      URL.revokeObjectURL(coverURL)
+    }
     setCover(undefined)
   }
 
@@ -106,24 +108,24 @@ export const EditDeckModal = ({ name, ...props }: PropsType) => {
             type={'file'}
           />
         </div>
-        {/*{cover && (*/}
-        {/*  <div className={s.coverImage}>*/}
-        {/*    <img src={coverURL} width={'170px'} />*/}
-        {/*    <button className={s.iconButton} onClick={onDeleteImageHandler}>*/}
-        {/*      <CloseCrossOutline />*/}
-        {/*    </button>*/}
-        {/*  </div>*/}
-        {/*)}   */}
+        {props.cover && (
+          <div className={s.coverImage}>
+            <img src={coverURL} width={'170px'} />
+            <button className={s.iconButton} onClick={onDeleteImageHandler}>
+              <CloseCrossOutline />
+            </button>
+          </div>
+        )}
 
-        <div className={s.coverImage}>
-          <img src={coverURL} width={'170px'} />
-          <button className={s.iconButton} onClick={onDeleteImageHandler}>
-            <CloseCrossOutline />
-          </button>
-        </div>
+        {/*<div className={s.coverImage}>*/}
+        {/*  <img src={coverURL} width={'170px'} />*/}
+        {/*  <button className={s.iconButton} onClick={onDeleteImageHandler}>*/}
+        {/*    <CloseCrossOutline />*/}
+        {/*  </button>*/}
+        {/*</div>*/}
 
         <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
-          <Image width={'1rem'} /> {cover ? 'Change Image' : 'Upload Image'}
+          <Image width={'1rem'} /> {props.cover ? 'Change Image' : 'Upload Image'}
         </Button>
         <div className={s.checkBoxWrapper}>
           <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
