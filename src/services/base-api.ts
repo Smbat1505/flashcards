@@ -121,12 +121,12 @@ export const baseApi = createApi({
         invalidatesTags: ['Decks'],
         query: args => {
           return {
-            method: 'PATCH',
-            params: {
-              cover: args.cover,
+            body: {
+              // cover: args.cover,
               isPrivate: args.isPrivate,
               name: args.name,
             },
+            method: 'PATCH',
             url: `v1/decks/${args.id}`,
           }
         },

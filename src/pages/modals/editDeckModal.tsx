@@ -10,7 +10,7 @@ import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkb
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield/controlled-textfield'
 import { Modal } from '@/components/ui/modal'
 import { addNewDeckFormValues, addNewDeckSchema } from '@/pages/modals/addNewDecksModal-schema'
-import { useCreateDeckMutation } from '@/services/base-api'
+import { useUpdateDeckMutation } from '@/services/base-api'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './addNewDeckModal.module.scss'
@@ -22,7 +22,7 @@ type PropsType = {
   name: string
 }
 
-export const EditDeckModal = ({ name, ...props }: PropsType) => {
+export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   const {
     control,
     formState: { errors, isValid },
@@ -38,7 +38,7 @@ export const EditDeckModal = ({ name, ...props }: PropsType) => {
 
   console.log('errors: ', errors)
 
-  const [createDeck] = useCreateDeckMutation()
+  const [updateDeck] = useUpdateDeckMutation()
 
   const [cover, setCover] = useState<File>()
   const [open, setOpen] = useState(false)
@@ -61,14 +61,14 @@ export const EditDeckModal = ({ name, ...props }: PropsType) => {
 
   const onSubmit = async (data: addNewDeckFormValues) => {
     console.log(data)
-    const dataWithCover = { ...data, cover }
+    const dataWithCover = { ...data, cover, id: deckId }
 
     console.log(dataWithCover)
 
     if (isValid) {
       try {
-        await createDeck(dataWithCover).then(() =>
-          console.log('new deck ' + data.name + ' created')
+        await updateDeck({ ...data, id: deckId }).then(() =>
+          console.log('new deck ' + data.name + ' udpated')
         )
       } catch (e) {
         console.log(e)
