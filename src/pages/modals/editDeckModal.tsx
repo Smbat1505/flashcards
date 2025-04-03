@@ -17,9 +17,9 @@ import s from './addNewDeckModal.module.scss'
 
 type PropsType = {
   cover?: string
-  deckId: string
+  deckId: string | undefined
   isPrivate?: boolean
-  name: string
+  name: string | undefined
 }
 
 export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
@@ -65,7 +65,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
 
     console.log(dataWithCover)
 
-    if (isValid) {
+    if (isValid && deckId) {
       try {
         await updateDeck({ ...data, id: deckId }).then(() =>
           console.log('new deck ' + data.name + ' udpated')

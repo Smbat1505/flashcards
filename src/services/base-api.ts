@@ -72,6 +72,7 @@ export const baseApi = createApi({
         }),
       }),
       getDeckById: builder.query<Omit<GetDecksResponseItems, 'author'>, string | undefined>({
+        providesTags: ['Cards'],
         query: deckId => {
           return {
             url: `v1/decks/${deckId}`,
@@ -118,7 +119,7 @@ export const baseApi = createApi({
         },
       }),
       updateDeck: builder.mutation<updateDeckResponse, updateDeckQuery>({
-        invalidatesTags: ['Decks'],
+        invalidatesTags: ['Decks', 'Cards'],
         query: args => {
           return {
             body: {

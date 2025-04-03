@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { Edit2, Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
+import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
 import { SvgWrapper } from '@/assets/icons/wrapper'
 import { DropDownMenu, dropDownMenuList } from '@/components/ui/drop-down-menu'
@@ -20,6 +20,7 @@ import {
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { AddNewCardModal } from '@/pages/modals/addNewCardModal'
+import { EditDeckModal } from '@/pages/modals/editDeckModal'
 import { useAuthMeQuery } from '@/services/auth/auth.service'
 import {
   useDeleteCardMutation,
@@ -61,7 +62,12 @@ export const Cards = () => {
       redirect: `./learn/${deckId}`,
       title: 'Learn',
     },
-    { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
+    // { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
+    {
+      icon: <EditDeckModal deckId={deckId} name={currentData ? currentData.name : ''} />,
+      // redirect: '',
+      title: 'Edit',
+    },
     { icon: <TrashOutline height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
   ]
 
@@ -114,6 +120,7 @@ export const Cards = () => {
         ) : (
           ''
         )}
+        <EditDeckModal deckId={deckId} name={currentData ? currentData.name : ''} />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}
