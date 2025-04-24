@@ -43,7 +43,25 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   const [cover, setCover] = useState<File>()
   const [open, setOpen] = useState(false)
 
-  let coverURL: string | undefined = props.cover
+  let blob
+  let coverURL: string
+
+  if (props.cover) {
+    blob = new Blob([props.cover], { type: 'image/*' })
+
+    // setCover(new File([blob], 'cover'))
+
+    const file = new File([blob], 'cover')
+
+    console.log('file:', file)
+
+    coverURL = URL.createObjectURL(blob)
+    console.log(blob)
+
+    console.log('coverURL: ', coverURL)
+  }
+
+  // let coverURL: string | undefined = props.cover
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -51,13 +69,11 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     }
   }
 
-  if (cover) {
-    coverURL = URL.createObjectURL(cover)
-  }
+  // if (cover) {
+  //   coverURL = URL.createObjectURL(cover)
+  // }
 
   console.log('cover: ', cover)
-
-  console.log('coverURL: ', coverURL)
 
   const onSubmit = async (data: addNewDeckFormValues) => {
     console.log(data)
@@ -110,7 +126,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
         </div>
         {props.cover && (
           <div className={s.coverImage}>
-            <img src={coverURL} width={'170px'} />
+            {/*<img src={coverURL} width={'170px'} />*/}
             <button className={s.iconButton} onClick={onDeleteImageHandler}>
               <CloseCrossOutline />
             </button>

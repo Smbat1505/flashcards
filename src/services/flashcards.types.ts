@@ -146,7 +146,7 @@ export type updateDeckResponse = {
 }
 
 export type updateDeckQuery = {
-  cover?: string
+  cover?: File | null
   id: string
   isPrivate: boolean
   name: string
