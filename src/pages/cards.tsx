@@ -120,7 +120,11 @@ export const Cards = () => {
         ) : (
           ''
         )}
-        <EditDeckModal deckId={deckId} name={currentData ? currentData.name : ''} />
+        <EditDeckModal
+          cover={currentData ? currentData.cover : undefined}
+          deckId={deckId}
+          name={currentData ? currentData.name : ''}
+        />
         <TextField
           handleValueChange={setSearchInputValue}
           placeholder={'Input search'}
