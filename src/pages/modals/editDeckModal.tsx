@@ -20,6 +20,7 @@ type PropsType = {
   deckId: string | undefined
   isPrivate?: boolean
   name: string | undefined
+  onOpenChange: (open: boolean) => void
 }
 
 export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
@@ -37,29 +38,33 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   })
 
   console.log('errors: ', errors)
+  console.log(props.cover)
 
   const [updateDeck] = useUpdateDeckMutation()
 
   const [cover, setCover] = useState<File>()
-  const [open, setOpen] = useState(false)
-
-  let blob
-  let coverURL: string
+  // const [coverURL, setCoverURL] = useState<string>()
+  const [open, setOpen] = useState<boolean>(true)
 
   if (props.cover) {
-    blob = new Blob([props.cover], { type: 'image/*' })
-
-    // setCover(new File([blob], 'cover'))
-
-    const file = new File([blob], 'cover')
-
-    console.log('file:', file)
-
-    coverURL = URL.createObjectURL(blob)
-    console.log(blob)
-
-    console.log('coverURL: ', coverURL)
+    fetch(props.cover, {})
+      .then(res => res.blob())
+      .then(blob => console.log(blob))
+      .catch(err => console.log(err))
   }
+
+  // const blob = new Blob([props.cover ? props.cover : ''], { type: 'image/*' })
+
+  // setCover(new File([blob], 'cover'))
+
+  // const file = new File([blob], 'cover')
+
+  console.log('file:', cover)
+
+  console.log(blob)
+  // const coverURL = URL.createObjectURL(blob)
+
+  // console.log('coverURL: ', coverURL)
 
   // let coverURL: string | undefined = props.cover
 
@@ -94,16 +99,16 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     }
   }
 
-  const onDeleteImageHandler = () => {
-    if (coverURL != null) {
-      URL.revokeObjectURL(coverURL)
-    }
-    setCover(undefined)
-  }
+  // const onDeleteImageHandler = () => {
+  //   if (coverURL != null) {
+  //     URL.revokeObjectURL(coverURL)
+  //   }
+  //   setCover(undefined)
+  // }
 
   return (
     <Modal
-      onOpenChange={setOpen}
+      onOpenChange={props.onOpenChange}
       open={open}
       title={`Edit Deck`}
       trigger={<SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />}
@@ -124,14 +129,14 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
             type={'file'}
           />
         </div>
-        {props.cover && (
-          <div className={s.coverImage}>
-            {/*<img src={coverURL} width={'170px'} />*/}
-            <button className={s.iconButton} onClick={onDeleteImageHandler}>
-              <CloseCrossOutline />
-            </button>
-          </div>
-        )}
+        {/*{props.cover && (*/}
+        {/*  <div className={s.coverImage}>*/}
+        {/*    /!*<img src={coverURL} width={'170px'} />*!/*/}
+        {/*    <button className={s.iconButton} onClick={onDeleteImageHandler}>*/}
+        {/*      <CloseCrossOutline />*/}
+        {/*    </button>*/}
+        {/*  </div>*/}
+        {/*)}*/}
 
         {/*<div className={s.coverImage}>*/}
         {/*  <img src={coverURL} width={'170px'} />*/}

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
+import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Filter } from '@/components/layout/filter/filter'
 import { Header } from '@/components/ui/header'
@@ -57,6 +58,10 @@ export const Decks = () => {
   }
   const { data, isLoading } = useGetDecksQuery(getDecksQuery)
   const [deleteDeck] = useDeleteDeckMutation()
+  const [open, setOpen] = useState<boolean>(false)
+  const [cover, setCover] = useState<string | undefined>()
+  const [id, setId] = useState<string>()
+  const [name, setName] = useState<string>()
 
   console.log(meResponse)
 
@@ -85,6 +90,19 @@ export const Decks = () => {
   const onInputSearchChangeHandler = (value: string) => {
     console.log(value)
     setSearchInputValue(value)
+  }
+
+  const onEditClickHandler = (cover: string | undefined, id: string, name: string) => {
+    console.log(cover, id, name)
+    setOpen(true)
+    setCover(cover)
+    setId(id)
+    setName(name)
+  }
+
+  const openChangeEventHandler = (open: boolean) => {
+    console.log(open)
+    setOpen(open)
   }
 
   return (
@@ -156,7 +174,13 @@ export const Decks = () => {
                             wrapper={'button'}
                           />
                         </Link>
-                        <EditDeckModal cover={item.cover} deckId={item.id} name={item.name} />
+                        <SvgWrapper
+                          SvgComponent={Edit2Outline}
+                          onClick={() => onEditClickHandler(item.cover, item.id, item.name)}
+                          size={'16'}
+                          wrapper={'button'}
+                        />
+
                         <SvgWrapper
                           SvgComponent={TrashOutline}
                           onClick={() => deleteDeck(item.id)}
@@ -175,6 +199,14 @@ export const Decks = () => {
             )}
           </TableBody>
         </Table>
+        {open && (
+          <EditDeckModal
+            cover={cover}
+            deckId={id}
+            name={name}
+            onOpenChange={openChangeEventHandler}
+          />
+        )}
         <Pagination
           onPageChange={onCurrentPageButtonClickHandler}
           onPerPageChange={onItemsPerPageClickHandler}
