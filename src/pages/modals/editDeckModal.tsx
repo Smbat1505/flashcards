@@ -43,15 +43,8 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   const [updateDeck] = useUpdateDeckMutation()
 
   const [cover, setCover] = useState<File>()
-  // const [coverURL, setCoverURL] = useState<string>()
+  const [coverURL, setCoverURL] = useState<string | undefined>(props.cover)
   const [open, setOpen] = useState<boolean>(true)
-
-  if (props.cover) {
-    fetch(props.cover, {})
-      .then(res => res.blob())
-      .then(blob => console.log(blob))
-      .catch(err => console.log(err))
-  }
 
   // const blob = new Blob([props.cover ? props.cover : ''], { type: 'image/*' })
 
@@ -59,26 +52,26 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
 
   // const file = new File([blob], 'cover')
 
-  console.log('file:', cover)
-
-  console.log(blob)
+  // console.log('file:', cover)
+  //
+  // console.log(blob)
   // const coverURL = URL.createObjectURL(blob)
-
-  // console.log('coverURL: ', coverURL)
 
   // let coverURL: string | undefined = props.cover
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       setCover(e.target.files?.[0])
+      setCoverURL(URL.createObjectURL(e.target.files?.[0]))
     }
   }
 
   // if (cover) {
-  //   coverURL = URL.createObjectURL(cover)
+  //   // setCoverURL(URL.createObjectURL(cover))
   // }
 
   console.log('cover: ', cover)
+  console.log('coverURL: ', coverURL)
 
   const onSubmit = async (data: addNewDeckFormValues) => {
     console.log(data)
@@ -99,12 +92,12 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     }
   }
 
-  // const onDeleteImageHandler = () => {
-  //   if (coverURL != null) {
-  //     URL.revokeObjectURL(coverURL)
-  //   }
-  //   setCover(undefined)
-  // }
+  const onDeleteImageHandler = () => {
+    if (coverURL != null) {
+      URL.revokeObjectURL(coverURL)
+    }
+    setCoverURL(undefined)
+  }
 
   return (
     <Modal
@@ -129,14 +122,14 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
             type={'file'}
           />
         </div>
-        {/*{props.cover && (*/}
-        {/*  <div className={s.coverImage}>*/}
-        {/*    /!*<img src={coverURL} width={'170px'} />*!/*/}
-        {/*    <button className={s.iconButton} onClick={onDeleteImageHandler}>*/}
-        {/*      <CloseCrossOutline />*/}
-        {/*    </button>*/}
-        {/*  </div>*/}
-        {/*)}*/}
+        {coverURL && (
+          <div className={s.coverImage}>
+            <img alt={name} src={coverURL} width={'170px'} />
+            <button className={s.iconButton} onClick={onDeleteImageHandler}>
+              <CloseCrossOutline />
+            </button>
+          </div>
+        )}
 
         {/*<div className={s.coverImage}>*/}
         {/*  <img src={coverURL} width={'170px'} />*/}
