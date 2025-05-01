@@ -60,7 +60,7 @@ export const Decks = () => {
   const [deleteDeck] = useDeleteDeckMutation()
   const [open, setOpen] = useState<boolean>(false)
   const [cover, setCover] = useState<string | undefined>()
-  const [id, setId] = useState<string>()
+  const [id, setId] = useState<string>('')
   const [name, setName] = useState<string>()
 
   console.log(meResponse)
@@ -205,6 +205,7 @@ export const Decks = () => {
             deckId={id}
             name={name}
             onOpenChange={openChangeEventHandler}
+            open={open}
           />
         )}
         <Pagination

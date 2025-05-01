@@ -121,12 +121,16 @@ export const baseApi = createApi({
       updateDeck: builder.mutation<updateDeckResponse, updateDeckQuery>({
         invalidatesTags: ['Decks', 'Cards'],
         query: args => {
+          const formData = new FormData()
+
+          if (args.cover) {
+            formData.append('cover', args.cover)
+          }
+          formData.append('name', args.name)
+          formData.append('isPrivate', String(args.isPrivate))
+
           return {
-            body: {
-              // cover: args.cover,
-              isPrivate: args.isPrivate,
-              name: args.name,
-            },
+            body: formData,
             method: 'PATCH',
             url: `v1/decks/${args.id}`,
           }

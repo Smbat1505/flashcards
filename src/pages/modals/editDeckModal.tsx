@@ -17,10 +17,11 @@ import s from './addNewDeckModal.module.scss'
 
 type PropsType = {
   cover?: string
-  deckId: string | undefined
+  deckId: string
   isPrivate?: boolean
   name: string | undefined
   onOpenChange: (open: boolean) => void
+  open: boolean
 }
 
 export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
@@ -44,20 +45,6 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
 
   const [cover, setCover] = useState<File>()
   const [coverURL, setCoverURL] = useState<string | undefined>(props.cover)
-  const [open, setOpen] = useState<boolean>(true)
-
-  // const blob = new Blob([props.cover ? props.cover : ''], { type: 'image/*' })
-
-  // setCover(new File([blob], 'cover'))
-
-  // const file = new File([blob], 'cover')
-
-  // console.log('file:', cover)
-  //
-  // console.log(blob)
-  // const coverURL = URL.createObjectURL(blob)
-
-  // let coverURL: string | undefined = props.cover
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -65,10 +52,6 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
       setCoverURL(URL.createObjectURL(e.target.files?.[0]))
     }
   }
-
-  // if (cover) {
-  //   // setCoverURL(URL.createObjectURL(cover))
-  // }
 
   console.log('cover: ', cover)
   console.log('coverURL: ', coverURL)
@@ -79,15 +62,15 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
 
     console.log(dataWithCover)
 
-    if (isValid && deckId) {
+    if (isValid) {
       try {
-        await updateDeck({ ...data, id: deckId }).then(() =>
-          console.log('new deck ' + data.name + ' udpated')
+        await updateDeck({ ...dataWithCover }).then(() =>
+          console.log('deck ' + data.name + ' udpated')
         )
       } catch (e) {
         console.log(e)
       }
-      setOpen(false)
+      props.onOpenChange(false)
       reset()
     }
   }
@@ -102,7 +85,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   return (
     <Modal
       onOpenChange={props.onOpenChange}
-      open={open}
+      open={props.open}
       title={`Edit Deck`}
       trigger={<SvgWrapper SvgComponent={Edit2Outline} size={'16'} wrapper={'button'} />}
     >
@@ -130,23 +113,15 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
             </button>
           </div>
         )}
-
-        {/*<div className={s.coverImage}>*/}
-        {/*  <img src={coverURL} width={'170px'} />*/}
-        {/*  <button className={s.iconButton} onClick={onDeleteImageHandler}>*/}
-        {/*    <CloseCrossOutline />*/}
-        {/*  </button>*/}
-        {/*</div>*/}
-
         <Button as={'label'} fullWidth htmlFor={'addDeckCoverInput'} variant={'secondary'}>
-          <Image width={'1rem'} /> {props.cover ? 'Change Image' : 'Upload Image'}
+          <Image width={'1rem'} /> {coverURL ? 'Change Image' : 'Upload Image'}
         </Button>
         <div className={s.checkBoxWrapper}>
           <ControlledCheckbox control={control} labelText={'Private Pack'} name={'isPrivate'} />
         </div>
         <div className={s.footerWrapper}>
           <div>
-            <Button onClick={() => setOpen(false)} variant={'secondary'}>
+            <Button onClick={() => props.onOpenChange(false)} variant={'secondary'}>
               Cancel
             </Button>
           </div>
