@@ -79,6 +79,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     if (coverURL != null) {
       URL.revokeObjectURL(coverURL)
     }
+    setCover(undefined)
     setCoverURL(undefined)
   }
 

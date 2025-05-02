@@ -125,7 +125,10 @@ export const baseApi = createApi({
 
           if (args.cover) {
             formData.append('cover', args.cover)
+          } else {
+            formData.append('cover', (args.cover = ''))
           }
+
           formData.append('name', args.name)
           formData.append('isPrivate', String(args.isPrivate))
 
