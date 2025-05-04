@@ -33,7 +33,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
   } = useForm<addNewDeckFormValues>({
     defaultValues: {
       isPrivate: true,
-      name: '',
+      name: name,
     },
     resolver: zodResolver(addNewDeckSchema),
   })
@@ -43,7 +43,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
 
   const [updateDeck] = useUpdateDeckMutation()
 
-  const [cover, setCover] = useState<File>()
+  const [cover, setCover] = useState<File | string>()
   const [coverURL, setCoverURL] = useState<string | undefined>(props.cover)
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +79,7 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     if (coverURL != null) {
       URL.revokeObjectURL(coverURL)
     }
-    setCover(undefined)
+    setCover('')
     setCoverURL(undefined)
   }
 

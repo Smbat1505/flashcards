@@ -125,7 +125,7 @@ export const baseApi = createApi({
 
           if (args.cover) {
             formData.append('cover', args.cover)
-          } else {
+          } else if (args.cover === '') {
             formData.append('cover', (args.cover = ''))
           }
 
