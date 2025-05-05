@@ -14,7 +14,7 @@ type ModalProps = {
   open: boolean
   overlayClassName?: string
   title?: string
-  trigger: ReactNode
+  trigger?: ReactNode
 } & ComponentProps<'div'>
 
 export const Modal = forwardRef<ComponentRef<'div'>, ModalProps>((props, ref) => {

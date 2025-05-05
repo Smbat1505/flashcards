@@ -135,11 +135,11 @@ export const Cards = () => {
         <Table width={'100%'}>
           <TableHead>
             <TableRow>
-              <TableHeader>Question</TableHeader>
-              <TableHeader>Answer</TableHeader>
-              <TableHeader>Last Updated</TableHeader>
-              <TableHeader>Grade</TableHeader>
-              <TableHeader></TableHeader>
+              <TableHeader align={'left'}>Question</TableHeader>
+              <TableHeader align={'left'}>Answer</TableHeader>
+              <TableHeader align={'left'}>Last Updated</TableHeader>
+              <TableHeader align={'left'}>Grade</TableHeader>
+              <TableHeader align={'left'}></TableHeader>
             </TableRow>
           </TableHead>
           <TableBody>

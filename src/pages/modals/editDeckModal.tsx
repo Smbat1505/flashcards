@@ -1,9 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Image } from '@/assets/icons/components'
+import { Edit2Outline, Image } from '@/assets/icons/components'
 import CloseCrossOutline from '@/assets/icons/components/Close'
-import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import { SvgWrapper } from '@/assets/icons/wrapper'
 import { Button } from '@/components/ui/button'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox'
@@ -83,6 +82,10 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     setCoverURL(undefined)
   }
 
+  const onInputClearHandler = () => {
+    console.log('clear input pressed')
+  }
+
   return (
     <Modal
       onOpenChange={props.onOpenChange}
@@ -92,10 +95,12 @@ export const EditDeckModal = ({ deckId, name, ...props }: PropsType) => {
     >
       <form onSubmit={event => event.preventDefault()}>
         <ControlledTextField
+          CloseIcon={CloseCrossOutline}
           control={control}
           defaultValue={name}
           labelText={'Name Pack'}
           name={'name'}
+          onClear={onInputClearHandler}
           wrapperProps={{ className: s.txtFieldWrapper }}
         />
         <div>

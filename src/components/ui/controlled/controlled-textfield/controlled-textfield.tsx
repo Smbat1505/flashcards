@@ -5,11 +5,13 @@ import { TextField, TextFieldProps } from '@/components/ui/textField'
 type Props<T extends FieldValues> = TextFieldProps & UseControllerProps<T>
 
 export const ControlledTextField = <T extends FieldValues>({
+  CloseIcon,
   control,
   defaultValue,
   disabled,
   labelText,
   name,
+  onClear,
   rules,
   shouldUnregister,
   wrapperProps,
@@ -33,8 +35,10 @@ export const ControlledTextField = <T extends FieldValues>({
       handleValueChange={onChange}
       wrapperProps={wrapperProps}
       {...field}
+      CloseIcon={CloseIcon}
       defaultValue={defaultValue}
       labelText={labelText}
+      onClear={onClear}
       validationError={error?.message}
     />
   )
