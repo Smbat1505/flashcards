@@ -42,6 +42,7 @@ export const Cards = () => {
   const [currentPage, setCurrentPage] = useState<number>()
   const [itemsPerPage, setItemsPerPage] = useState<number>()
   const [searchInputValue, setSearchInputValue] = useState<string>()
+  const [open, setOpen] = useState<boolean>(false)
 
   const { data, isLoading } = useGetDeckCardsQuery({
     currentPage,
@@ -56,21 +57,6 @@ export const Cards = () => {
   const meResponse = useAuthMeQuery()
   const [deleteCard] = useDeleteCardMutation()
 
-  const options: dropDownMenuList[] = [
-    {
-      icon: <PlayCircleOutline height={'16'} width={'16'} />,
-      redirect: `./learn/${deckId}`,
-      title: 'Learn',
-    },
-    // { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
-    {
-      icon: <EditDeckModal deckId={deckId} name={currentData ? currentData.name : ''} />,
-      // redirect: '',
-      title: 'Edit',
-    },
-    { icon: <TrashOutline height={'16'} width={'16'} />, redirect: '#', title: 'Delete' },
-  ]
-
   console.log(searchInputValue)
 
   const onCurrentPageButtonClickHandler = (currentPage: number | string) => {
@@ -84,6 +70,39 @@ export const Cards = () => {
   if (isLoading) {
     return <div>Loading...</div>
   }
+  const openChangeEventHandler = (open: boolean) => {
+    console.log(open)
+    setOpen(open)
+  }
+
+  const options: dropDownMenuList[] = [
+    {
+      icon: <PlayCircleOutline height={'16'} width={'16'} />,
+      redirect: `./learn/${deckId}`,
+      title: 'Learn',
+    },
+    // { icon: <Edit2 height={'16'} width={'16'} />, redirect: '#', title: 'Edit' },
+    {
+      icon: (
+        <SvgWrapper
+          SvgComponent={Edit2Outline}
+          onClick={() => setOpen(true)}
+          size={'16'}
+          wrapper={'button'}
+        />
+      ),
+      // <EditDeckModal deckId={deckId} name={currentData ? currentData.name : ''} />,
+      // redirect: '',
+      title: 'Edit',
+    },
+    {
+      icon: (
+        <TrashOutline height={'16'} onClick={() => console.log('delete clicked')} width={'16'} />
+      ),
+      redirect: '#',
+      title: 'Delete',
+    },
+  ]
 
   return (
     <>
@@ -109,7 +128,13 @@ export const Cards = () => {
             </Typography>
             <div className={s.menuIconWrapper}>
               <DropDownMenu>
-                <DropDownList options={options} />
+                {/*<DropDownList options={options} />*/}
+                <SvgWrapper
+                  SvgComponent={Edit2Outline}
+                  onClick={() => setOpen(true)}
+                  size={'16'}
+                  // wrapper={'a'}
+                />
               </DropDownMenu>
             </div>
           </div>
@@ -120,10 +145,11 @@ export const Cards = () => {
         ) : (
           ''
         )}
-        <EditDeckModal
-          cover={currentData ? currentData.cover : undefined}
-          deckId={deckId}
-          name={currentData ? currentData.name : ''}
+        <SvgWrapper
+          SvgComponent={Edit2Outline}
+          onClick={() => setOpen(true)}
+          size={'16'}
+          wrapper={'button'}
         />
         <TextField
           handleValueChange={setSearchInputValue}
@@ -170,6 +196,15 @@ export const Cards = () => {
               : ''}
           </TableBody>
         </Table>
+        {open && deckId && (
+          <EditDeckModal
+            cover={currentData ? currentData.cover : undefined}
+            deckId={deckId}
+            name={currentData ? currentData.name : ''}
+            onOpenChange={openChangeEventHandler}
+            open={open}
+          />
+        )}
         <Pagination
           onPageChange={onCurrentPageButtonClickHandler}
           onPerPageChange={onItemsPerPageClickHandler}

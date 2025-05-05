@@ -57,7 +57,8 @@ export const DropDownMenu = (props: DropDownMenuProps) => {
           onPointerDownOutside={onClose}
           sideOffset={5}
         >
-          {children}
+          <DropdownMenu.Item>{children}</DropdownMenu.Item>
+
           <DropdownMenu.Arrow asChild className={s.dropdownMenuArrow}>
             <div className={s.arrow} />
           </DropdownMenu.Arrow>
